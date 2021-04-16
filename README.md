@@ -1,7 +1,17 @@
 # azure
 
 These files are adapted from various others generous with sharing their code:
-   * https://github.com/fouldsy/azure-mol-samples-2nd-ed
+   * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Ian 
+   * https://github.com/timothywarner/az400 by Tim Warner
+   * https://github.com/zaalion/oreilly-azure-app-security
+   * https://github.com/johnthebrit/AzureMasterClass PowerShell scripts
+   * Skylines Academy
+   * Gruntwork (Terraform)
+   * CloudPosse (Terraform for AWS)
+   
+   Microsoft labs:
+   * https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies
+   * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
    <br /><br />
 
 A Bash script is invoked with a command like this to create various services:
