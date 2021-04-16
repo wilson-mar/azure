@@ -14,16 +14,14 @@ In this repo are files adapted from various experts generous with sharing their 
    * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
    <br /><br />
 
-My Bash scripts references external system variables defined before scripts are invoked:
+My Bash scripts references external system variables defined by pasting from your local file <tt>~/.secrets.sh</tt> containing:
 
    <pre>MY_LOC="westus2"
 MY_RG="whatever2"
 MY_APPNAME="thismustbeunique2"</pre>
 
-The above variable values are defined in file or by JIT command parameters specified at run-time.
-   <ul><tt>source ~/secrets.sh -v </tt></ul>
- 
-My contribution is a Bash script is invoked with a command like this to create various services:
+My contribution are Bash scripts invoked with a command like this to create various services:
+
 * To create a VM with a public IP address:
 
    <tt>az-vm-cli.sh</tt> 
