@@ -9,7 +9,9 @@
 # Create a resource group. This is a logical container to hold your resources.
 # You can specify any name you wish, so long as it's unique with your Azure
 # subscription and location
+echo "MY_RG=${MY_RG} MY_LOC=${MY_LOC}"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
+exit
 
 # Generate SSH key pair using built-in Linux ssh-keygen program in folder
 # /home/wilson/.ssh/"${SSH_KEY_FILE_NAME}"  # (instead of file id_rsa)
