@@ -1,6 +1,6 @@
 This is <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">https://github.com/wilson-mar/azure-your-way</a>
 
-The contribution of this repo are Bash scripts which have been generalized with these external system variables:
+The contribution of this repo are Bash scripts which have been generalized with these system variables (referenced from inside Bash scripts):
 
    <ul><pre>export MY_LOC="westus2"   # aka region
 export MY_RG="mol"
