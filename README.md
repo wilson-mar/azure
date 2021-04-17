@@ -40,6 +40,12 @@ Make this repo availble on https://shell.azure.com
    cd azure-your-way
    </strong></pre></ul>
 
+When you're done, remove the repo:
+
+   <ul><pre><strong>cd ~/clouddrive
+   rm -rf azure-your-way
+   </strong></pre></ul>
+
 Invoke an individual Bash script with a command like this to create various resources within Azure:
 
 * Create a VM with a public IP address:
