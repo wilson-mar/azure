@@ -6,17 +6,17 @@
 # and chapter 21 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
 
+set -o errexit
+
+# Create a resource group
+az group create --name "${MY_RG}" --location "${MY_LOC}"
+
 # Create a Dockerfile:
 cat <<EOF > Dockerfile
 FROM nginx:1.17.5
 EXPOSE 80:80
 COPY index.html /usr/share/nginx/html
 EOF
-
-exit  # DURING DEBUGGING
-
-# Create a resource group
-az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 # Create an Azure Container Instance
 # A public image from Dockerhub is used as the source image for the container,
