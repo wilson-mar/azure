@@ -23,12 +23,12 @@ My contribution are Bash scripts invoked with a command like this to create vari
 
 * To create a VM with a public IP address:
 
-   <pre><strong>MY_RG="azuremolchapter5"
-   az-vm-cli.sh</strong></pre>
+   <pre><strong>MY_RG="azuremolchapter2-$MY_RG"
+   az-vm-cli.sh -v</strong></pre>
 
 * To create an App Service Plan, Azure Web App, Deployment, to show MY_APPNAME.
 
-   <pre><strong>MY_RG="azuremolchapter5"
+   <pre><strong>MY_RG="azuremolchapter5-$MY_RG"
    az-webapp-cli.sh -v 
    </strong></pre>
 
@@ -38,4 +38,20 @@ My contribution are Bash scripts invoked with a command like this to create vari
    az-vm-jumpbox-cli.sh -v
    </strong></pre> 
 
+* To create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
+
+   <pre><strong>MY_RG="azuremolchapter12-$MY_RG"
+   az-vm-diag-cli.sh -v</strong></pre>
+
+* To create Azure Functions:
+
+   <pre><strong>MY_RG="azuremolchapter21-$MY_RG"
+   az-functions-temp.sh -v</strong></pre>
+
+   Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.
+
+* To create a Docker container, AKS, Lastly, scale up replicas.
+
+   <pre><strong>azuremolchapter19-$MY_RG"
+   az-aks-cli.sh -v</strong></pre>
 
