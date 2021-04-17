@@ -87,6 +87,9 @@ Scripts here are adapted from various experts generous with sharing their code:
    Type yes to question<br />
    Are you sure you want to continue connecting (yes/no)? yes<br />
    Warning: Permanently added '20.94.231.94' (ECDSA) to the list of known hosts.
+   johndoe@webvm1:~$ uname -a
+   Linux webvm1 5.4.0-1046-azure #48~18.04.1-Ubuntu SMP Tue Apr 13 19:41:38 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+   exit
    
    https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest
 
