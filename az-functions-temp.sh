@@ -12,6 +12,8 @@
 # As such, this is not a complete example script that provides a functional end
 # result at the end of the script.
 
+set -o errexit
+
 # Create a resource group
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
