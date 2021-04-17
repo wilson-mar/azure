@@ -4,7 +4,7 @@ The contribution of this repo are Bash scripts which have been <strong>generaliz
 
    <ul><pre>export MY_LOC="westus2"   # aka region
 export MY_RG="mol"
-export MY_ADMIN_USER_NAME="JohnDoe"
+export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
 export MY_VM_NAME="webvm1"
 export MY_APPNAME="thismustbeunique2"
 export MY_VAULT_NAME="secretplace"
@@ -43,12 +43,6 @@ Make this repo available on https://shell.azure.com
    cd azure-your-way
    ls
    chmod +x *.sh
-   </strong></pre></ul>
-
-When you're done, remove the repo (to save disk space):
-
-   <ul><pre><strong>cd ~/clouddrive
-   rm -rf azure-your-way
    </strong></pre></ul>
 
 Invoke an individual Bash script with a command like this to create various resources within Azure:
@@ -114,3 +108,10 @@ See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/del
 
    <ul><pre><strong>az group delete --name "${MY_RG}"
    </strong></pre></ul>
+
+When you're done, remove the repo (to save disk space):
+
+   <ul><pre><strong>cd ~/clouddrive
+   rm -rf azure-your-way
+   </strong></pre></ul>
+
