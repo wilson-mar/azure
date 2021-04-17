@@ -65,6 +65,12 @@ Scripts here are adapted from various experts generous with sharing their code:
    <pre><strong>MY_RG="azuremolchapter2-$MY_LOC"
    ./az-vm-cli.sh 
    </strong></pre>
+   
+   Type yes to question<br />
+   Are you sure you want to continue connecting (yes/no)? yes<br />
+   Warning: Permanently added '20.94.231.94' (ECDSA) to the list of known hosts.
+   
+   https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest
 
 * Create an App Service Plan, Azure Web App, Deployment, to show MY_APPNAME.
 
