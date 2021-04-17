@@ -25,19 +25,19 @@ az keyvault create \
 # Create a secret in Key Vault
 # This secret is a basic password that is used to install a database server
 az keyvault secret set \
-    --name databasepassword \
     --vault-name $keyVaultName \
+    --name "${MY_KEY_NAME}" \
     --description "Database password" \
-    --value "${MY_SECURE_PASSWORD}" 
+    --value "${MY_KEY_SECRET}" 
 
 # Show the secret stored in Key Vault
 az keyvault secret show \
-    --name databasepassword \
+    --name "${MY_KEY_NAME}" \
     --vault-name $keyVaultName
 
 # Delete the secret
 az keyvault secret delete \
-    --name databasepassword \
+    --name "${MY_KEY_NAME}" \
     --vault-name $keyVaultName
 
 # Wait 5 seconds for the secret to be successfully deleted before recovering
@@ -48,7 +48,7 @@ sleep 5
 # for a period of time. This allows keys and secrets to be recovered back to
 # the vault.
 az keyvault secret recover \
-    --name databasepassword \
+    --name "${MY_KEY_NAME}" \
     --vault-name $keyVaultName
 
 # Create a VM
