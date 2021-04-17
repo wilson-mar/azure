@@ -11,7 +11,7 @@ az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 # Create a Linux VM
 # You specify the resoure group from the previous step, then provide a name.
-# This VM uses Ubuntu LTS as the VM image, and creates a user name `azuremol`
+# This VM uses Ubuntu LTS as the VM image, and creates a user name MY_ADMIN_USER_NAME `azuremol`
 # The `--generate-ssh-keys` checks for keys you may have created earlier. If
 # SSH keys are found, they are used. Otherwise, they are created for you
 az vm create \
