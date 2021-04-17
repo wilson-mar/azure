@@ -20,12 +20,12 @@ Scripts here are adapted from various experts generous with sharing their code:
 
 1. Download this repo to establish a run enviornment:
 
-   <ul><pre><strong>cd clouddrive
+   <pre><strong>cd clouddrive
    git clone https://github.com/wilson-mar/azure-your-way.git --depth 1 
    cd azure-your-way
    ls
    chmod +x *.sh
-   </strong></pre></ul>
+   </strong></pre>
 
 1. Copy enviornment variable definitions and paste in the command line for bash scripts to reference:
 
