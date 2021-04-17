@@ -33,7 +33,12 @@ The above variable are referenced within Bash scripts adapted from various exper
    * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
    <br /><br />
 
-Invoke each Bash script with a command like this to create various resources within Azure:
+Make this repo availble on https://shell.azure.com
+
+   <pre><strong>cd clouddrive
+   git clone https://github.com/wilson-mar/azure.git</strong></pre>
+
+Invoke an individual Bash script with a command like this to create various resources within Azure:
 
 * Create a VM with a public IP address:
 
