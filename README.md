@@ -22,39 +22,44 @@ MY_SECRET_PASSWORD="SecureP@ssw0rd"   # use by Key Vault</pre></ul>
 
 My contribution are Bash scripts invoked with a command like this to create various services:
 
-* To create a VM with a public IP address:
+* Create a VM with a public IP address:
 
    <pre><strong>MY_RG="azuremolchapter2-$MY_RG"
    az-vm-cli.sh -v</strong></pre>
 
-* To create an App Service Plan, Azure Web App, Deployment, to show MY_APPNAME.
+* Create an App Service Plan, Azure Web App, Deployment, to show MY_APPNAME.
 
    <pre><strong>MY_RG="azuremolchapter5-$MY_RG"
    az-webapp-cli.sh -v 
    </strong></pre>
 
-* To create a network with two subnets and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server. Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an <strong>SSH jumpbox</strong> to then connect to the the second VM which can be used an web server:
+* Create a network with two subnets and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server. Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an <strong>SSH jumpbox</strong> to then connect to the the second VM which can be used an web server:
 
    <pre><strong>MY_RG="azuremolchapter5"
    az-vm-jumpbox-cli.sh -v
    </strong></pre> 
 
-* To create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
+* Create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
 
    <pre><strong>MY_RG="azuremolchapter12-$MY_RG"
    az-vm-diag-cli.sh -v</strong></pre>
 
-* To create an Azure Key Vault; put a secret in it; show secret; delete secret; recover secret; create a vm; Managed Service Identity; update permissions; Custom Script Extension; Apply the Custom Script Extension:
+* Create a VM; Recovery Services vault, a backup policy, then creates a VM and applies the backup policy before starting the initial backup job.
+
+   <pre><strong>MY_RG="azuremolchapter13-$MY_RG"
+   az-vm-backup-cli.sh -v</strong></pre>
+
+* Create an Azure Key Vault; put a secret in it; show secret; delete secret; recover secret; create a vm; Managed Service Identity; update permissions; Custom Script Extension; Apply the Custom Script Extension:
 
    <pre><strong>MY_RG="azuremolchapter15-$MY_RG"
    az-keyvault-cli.sh -v</strong></pre>
    
-* To create a Docker container, AKS, Lastly, scale up replicas:
+* Create a Docker container, AKS, Lastly, scale up replicas:
 
    <pre><strong>azuremolchapter19-$MY_RG"
    az-aks-cli.sh -v</strong></pre>
 
-* To create Azure Functions:
+* Create Azure Functions:
 
    <pre><strong>MY_RG="azuremolchapter21-$MY_RG"
    az-functions-temp.sh -v</strong></pre>
