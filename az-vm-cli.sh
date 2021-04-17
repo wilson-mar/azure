@@ -63,6 +63,9 @@ publicIp=$(az vm show \
 # SSH to your VM with the username and public IP address for your VM
 ssh "${MY_ADMIN_USER_NAME}"@$publicIp
 
+# Display information to verify entry in the Linux machine:
+uname -a
+
 # Once logged in to your VM, install the LAMP web stack with apt-get
 sudo apt update && sudo apt install -y lamp-server^
 logout
@@ -73,3 +76,5 @@ az vm open-port --name "${MY_VM_NAME}" --port 80 --resource-group "${MY_RG}"
 
 # Now you can access the basic website in your web browser
 echo "To see your web server in action, enter the public IP address in to your web browser: http://$publicIp"
+
+# In Portal, list Virtual Machines at https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines
