@@ -78,3 +78,6 @@ az vm open-port --name "${MY_VM_NAME}" --port 80 --resource-group "${MY_RG}"
 echo "To see your web server in action, enter the public IP address in to your web browser: http://$publicIp"
 
 # In Portal, list Virtual Machines at https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines
+
+# More VM CLI commands are at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-manage
+
