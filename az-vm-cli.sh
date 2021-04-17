@@ -20,6 +20,10 @@ if [ ! -d ~/.ssh ]; then  # directory not found:
 fi 
 cd ~/.ssh
 
+if [   -f ~/.ssh/"${SSH_KEY_FILE_NAME}" ]; then  # directory not found:
+   rm -rf ~/.ssh/"${SSH_KEY_FILE_NAME}"
+fi 
+
 # Generate SSH key pair using built-in Linux ssh-keygen program in folder
 # /home/wilson/.ssh/"${SSH_KEY_FILE_NAME}"  # (instead of file id_rsa)
 # SSH keys are used to securely authenticate with a Linux VM
@@ -31,7 +35,7 @@ ssh-keygen -t rsa -b 2048 -f "${SSH_KEY_FILE_NAME}" -N ""
 # From the CLI, you don't really need this. But if you use the Azure portal or
 # Resource Manager templates (which we look at in chapter 6), you need to
 # provide this public key
-cat .ssh/"${SSH_KEY_FILE_NAME}"
+cat ~/.ssh/"${SSH_KEY_FILE_NAME}"
 
 # Create a Linux VM
 # You specify the resoure group from the previous step, then provide a name.
