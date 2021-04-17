@@ -8,16 +8,16 @@ MY_ADMIN_USER_NAME="JohnDoe"
 MY_APPNAME="thismustbeunique2"
 MY_VAULT_NAME="secretplace"
 MY_SVC_BUS_NAME="azuremol"
-MY_STORAGE_ACCT="xxx"
-FUNC_APP_NAME=Bulwinkle"
+MY_STORAGE_ACCT="AzureSaves"
+FUNC_APP_NAME="Bulwinkle"
 MY_KEYVAULT_NAME="specialplace2"
 MY_KEY_NAME="databasepassword"
-MY_KEY_SECRET="SecureP@ssw0rd"   # use by Key Vault
+MY_KEY_SECRET="SecureP@ssw0rd"   # safely saved in Key Vault
 </pre></ul>
 
-The above are example values. Save them to a local file such as <tt>$HOME/.secrets.sh</tt> 
+The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
+Save them to a local file such as <tt>$HOME/.secrets.sh</tt> 
 so that you can copy and paste them at the beginning of each CLI session.
-CAUTION: Do not save the above in a public GitHub.
 
 The above variable are referenced within Bash scripts adapted from various experts generous with sharing their code:
    * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds 
@@ -37,6 +37,7 @@ Make this repo availble on https://shell.azure.com
 
    <ul><pre><strong>cd clouddrive
    git clone https://github.com/wilson-mar/azure.git --depth 1 
+   cd azure
    </strong></pre></ul>
 
 Invoke an individual Bash script with a command like this to create various resources within Azure:
