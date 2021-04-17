@@ -25,7 +25,7 @@ az vm create \
 # This vault is used to store your backups
 az backup vault create \
     --name molvault \
-    --location eastus \
+    --location "${MY_LOC}" \
     --resource-group "${MY_RG}"
     
 # It can take a few seconds for the Recovery Services vault to become
@@ -55,7 +55,7 @@ az backup protection backup-now \
 # The status of the backup should be listed as InProgress. It can 15-20 minutes
 # for the initial backup job to complete
 az backup job list \
-    --vault-name molvault \
+    --vault-name "${MY_VAULT_NAME}" \
     --output table \
     --resource-group "${MY_RG}"
     
