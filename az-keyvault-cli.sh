@@ -6,6 +6,8 @@
 # and chapter 15 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
 
+set -o errexit
+
 # Create a resource group
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
