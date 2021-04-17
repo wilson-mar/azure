@@ -11,7 +11,6 @@
 # subscription and location
 echo "MY_RG=$MY_RG MY_LOC=${MY_LOC}"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
-exit
 
 # Generate SSH key pair using built-in Linux ssh-keygen program in folder
 # /home/wilson/.ssh/"${SSH_KEY_FILE_NAME}"  # (instead of file id_rsa)
