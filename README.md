@@ -103,7 +103,7 @@ Invoke an individual Bash script with a command like this to create various reso
    Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.
    See the "Month of Lunches" ebook.
 
-Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-scripting">https://wilsonmar.github.io/bash-scripting</a> which include:
+Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-codng">https://wilsonmar.github.io/bash-coding</a> which include:
 
    * <tt>set -o errexit</tt> so that the script stops on the first error (instead of running on).
 
