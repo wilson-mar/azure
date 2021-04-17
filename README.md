@@ -14,7 +14,7 @@ In this repo are files adapted from various experts generous with sharing their 
    * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
    <br /><br />
 
-My Bash scripts references external system variables defined by pasting from your local file <tt>~/.secrets.sh</tt> containing:
+The contribution of this repo are Bash scripts which have been generalized with these external system variables:
 
    <ul><pre>MY_LOC="westus2"
 MY_RG="mol"
@@ -25,9 +25,14 @@ MY_SVC_BUS_NAME="azuremol"
 MY_STORAGE_ACCT="xxx"
 MY_KEYVAULT_NAME="specialplace2"
 FUNC_APP_NAME=Bulwinkle"
-MY_SECRET_PASSWORD="SecureP@ssw0rd"   # use by Key Vault</pre></ul>
+MY_SECRET_PASSWORD="SecureP@ssw0rd"   # use by Key Vault
+</pre></ul>
 
-My contribution are Bash scripts invoked with a command like this to create various services:
+The above are example values. Save them to a local file such as <tt>$HOME/.secrets.sh</tt> 
+so that you can copy and paste them at the beginning of each CLI session.
+CAUTION: Do not save the above in a public GitHub.
+
+The above variable are referenced within Bash scripts invoked with a command like this to create various resources within Azure:
 
 * Create a VM with a public IP address:
 
@@ -75,8 +80,6 @@ My contribution are Bash scripts invoked with a command like this to create vari
    <pre><strong>MY_RG="azuremolchapter21-$MY_RG"
    az-functions-temp.sh -v
    </strong></pre>
-   
-   
 
    Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.
-
+   See the "Month of Lunches" ebook.
