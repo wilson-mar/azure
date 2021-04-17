@@ -1,26 +1,6 @@
 The contribution of <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">this repo (at https://github.com/wilson-mar/azure-your-way)</a>
-are Bash scripts which have been <strong>generalized</strong> to reference these system variables:
-
-   <ul><pre>export MY_LOC="westus2"   # aka region
-export MY_RG="mol"
-export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
-export MY_VM_NAME="webvm1"
-export MY_APPNAME="thismustbeunique2"
-export MY_VAULT_NAME="secretplace"
-export MY_SVC_BUS_NAME="azuremol"
-export MY_STORAGE_ACCT="AzureSaves"
-export FUNC_APP_NAME="Bulwinkle"
-export SSH_KEY_FILE_NAME="id_rsa"
-export MY_KEYVAULT_NAME="specialplace2"
-export MY_KEY_NAME="databasepassword"
-export MY_KEY_SECRET="SecureP@ssw0rd"   # for saving into Key Vault
-</pre></ul>
-
-The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
-Save them to a local file such as <tt>$HOME/.secrets.sh</tt> so that you can 
-copy and paste them at the beginning of each CLI session.
-
-The above variable are referenced within Bash scripts adapted from various experts generous with sharing their code:
+are Bash scripts which have been <strong>generalized</strong> for productive use.
+Scripts here are adapted from various experts generous with sharing their code:
    * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds, explained in https://aka.ms/monthoflunches published 4/30/2020.
    * https://github.com/timothywarner/az400 & az303 by Tim Warner
    * https://github.com/zaalion/oreilly-azure-app-security by Reza Salehi 
@@ -46,7 +26,37 @@ The above variable are referenced within Bash scripts adapted from various exper
    chmod +x *.sh
    </strong></pre></ul>
 
-1. Copy enviornment variable definitions and paste in the command line for bash scripts to reference.
+1. Copy enviornment variable definitions and paste in the command line for bash scripts to reference:
+
+   <ul><pre>export MY_LOC="westus2"   # aka region
+export MY_RG="mol"
+export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
+export MY_VM_NAME="webvm1"
+export MY_APPNAME="thismustbeunique2"
+export MY_VAULT_NAME="secretplace"
+export MY_SVC_BUS_NAME="azuremol"
+export MY_STORAGE_ACCT="AzureSaves"
+export FUNC_APP_NAME="Bulwinkle"
+export SSH_KEY_FILE_NAME="id_rsa"
+export MY_KEYVAULT_NAME="specialplace2"
+export MY_KEY_NAME="databasepassword"
+export MY_KEY_SECRET="SecureP@ssw0rd"   # for saving into Key Vault
+</pre></ul>
+
+   The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
+   Save them to a local file such as <tt>$HOME/.secrets.sh</tt> so that you can 
+   copy and paste them at the beginning of each CLI session.
+
+1. Using environment variables makes it easier to <strong>delete resource groups</strong> created to stop charges from accumulating: See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group?tabs=azure-powershell
+
+   <ul><pre><strong>az group delete --name "${MY_RG}"
+   </strong></pre></ul>
+
+1. If you ran these scripts for <strong>training or testing</strong>, remove the repo (to save disk space):
+
+   <ul><pre><strong>cd ~/clouddrive
+   rm -rf azure-your-way
+   </strong></pre></ul>
 
 1. Invoke an individual Bash script with a command like this to create various resources within Azure:
 
@@ -106,15 +116,4 @@ Bash scripts here are written with coding conventions defined at <a target="_bla
    * <tt>set -o errexit</tt> so that the script stops on the first error (instead of running on).
    <br /><br />
    
-If you ran these scripts for <strong>training or testing</strong>, remember to <strong>delete resource groups</strong> created to stop charges from accumulating:
-See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group?tabs=azure-powershell
-
-   <ul><pre><strong>az group delete --name "${MY_RG}"
-   </strong></pre></ul>
-
-When you're done, remove the repo (to save disk space):
-
-   <ul><pre><strong>cd ~/clouddrive
-   rm -rf azure-your-way
-   </strong></pre></ul>
-
+   
