@@ -2,10 +2,10 @@ There are several ways to automate provisioning of resources in Azure:
    * portal.azure.com GUI
    * Bash CLI shell
    * PowerShell
-   * JSON Template (based on PowerShell)
+   * JSON Template and parameter files
    * REST API (which the above calls behind the scenes)
-   * Terraform HCL
-   * Plummi programs
+   * Terraform HCL (with templating features and advanced logic features)
+   * Plummi programming in Python
    * Bicep (from Microsoft)
    <br /><br />
 
