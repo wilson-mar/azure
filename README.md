@@ -35,8 +35,9 @@ The above variable are referenced within Bash scripts adapted from various exper
 
 Make this repo availble on https://shell.azure.com
 
-   <pre><strong>cd clouddrive
-   git clone https://github.com/wilson-mar/azure.git</strong></pre>
+   <ul><pre><strong>cd clouddrive
+   git clone https://github.com/wilson-mar/azure.git --depth 1 
+   </strong></pre></ul>
 
 Invoke an individual Bash script with a command like this to create various resources within Azure:
 
