@@ -109,7 +109,7 @@ Bash scripts here are written with coding conventions defined at <a target="_bla
    * <tt>set -o errexit</tt> so that the script stops on the first error (instead of running on).
    <br /><br />
    
-If you ran these scripts for training or testing purpose, remember to delete resource groups created to stop charges from accumulating:
+If you ran these scripts for <strong>training or testing</strong>, remember to <strong>delete resource groups</strong> created to stop charges from accumulating:
 See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group?tabs=azure-powershell
 
    <ul><pre><strong>az group delete --name "${MY_RG}"
