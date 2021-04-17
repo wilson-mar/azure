@@ -1,6 +1,5 @@
-This is <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">https://github.com/wilson-mar/azure-your-way</a>
-
-The contribution of this repo are Bash scripts which have been <strong>generalized</strong> to reference these system variables:
+The contribution of <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">this repo (at https://github.com/wilson-mar/azure-your-way)</a>
+are Bash scripts which have been <strong>generalized</strong> to reference these system variables:
 
    <ul><pre>export MY_LOC="westus2"   # aka region
 export MY_RG="mol"
@@ -38,7 +37,7 @@ The above variable are referenced within Bash scripts adapted from various exper
 
 1. Be in https://shell.azure.com
 
-1. Download this repo:
+1. Download this repo to establish a run enviornment:
 
    <ul><pre><strong>cd clouddrive
    git clone https://github.com/wilson-mar/azure-your-way.git --depth 1 
@@ -46,6 +45,8 @@ The above variable are referenced within Bash scripts adapted from various exper
    ls
    chmod +x *.sh
    </strong></pre></ul>
+
+1. Copy enviornment variable definitions and paste in the command line for bash scripts to reference.
 
 1. Invoke an individual Bash script with a command like this to create various resources within Azure:
 
