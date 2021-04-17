@@ -6,6 +6,8 @@
 # and chapter 2 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
 
+set -o errexit
+
 # Create a resource group. This is a logical container to hold your resources.
 # You can specify any name you wish, so long as it's unique with your Azure
 # subscription and location
