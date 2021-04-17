@@ -1,6 +1,6 @@
 This is <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">https://github.com/wilson-mar/azure-your-way</a>
 
-The contribution of this repo are Bash scripts which have been <strong>generalized</strong> to referenced these system variables:
+The contribution of this repo are Bash scripts which have been <strong>generalized</strong> to reference these system variables:
 
    <ul><pre>export MY_LOC="westus2"   # aka region
 export MY_RG="mol"
@@ -22,9 +22,9 @@ Save them to a local file such as <tt>$HOME/.secrets.sh</tt> so that you can
 copy and paste them at the beginning of each CLI session.
 
 The above variable are referenced within Bash scripts adapted from various experts generous with sharing their code:
-   * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds 
+   * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds, explained in https://aka.ms/monthoflunches published 4/30/2020.
    * https://github.com/timothywarner/az400 & az303 by Tim Warner
-   * https://github.com/zaalion/oreilly-azure-app-security
+   * https://github.com/zaalion/oreilly-azure-app-security by Reza Salehi 
    * https://github.com/johnthebrit/AzureMasterClass PowerShell scripts
    * Skylines Academy
    * Gruntwork (Terraform)
