@@ -15,7 +15,7 @@ az group create --name "${MY_RG}" --location "${MY_LOC}"
 # The `--generate-ssh-keys` checks for keys you may have created earlier. If
 # SSH keys are found, they are used. Otherwise, they are created for you
 az vm create \
-    --name molvm \
+    --name "${MY_VM_NAME}" \
     --image UbuntuLTS \
     --admin-username "${MY_ADMIN_USER_NAME}" \
     --generate-ssh-keys \
@@ -45,7 +45,7 @@ az backup protection enable-for-vm \
 # Start a backup job for the VM
 # The data is formatted into the d-m-Y format and is retained for 30 days
 az backup protection backup-now \
-    --item-name molvm \
+    --item-name "${MY_VM_NAME}" \
     --vault-name "${MY_RECOVERY_VAULT_NAME}" \
     --container-name molvm \
     --retain-until $(date +%d-%m-%Y -d "+30 days") \
