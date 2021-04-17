@@ -1,4 +1,4 @@
-This is <a target="_blank" href="https://github.com/wilson-mar/azure-cli/">https://github.com/wilson-mar/azure-cli/</a>
+This is <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">https://github.com/wilson-mar/azure-your-way</a>
 
 The contribution of this repo are Bash scripts which have been generalized with these external system variables:
 
@@ -36,8 +36,8 @@ The above variable are referenced within Bash scripts adapted from various exper
 Make this repo availble on https://shell.azure.com
 
    <ul><pre><strong>cd clouddrive
-   git clone https://github.com/wilson-mar/azure-cli.git --depth 1 
-   cd azure-cli
+   git clone https://github.com/wilson-mar/azure-your-way.git --depth 1 
+   cd azure-your-way
    </strong></pre></ul>
 
 Invoke an individual Bash script with a command like this to create various resources within Azure:
