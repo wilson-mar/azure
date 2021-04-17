@@ -9,7 +9,7 @@
 # Create a resource group. This is a logical container to hold your resources.
 # You can specify any name you wish, so long as it's unique with your Azure
 # subscription and location
-echo "MY_RG=${MY_RG} MY_LOC=${MY_LOC}"
+echo "MY_RG=$MY_RG MY_LOC=${MY_LOC}"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 exit
 
