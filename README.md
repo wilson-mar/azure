@@ -2,18 +2,21 @@ The contribution of <a target="_blank" href="https://github.com/wilson-mar/azure
 are Bash scripts which have been <strong>generalized</strong> for productive use.
 Scripts here are adapted from various experts generous with sharing their code:
    * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds, explained in https://aka.ms/monthoflunches published 4/30/2020.
-   * https://github.com/timothywarner/az400 & az303 by Tim Warner
-   * https://github.com/zaalion/oreilly-azure-app-security by Reza Salehi 
-   
-   * https://github.com/johnthebrit/AzureMasterClass PowerShell scripts
-   * Skylines Academy
-   * Gruntwork (Terraform)
-   * CloudPosse (Terraform for AWS)
-   * https://github.com/Azure/azure-quickstart-templates (ARM Templates)
-   
+
    Microsoft Learning:
    * https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies
    * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
+   * https://github.com/Azure/azure-cli by Microsoft
+
+   * https://github.com/timothywarner/az400 & az303 by Tim Warner
+   * https://github.com/zaalion/oreilly-azure-app-security by Reza Salehi 
+   
+   * https://github.com/Azure/azure-quickstart-templates (ARM Templates)
+   * https://github.com/johnthebrit/AzureMasterClass PowerShell scripts
+
+   * Skylines Academy
+   * Gruntwork (Terraform)
+   * CloudPosse (Terraform for AWS)
    <br /><br />
 
 1. Be in https://shell.azure.com
