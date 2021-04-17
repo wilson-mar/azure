@@ -10,7 +10,7 @@
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 # Define a unique name for the Key Vault
-keyVaultName=mykeyvault$RANDOM
+keyVaultName="${MY_KEYVAULT_NAME}"$RANDOM
 
 # Create a Key Vault
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
