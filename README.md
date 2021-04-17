@@ -29,19 +29,19 @@ Scripts here are adapted from various experts generous with sharing their code:
 1. Copy enviornment variable definitions and paste in the command line for bash scripts to reference:
 
    <ul><pre>export MY_LOC="westus2"   # aka region
-export MY_RG="mol"
-export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
-export MY_VM_NAME="webvm1"
-export MY_APPNAME="thismustbeunique2"
-export MY_VAULT_NAME="secretplace"
-export MY_SVC_BUS_NAME="azuremol"
-export MY_STORAGE_ACCT="AzureSaves"
-export FUNC_APP_NAME="Bulwinkle"
-export SSH_KEY_FILE_NAME="id_rsa"
-export MY_KEYVAULT_NAME="specialplace2"
-export MY_KEY_NAME="databasepassword"
-export MY_KEY_SECRET="SecureP@ssw0rd"   # for saving into Key Vault
-</pre></ul>
+   export MY_RG="mol"
+   export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
+   export MY_VM_NAME="webvm1"
+   export MY_APPNAME="thismustbeunique2"
+   export MY_VAULT_NAME="secretplace"
+   export MY_SVC_BUS_NAME="azuremol"
+   export MY_STORAGE_ACCT="AzureSaves"
+   export FUNC_APP_NAME="Bulwinkle"
+   export SSH_KEY_FILE_NAME="id_rsa"
+   export MY_KEYVAULT_NAME="specialplace2"
+   export MY_KEY_NAME="databasepassword"
+   export MY_KEY_SECRET="SecureP@ssw0rd"   # for saving into Key Vault
+   </pre></ul>
 
    The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
    Save them to a local file such as <tt>$HOME/.secrets.sh</tt> so that you can 
