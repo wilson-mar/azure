@@ -49,7 +49,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 
 1. Using environment variables makes it easier to <strong>delete resource groups</strong> created to stop charges from accumulating: See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group?tabs=azure-powershell
 
-   <ul><pre><strong>az group delete --name "${MY_RG}"
+   <ul><pre><strong>az group delete --name "${MY_RG}"   # takes several minutes
    </strong></pre></ul>
 
 1. If you ran these scripts for <strong>training or testing</strong>, remove the repo (to save disk space):
