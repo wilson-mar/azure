@@ -17,6 +17,7 @@ In this repo are files adapted from various experts generous with sharing their 
 My Bash scripts references external system variables defined by pasting from your local file <tt>~/.secrets.sh</tt> containing:
 
    <ul><pre>MY_LOC="westus2"
+MY_RG="mol"
 MY_ADMIN_USER_NAME="JohnDoe"
 MY_APPNAME="thismustbeunique2"
 MY_VAULT_NAME="secretplace"
