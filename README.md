@@ -48,7 +48,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    Save them to a local file such as <tt>$HOME/.secrets.sh</tt> so that you can 
    copy and paste them at the beginning of each CLI session.
 
-1. Using environment variables makes it easier to <strong>delete resource groups</strong> created to stop charges from accumulating: See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group?tabs=azure-powershell
+1. Using environment variables makes it easier to <strong>delete resource groups</strong> created to stop charges from accumulating: 
 
    <pre><strong>az group delete --name "${MY_RG}"   # takes several minutes
    </strong></pre>
