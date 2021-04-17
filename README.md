@@ -2,18 +2,19 @@ This is <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">
 
 The contribution of this repo are Bash scripts which have been generalized with these external system variables:
 
-   <ul><pre>MY_LOC="westus2"   # aka region
-MY_RG="mol"
-MY_ADMIN_USER_NAME="JohnDoe"
-MY_APPNAME="thismustbeunique2"
-MY_VAULT_NAME="secretplace"
-MY_SVC_BUS_NAME="azuremol"
-MY_STORAGE_ACCT="AzureSaves"
-FUNC_APP_NAME="Bulwinkle"
-SSH_KEY_FILE_NAME="id_rsa"
-MY_KEYVAULT_NAME="specialplace2"
-MY_KEY_NAME="databasepassword"
-MY_KEY_SECRET="SecureP@ssw0rd"   # safely saved in Key Vault
+   <ul><pre>export MY_LOC="westus2"   # aka region
+export MY_RG="mol"
+export MY_ADMIN_USER_NAME="JohnDoe"
+export MY_VM_NAME="webvm1"
+export MY_APPNAME="thismustbeunique2"
+export MY_VAULT_NAME="secretplace"
+export MY_SVC_BUS_NAME="azuremol"
+export MY_STORAGE_ACCT="AzureSaves"
+export FUNC_APP_NAME="Bulwinkle"
+export SSH_KEY_FILE_NAME="id_rsa"
+export MY_KEYVAULT_NAME="specialplace2"
+export MY_KEY_NAME="databasepassword"
+export MY_KEY_SECRET="SecureP@ssw0rd"   # safely saved in Key Vault
 </pre></ul>
 
 The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
