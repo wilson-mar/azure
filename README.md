@@ -41,7 +41,7 @@ Make this repo availble on https://shell.azure.com
    git clone https://github.com/wilson-mar/azure-your-way.git --depth 1 
    cd azure-your-way
    ls
-   chmod +x *
+   chmod +x *.sh
    </strong></pre></ul>
 
 When you're done, remove the repo:
