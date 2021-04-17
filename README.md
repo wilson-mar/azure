@@ -17,7 +17,8 @@ In this repo are files adapted from various experts generous with sharing their 
 My Bash scripts references external system variables defined by pasting from your local file <tt>~/.secrets.sh</tt> containing:
 
    <ul><pre>MY_LOC="westus2"
-MY_APPNAME="thismustbeunique2"</pre></ul>
+MY_APPNAME="thismustbeunique2"
+MY_SECRET_PASSWORD="SecureP@ssw0rd"   # use by Key Vault</pre></ul>
 
 My contribution are Bash scripts invoked with a command like this to create various services:
 
@@ -43,6 +44,16 @@ My contribution are Bash scripts invoked with a command like this to create vari
    <pre><strong>MY_RG="azuremolchapter12-$MY_RG"
    az-vm-diag-cli.sh -v</strong></pre>
 
+* To create an Azure Key Vault; put a secret in it; show secret; delete secret; recover secret; create a vm; Managed Service Identity; update permissions; Custom Script Extension; Apply the Custom Script Extension:
+
+   <pre><strong>MY_RG="azuremolchapter15-$MY_RG"
+   az-keyvault-cli.sh -v</strong></pre>
+   
+* To create a Docker container, AKS, Lastly, scale up replicas:
+
+   <pre><strong>azuremolchapter19-$MY_RG"
+   az-aks-cli.sh -v</strong></pre>
+
 * To create Azure Functions:
 
    <pre><strong>MY_RG="azuremolchapter21-$MY_RG"
@@ -50,13 +61,3 @@ My contribution are Bash scripts invoked with a command like this to create vari
 
    Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.
 
-* To create a Docker container, AKS, Lastly, scale up replicas.
-
-   <pre><strong>azuremolchapter19-$MY_RG"
-   az-aks-cli.sh -v</strong></pre>
-
-* To create a Docker container, AKS, Lastly, scale up replicas.
-
-   <pre><strong>MY_RG="azuremolchapter15-$MY_RG"
-   az-keyvault-cli.sh -v</strong></pre>
-   
