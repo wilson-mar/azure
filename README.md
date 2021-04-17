@@ -14,7 +14,7 @@ export FUNC_APP_NAME="Bulwinkle"
 export SSH_KEY_FILE_NAME="id_rsa"
 export MY_KEYVAULT_NAME="specialplace2"
 export MY_KEY_NAME="databasepassword"
-export MY_KEY_SECRET="SecureP@ssw0rd"   # safely saved in Key Vault
+export MY_KEY_SECRET="SecureP@ssw0rd"   # for saving into Key Vault
 </pre></ul>
 
 The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
@@ -25,6 +25,7 @@ The above variable are referenced within Bash scripts adapted from various exper
    * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds, explained in https://aka.ms/monthoflunches published 4/30/2020.
    * https://github.com/timothywarner/az400 & az303 by Tim Warner
    * https://github.com/zaalion/oreilly-azure-app-security by Reza Salehi 
+   
    * https://github.com/johnthebrit/AzureMasterClass PowerShell scripts
    * Skylines Academy
    * Gruntwork (Terraform)
@@ -44,7 +45,7 @@ Make this repo available on https://shell.azure.com
    chmod +x *.sh
    </strong></pre></ul>
 
-When you're done, remove the repo:
+When you're done, remove the repo (to save disk space):
 
    <ul><pre><strong>cd ~/clouddrive
    rm -rf azure-your-way
@@ -106,4 +107,10 @@ Invoke an individual Bash script with a command like this to create various reso
 Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-codng">https://wilsonmar.github.io/bash-coding</a> which include:
 
    * <tt>set -o errexit</tt> so that the script stops on the first error (instead of running on).
+   <br /><br />
+   
+If you ran these scripts for training or testing purpose, remember to delete resource groups created to stop charges from accumulating:
+See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group?tabs=azure-powershell
 
+   <ul><pre><strong>az group delete --name "${MY_RG}"
+   </strong></pre></ul>
