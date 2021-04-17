@@ -23,15 +23,15 @@ az group create --name "${MY_RG}" --location "${MY_LOC}"
 # and a public IP address is assigned. To allow web traffic to reach the 
 # container instance, port 80 is also opened
 az container create \
-    --name azuremol \
-    --image iainfoulds/azuremol \
+    --name "${MY_CONTAINER}" \
+    --image iainfoulds/"${MY_CONTAINER}" \
     --ip-address public \
     --ports 80 \
     --resource-group "${MY_RG}"
 
 # Show the container instance public IP address
 az container show \
-    --name azuremol \
+    --name "${MY_CONTAINER}" \
     --query ipAddress.ip \
     --output tsv \
     --resource-group "${MY_RG}"
@@ -39,7 +39,7 @@ az container show \
 # Create an Azure Container Service with Kubernetes (AKS) cluster
 # Two nodes are created. 
 az aks create \
-  --name azuremol \
+  --name "${MY_CONTAINER}" \
   --node-count 2 \
   --vm-set-type VirtualMachineScaleSets \
   --zones 1 2 3 \
@@ -51,7 +51,7 @@ az aks create \
 # config file. You can then use native Kubernetes tools to connect to the
 # cluster.
 az aks get-credentials \
-    --name azuremol \
+    --name "${MY_CONTAINER}" \
     --resource-group "${MY_RG}"
     
 # Install the kubectl CLI for managing the Kubernetes cluster
@@ -60,9 +60,9 @@ az aks install-cli
 # Start an Kubernetes deployment
 # This deployment uses the same base container image as the ACI instance in
 # a previous example. Again, port 80 is opened to allow web traffic.
-kubectl run azuremol \
+kubectl run "${MY_CONTAINER}" \
     --generator=deployment/v1beta1 \
-    --image=docker.io/iainfoulds/azuremol:latest \
+    --image=docker.io/iainfoulds/"${MY_CONTAINER}":latest \
     --port=80 \
     --generator=run-pod/v1
 
@@ -72,7 +72,7 @@ kubectl run azuremol \
 # that maps external traffic on port 80 to the pods. Although this is a
 # Kubernetes command (kubectl) under the hood an Azure load balancer and rules
 # are created
-kubectl expose deployment/azuremol \
+kubectl expose deployment/"${MY_CONTAINER}" \
     --type="LoadBalancer" \
     --port 80
     
@@ -84,12 +84,12 @@ kubectl get service
 # Scale out the number of nodes in the AKS cluster
 # The cluster is scaled up to 3 nodes
 az aks scale \
-    --name azuremol \
+    --name "${MY_CONTAINER}" \
     --node-count 3 \
     --resource-group "${MY_RG}"
 
 # Scale up the number of replicas
 # When our web app container was deployed, only one instance was created. Scale
 # up to 5 instances, distributed across all three nodes in the cluster
-kubectl scale deployment azuremol --replicas 5
+kubectl scale deployment "${MY_CONTAINER}" --replicas 5
 
