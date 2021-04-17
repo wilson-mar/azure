@@ -55,7 +55,7 @@ az keyvault secret recover \
 az vm create \
     --name molvm \
     --image ubuntults \
-    --admin-username azuremol \
+    --admin-username "${MY_ADMIN_USER_NAME}" \
     --generate-ssh-keys \
     --resource-group "${MY_RG}"
 
