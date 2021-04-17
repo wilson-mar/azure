@@ -55,3 +55,8 @@ My contribution are Bash scripts invoked with a command like this to create vari
    <pre><strong>azuremolchapter19-$MY_RG"
    az-aks-cli.sh -v</strong></pre>
 
+* To create a Docker container, AKS, Lastly, scale up replicas.
+
+   <pre><strong>MY_RG="azuremolchapter15-$MY_RG"
+   az-keyvault-cli.sh -v</strong></pre>
+   
