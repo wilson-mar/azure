@@ -1,6 +1,6 @@
 This is <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">https://github.com/wilson-mar/azure-your-way</a>
 
-The contribution of this repo are Bash scripts which have been generalized with these system variables (referenced from inside Bash scripts):
+The contribution of this repo are Bash scripts which have been <strong>generalized</strong> to referenced these system variables:
 
    <ul><pre>export MY_LOC="westus2"   # aka region
 export MY_RG="mol"
@@ -18,8 +18,8 @@ export MY_KEY_SECRET="SecureP@ssw0rd"   # safely saved in Key Vault
 </pre></ul>
 
 The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
-Save them to a local file such as <tt>$HOME/.secrets.sh</tt> 
-so that you can copy and paste them at the beginning of each CLI session.
+Save them to a local file such as <tt>$HOME/.secrets.sh</tt> so that you can 
+copy and paste them at the beginning of each CLI session.
 
 The above variable are referenced within Bash scripts adapted from various experts generous with sharing their code:
    * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds 
@@ -35,7 +35,7 @@ The above variable are referenced within Bash scripts adapted from various exper
    * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
    <br /><br />
 
-Make this repo availble on https://shell.azure.com
+Make this repo available on https://shell.azure.com
 
    <ul><pre><strong>cd clouddrive
    git clone https://github.com/wilson-mar/azure-your-way.git --depth 1 
@@ -102,3 +102,8 @@ Invoke an individual Bash script with a command like this to create various reso
 
    Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.
    See the "Month of Lunches" ebook.
+
+Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-scripting">https://wilsonmar.github.io/bash-scripting</a> which include:
+
+   * <tt>set -o errexit</tt> so that the script stops on the first error (instead of running on).
+
