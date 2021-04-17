@@ -6,6 +6,9 @@
 # and chapter 15 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
 
+# Create a resource group
+az group create --name "${MY_RG}" --location "${MY_LOC}"
+
 # Define variables for unique Web App name.
 # As we create DNS for the Web App, the DNS name must be unique. By adding some
 # randomization to the resource name, the commands can run without user 
@@ -13,13 +16,10 @@
 # name for use throughout the script
 webAppName=azuremol$RANDOM
 
-# Create a resource group
-az group create --name "${MY_RG}" --location "${MY_LOC}"
-
 # Create an App Service plan
 # An App Service plan defines the location and available features
 # These features include deployment slots, traffic routing options, and
-# security options
+# security options sku S1:
 az appservice plan create \
     --name appservice \
     --sku S1 \
