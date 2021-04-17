@@ -72,7 +72,7 @@ Invoke each Bash script with a command like this to create various resources wit
    
 * Create a Docker container, AKS, Lastly, scale up replicas:
 
-   <pre><strong>azuremolchapter19-$MY_LOC"
+   <pre><strong>MY_RG="azuremolchapter19-$MY_LOC"
    az-aks-cli.sh -v
    </strong></pre>
 
