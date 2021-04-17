@@ -10,6 +10,7 @@ MY_VAULT_NAME="secretplace"
 MY_SVC_BUS_NAME="azuremol"
 MY_STORAGE_ACCT="AzureSaves"
 FUNC_APP_NAME="Bulwinkle"
+SSH_KEY_FILE_NAME="id_rsa"
 MY_KEYVAULT_NAME="specialplace2"
 MY_KEY_NAME="databasepassword"
 MY_KEY_SECRET="SecureP@ssw0rd"   # safely saved in Key Vault
