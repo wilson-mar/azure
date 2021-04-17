@@ -56,9 +56,9 @@ Scripts here are adapted from various experts generous with sharing their code:
 
 1. If you ran these scripts for <strong>training or testing</strong>, remove the repo (to save disk space):
 
-   <ul><pre><strong>cd ~/clouddrive
+   <pre><strong>cd ~/clouddrive
    rm -rf azure-your-way
-   </strong></pre></ul>
+   </strong></pre>
 
 1. Invoke an individual Bash script with a command like this to create various resources within Azure:
 
