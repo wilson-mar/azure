@@ -10,6 +10,8 @@
 # This script sample is released under the MIT license. For more information,
 # see https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/LICENSE
 
+set -o errexit
+
 # Create a resource group. This is a logical container to hold your resources.
 # You can specify any name you wish, so long as it's unique with your Azure
 # subscription and location
