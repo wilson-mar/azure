@@ -6,7 +6,6 @@
 # and chapter 21 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
 #
-
 # There are quite a few components here that aren't available in the Azure CLI
 # The complete examples from chapter 21 fill in the gaps with the use of the
 # Azure portal.
@@ -39,10 +38,10 @@ storageAccount=mystorageaccount$RANDOM
 # Create an Azure Storage account
 # The Function App requires a Storage account
 az storage account create \
-	--resource-group azuremolchapter21 \
-	--name $storageAccount \
-	--sku standard_lrs \
-  --resource-group "${MY_RG}"
+   --resource-group azuremolchapter21 \
+   --name $storageAccount \
+   --sku standard_lrs \
+   --resource-group "${MY_RG}"
     
 # Define a unique name for the Function App
 functionAppName=azuremol$RANDOM
@@ -55,4 +54,6 @@ az functionapp create \
     --name $functionAppName \
     --storage-account $storageAccount \
     --consumption-plan-location eastus \
-    --deployment-source-url https://raw.githubusercontent.com/fouldsy/azure-mol-samples/master/21/analyzeTemperature.js
+    --deployment-source-url https://raw.githubusercontent.com/fouldsy/azure-mol-samples/master/21/analyzeTemperature.js \
+    --resource-group "${MY_RG}"
+    
