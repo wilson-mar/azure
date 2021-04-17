@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # az-webapp-cli.sh
-# This script was adapted from https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/15/azure_cli_sample.sh
+# This script was adapted from https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/03/azure_cli_sample.sh
 # released under the MIT license. See https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/LICENSE
-# and chapter 15 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
+# and chapter 3 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
 
 # Create a resource group
