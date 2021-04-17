@@ -16,44 +16,44 @@
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 # Define a unique name for the Service Bus namespace
-serviceBusNamespace=azuremol$RANDOM
+MY_SVC_BUS_NAMESPACE=$MY_SVC_BUS_NAME$RANDOM
 
 # Create a Service Bus namespace
 # This namespace is used to then create a queue that allows messages to be
 # transmitted between your Azure IoT Hub and applications such as Logic Apps
 # and Function Apps
-az servicebus namespace create --resource-group azuremolchapter21 --name $serviceBusNamespace
+az servicebus namespace create --name "${MY_SVC_BUS_NAMESPACE}" \
+    --resource-group "${MY_RG}"
 
 # Create a Service Bus queue
 # This queue is used to connect Azure IoT Hub with your serverless applications
 # to pass messages back and forth
 az servicebus queue create \
-    --namespace-name $serviceBusNamespace \
-    --name azuremol \
+    --namespace-name "${MY_SVC_BUS_NAMESPACE}" \
+    --name "${MY_SVC_BUS_NAME}" \
     --resource-group "${MY_RG}"
     
 # Define a unique name for the Storage account
-storageAccount=mystorageaccount$RANDOM
+storageAccount="$MY_STORAGE_ACCT$RANDOM"
 
 # Create an Azure Storage account
 # The Function App requires a Storage account
 az storage account create \
-   --resource-group azuremolchapter21 \
-   --name $storageAccount \
+   --name "${MY_STORAGE_ACCT}" \
    --sku standard_lrs \
    --resource-group "${MY_RG}"
     
 # Define a unique name for the Function App
-functionAppName=azuremol$RANDOM
+FUNC_APP_NAME="$MY_SVC_BUS_NAME$RANDOM"
 
 # Create a Function App
 # A consumption plan is used, which means you are only charged based on the
 # memory usage while your app is running. The Function App is set up to be
 # manually connected to a sample app in GitHub
 az functionapp create \
-    --name $functionAppName \
-    --storage-account $storageAccount \
-    --consumption-plan-location eastus \
+    --name "${FUNC_APP_NAME}" \
+    --storage-account "${MY_STORAGE_ACCT}" \
+    --consumption-plan-location "${MY_LOC}" \
     --deployment-source-url https://raw.githubusercontent.com/fouldsy/azure-mol-samples/master/21/analyzeTemperature.js \
     --resource-group "${MY_RG}"
     
