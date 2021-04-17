@@ -9,8 +9,9 @@ Scripts here are adapted from various experts generous with sharing their code:
    * Skylines Academy
    * Gruntwork (Terraform)
    * CloudPosse (Terraform for AWS)
+   * https://github.com/Azure/azure-quickstart-templates (ARM Templates)
    
-   Microsoft labs:
+   Microsoft Learning:
    * https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies
    * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
    <br /><br />
