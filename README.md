@@ -1,3 +1,13 @@
+There are several ways to provision resources in Azure:
+   * portal.azure.com GUI
+   * Bash CLI shell
+   * PowerShell
+   * JSON Template (based on PowerShell)
+   * REST API (which the above calls behind the scenes)
+   * Terraform HCL
+   * Plummi programs
+   <br /><br />
+
 The contribution of <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">this repo (at https://github.com/wilson-mar/azure-your-way)</a>
 are Bash scripts which have been <strong>generalized</strong> for productive use.
 Scripts here are adapted from various experts generous with sharing their code:
