@@ -17,14 +17,14 @@ az group create --name "${MY_RG}" --location "${MY_LOC}"
 az vm create \
     --name molvm \
     --image UbuntuLTS \
-    --admin-username azuremol \
+    --admin-username "${MY_ADMIN_USER_NAME}" \
     --generate-ssh-keys \
     --resource-group "${MY_RG}"
 
 # Create a Recovery Services vault
 # This vault is used to store your backups
 az backup vault create \
-    --name molvault \
+    --name "${MY_RECOVERY_VAULT_NAME}" \
     --location "${MY_LOC}" \
     --resource-group "${MY_RG}"
     
@@ -38,7 +38,7 @@ sleep 10
 # The default backup policy for retention is also then applied
 az backup protection enable-for-vm \
     --vm molvm \
-    --vault-name molvault \
+    --vault-name "${MY_RECOVERY_VAULT_NAME}" \
     --policy-name DefaultPolicy \
     --resource-group "${MY_RG}"
 
@@ -46,7 +46,7 @@ az backup protection enable-for-vm \
 # The data is formatted into the d-m-Y format and is retained for 30 days
 az backup protection backup-now \
     --item-name molvm \
-    --vault-name molvault \
+    --vault-name "${MY_RECOVERY_VAULT_NAME}" \
     --container-name molvm \
     --retain-until $(date +%d-%m-%Y -d "+30 days") \
     --resource-group "${MY_RG}"
