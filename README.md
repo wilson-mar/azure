@@ -38,6 +38,7 @@ Make this repo availble on https://shell.azure.com
    <ul><pre><strong>cd clouddrive
    git clone https://github.com/wilson-mar/azure-your-way.git --depth 1 
    cd azure-your-way
+   ls
    </strong></pre></ul>
 
 When you're done, remove the repo:
