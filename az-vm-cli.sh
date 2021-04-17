@@ -14,6 +14,12 @@ set -o errexit
 echo "MY_RG=$MY_RG MY_LOC=${MY_LOC}"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
+# Ensure a .ssh folder is available to hold key pairs:
+if [ ! -d ~/.ssh ]; then  # directory not found:
+   mkdir ~/.ssh
+fi 
+cd ~/.ssh
+
 # Generate SSH key pair using built-in Linux ssh-keygen program in folder
 # /home/wilson/.ssh/"${SSH_KEY_FILE_NAME}"  # (instead of file id_rsa)
 # SSH keys are used to securely authenticate with a Linux VM
@@ -31,7 +37,7 @@ cat .ssh/"${SSH_KEY_FILE_NAME}"
 # You specify the resoure group from the previous step, then provide a name.
 # This VM uses Ubuntu LTS as the VM image, and creates a user name `azuremol`
 # The `--generate-ssh-keys` checks for keys you may have created earlier. If
-# SSH keys are found, they are used. Otherwise, they are created for you
+# SSH keys are found, they are used. Otherwise, they are created for you:
 az vm create \
     --name "${MY_VM_NAME}" \
     --image UbuntuLTS \
