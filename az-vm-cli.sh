@@ -55,8 +55,8 @@ publicIp=$(az vm show \
     --name "${MY_VM_NAME}" \
     --show-details \
     --query publicIps \
-    --output tsv) \
-    --resource-group "${MY_RG}"
+    --output tsv \
+    --resource-group "${MY_RG}" )
 
 # TODO: if publicIp is blank, stop
 
