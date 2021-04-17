@@ -22,6 +22,7 @@ MY_APPNAME="thismustbeunique2"
 MY_VAULT_NAME="secretplace"
 MY_SVC_BUS_NAME="azuremol"
 MY_STORAGE_ACCT="xxx"
+MY_KEYVAULT_NAME="specialplace2"
 FUNC_APP_NAME=Bulwinkle"
 MY_SECRET_PASSWORD="SecureP@ssw0rd"   # use by Key Vault</pre></ul>
 
