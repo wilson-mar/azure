@@ -130,11 +130,13 @@ Scripts here are adapted from various experts generous with sharing their code:
    ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-keyvault-cli.sh">az-keyvault-cli.sh</a>
    </strong></pre>
    
-* Create a Docker container, AKS, Lastly, scale up replicas:
+* Create a Docker container from a Dockerfile; Create AKS; Scale up replicas 
 
    <pre><strong>MY_RG="azuremolchapter19-$MY_LOC"
    ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-aks-cli.sh">az-aks-cli.sh</a>
    </strong></pre>
+   
+   The IP shows the "Month of Pizza Lunches in a container" website (load balanced).
 
 * Create Azure Functions:
 
