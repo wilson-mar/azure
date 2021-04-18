@@ -86,7 +86,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 * Create a VM with a public IP address:
 
    <pre><strong>MY_RG="azuremolchapter2-$MY_LOC"
-   <a href="https://github.com/wilson-mar/azure-your-way/blob/main/az-vm-cli.sh">./az-vm-cli.sh</a>
+   ./<a href="https://github.com/wilson-mar/azure-your-way/blob/main/az-vm-cli.sh">az-vm-cli.sh</a>
    </strong></pre>
    
    Type yes to question<br />
@@ -101,43 +101,43 @@ Scripts here are adapted from various experts generous with sharing their code:
 * Create an App Service Plan, Azure Web App, Deployment, to show MY_APPNAME.
 
    <pre><strong>MY_RG="azuremolchapter3-$MY_LOC"
-   ./az-webapp-cli.sh
+   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-webapp-cli.sh">az-webapp-cli.sh</a>
    </strong></pre>
 
 * Create a network with two subnets and a network security group that secures inbound traffic. One subnet is for remote access traffic, one is web traffic for VMs that run a web server. Two VMs are then created. One allows SSH access and has the appropriate network security group rules applied. You use this VM as an <strong>SSH jumpbox</strong> to then connect to the the second VM which can be used an web server:
 
    <pre><strong>MY_RG="azuremolchapter5-$MY_LOC"
-   ./az-vm-jumpbox-cli.sh
+   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-vm-jumpbox-cli.sh">az-vm-jumpbox-cli.sh</a>
    </strong></pre> 
 
 * Create a VM with a public IP address. Enabled are a storage account, boot diagnostics with the VM diagnostics extension applied:
 
    <pre><strong>MY_RG="azuremolchapter12-$MY_LOC"
-   ./az-vm-diag-cli.sh
+   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-vm-diag-cli.sh">az-vm-diag-cli.sh</a>
    </strong></pre>
 
 * Create a VM; Recovery Services vault, a backup policy, then creates a VM and applies the backup policy before starting the initial backup job.
 
    <pre><strong>MY_RG="azuremolchapter13-$MY_LOC"
-   ./az-vm-backup-cli.sh
+   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-vm-backup-cli.sh">az-vm-backup-cli.sh</a>
    </strong></pre>
 
 * Create an Azure Key Vault; put a secret in it; show secret; delete secret; recover secret; create a vm; Managed Service Identity; update permissions; Custom Script Extension; Apply the Custom Script Extension:
 
    <pre><strong>MY_RG="azuremolchapter15-$MY_LOC"
-   ./az-keyvault-cli.sh
+   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-keyvault-cli.sh">az-keyvault-cli.sh</a>
    </strong></pre>
    
 * Create a Docker container, AKS, Lastly, scale up replicas:
 
    <pre><strong>MY_RG="azuremolchapter19-$MY_LOC"
-   ./az-aks-cli.sh
+   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-aks-cli.sh">./az-aks-cli.sh</a>
    </strong></pre>
 
 * Create Azure Functions:
 
    <pre><strong>MY_RG="azuremolchapter21-$MY_LOC"
-   ./az-functions-temp.sh
+   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-functions-temp.sh">az-functions-temp.sh</a>
    </strong></pre>
 
    Several Functions components are not available in the Azure CLI, so manual actions are needed on Azure portal to fill in the gaps.
