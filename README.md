@@ -3,7 +3,7 @@ There are several ways to automate provisioning of resources in Azure:
    * Bash CLI shell (az commands)
    * PowerShell (Az modules)
    * JSON Template and parameter files
-   * DSC
+   * PowerShell DSC (Desired State Configuration) automation
    * REST API (which the above calls behind the scenes), written in C# .NET, Java, Python, NodeJs, etc.
    * Terraform HCL (with templating features and advanced logic features)
    * <a target="_blank" href="https://wilsonmar.github.io/pulumi">Pulumi</a> programming in Python
