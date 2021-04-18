@@ -61,18 +61,20 @@ publicIp=$(az vm show \
 # TODO: if publicIp is blank, stop
 
 # SSH to your VM with the username and public IP address for your VM
-ssh "${MY_ADMIN_USER_NAME}"@$publicIp
+#ssh "${MY_ADMIN_USER_NAME}"@$publicIp
 
 # Display information to verify entry in the Linux machine:
 uname -a
 
 # Once logged in to your VM, install the LAMP web stack with apt-get
 sudo apt update && sudo apt install -y lamp-server^
-logout
+
+# out of
+exit
 
 # Open port 80 to your webserver (not HTTPS) while testing:
 az vm open-port --name "${MY_VM_NAME}" --port 80 --resource-group "${MY_RG}"
-# TODO: Enable TLS for port 443
+# TODO: Enable TLS for port 443?
 
 # Now you can access the basic website in your web browser
 echo "To see your web server in action, enter the public IP address in to your web browser: http://$publicIp"
