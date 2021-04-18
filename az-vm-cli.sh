@@ -37,7 +37,7 @@ ssh-keygen -t rsa -b 2048 -f "${SSH_KEY_FILE_NAME}" -N ""
 # provide this public key
 ls -al ~/.ssh/"${SSH_KEY_FILE_NAME}"*
 
-# Create a Linux VM
+echo ">>> Create a Linux VM:"
 # You specify the resoure group from the previous step, then provide a name.
 # This VM uses Ubuntu LTS as the VM image, and creates a user name `azuremol`
 # The `--generate-ssh-keys` checks for keys you may have created earlier. If
@@ -49,8 +49,7 @@ az vm create \
     --generate-ssh-keys \
     --resource-group "${MY_RG}"
 
-# Obtain the public IP address of your VM. Enter the name of your resource
-# group and VM if you changed them
+echo ">>> Obtain the public IP address of your VM. Enter the name of your resource group and VM if you changed them:"
 publicIp=$(az vm show \
     --name "${MY_VM_NAME}" \
     --show-details \
@@ -66,12 +65,12 @@ publicIp=$(az vm show \
    # Once logged in to your VM, install the LAMP web stack with apt-get
    # sudo apt update && sudo apt install -y lamp-server^
 
-# Open port 80 to your webserver (not HTTPS) while testing:
+echo ">>> Open port 80 to your webserver (not HTTPS) while testing:"
 az vm open-port --name "${MY_VM_NAME}" --port 80 --resource-group "${MY_RG}"
 # TODO: Enable TLS for port 443?
 
 # Now you can access the basic website in your web browser
-echo "To see your web server in action, enter the public IP address in to your web browser: http://$publicIp"
+echo ">>> To see your web server in action, enter the public IP address in to your web browser: http://$publicIp"
 
 # In Portal, list Virtual Machines at https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines
 
