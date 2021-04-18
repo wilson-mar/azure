@@ -3,7 +3,7 @@
 # az-aks-cli.sh
 # This script was adapted from https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/19/azure_cli_sample.sh
 # released under the MIT license. See https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/LICENSE
-# and chapter 19 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
+# and chapter 19 (page 290) of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
 
 set -o errexit
