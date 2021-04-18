@@ -53,9 +53,13 @@ echo "<<< Get the AKS credentials:"
 az aks get-credentials \
     --name "${MY_CONTAINER}" \
     --resource-group "${MY_RG}"
-    
-# (Idempotent) Install the kubectl CLI for managing the Kubernetes cluster
+
+   # Merged "azuremol" as current context in /home/wilson/.kube/config
+
+echo "<<< (Idempotent) Install the kubectl CLI for managing the Kubernetes cluster:"
 az aks install-cli
+   # Downloading client to "/usr/local/bin/kubectl" from "https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl"
+   # Connection error while attempting to download client ([Errno 13] Permission denied: '/usr/local/bin/kubectl')
 
 echo "<<< Start an Kubernetes deployment:"
 # This deployment uses the same base container image as the ACI instance in
