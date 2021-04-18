@@ -33,6 +33,12 @@ Scripts here are adapted from various experts generous with sharing their code:
 
 1. Be in https://shell.azure.com
 
+1. If you ran these scripts for <strong>training or testing</strong>, (to save disk space) remove the repo before and after the next step (download):
+
+   <pre><strong>cd ~/clouddrive
+   rm -rf azure-your-way
+   </strong></pre>
+
 1. Download this repo to establish a run enviornment:
 
    <pre><strong>cd clouddrive
@@ -76,12 +82,6 @@ Scripts here are adapted from various experts generous with sharing their code:
 
    <tt>--yes</tt> before the az command feeds a "y" to automatically answer the request:<br />
    Are you sure you want to perform this operation? (y/n): y
-
-1. If you ran these scripts for <strong>training or testing</strong>, remove the repo (to save disk space):
-
-   <pre><strong>cd ~/clouddrive
-   rm -rf azure-your-way
-   </strong></pre>
 
 1. Invoke an individual Bash script with a command like this to create various resources within Azure:
 
