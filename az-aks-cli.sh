@@ -63,15 +63,15 @@ az aks get-credentials \
 
    # Merged "azuremol" as current context in /home/wilson/.kube/config
 
-
 echo "<<< Start an Kubernetes deployment:"
 # This deployment uses the same base container image as the ACI instance in
 # a previous example. Again, port 80 is opened to allow web traffic.
 kubectl run "${MY_CONTAINER}" \
     --generator=deployment/v1beta1 \
     --image=docker.io/"${MY_DOCKERHUB_ACCT}"/"${MY_CONTAINER}":latest \
-    --port=80 \
-    --generator=run-pod/v1
+    --port=80 
+    
+   # Error: unknown flag: --generator=run-pod/v1
 
 echo "<<< Create a load balancer for Kubernetes deployment:"
 # Although port 80 is open to the deployment, external traffic can't reach the
