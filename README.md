@@ -69,7 +69,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    sleep 10  # takes several minutes
    </strong></pre>
 
-   <tt>--yes</tt> before the az command feeds a "y" to automatically answer the request:
+   <tt>--yes</tt> before the az command feeds a "y" to automatically answer the request:<br />
    Are you sure you want to perform this operation? (y/n): y
 
 1. If you ran these scripts for <strong>training or testing</strong>, remove the repo (to save disk space):
