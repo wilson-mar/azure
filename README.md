@@ -65,7 +65,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    
    PROTIP: Use of a variable by various scripts and commands avoids typos and misconfigurations.
    
-1. PROTIP: Use environment variables to <strong>delete resource groups</strong> created to stop charges from accumulating: 
+1. PROTIP: Use environment variables to <strong>delete resource groups</strong> created to stop charges from accumulating on Virtual Servers, etc.: 
 
    <pre><strong>MY_RG="mol"
    az group delete --name "${MY_RG}" --yes  
