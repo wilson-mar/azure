@@ -6,7 +6,7 @@ There are several ways to automate provisioning of resources in Azure:
    * DSC
    * REST API (which the above calls behind the scenes), written in C# .NET, Java, Python, NodeJs, etc.
    * Terraform HCL (with templating features and advanced logic features)
-   * Plummi programming in Python
+   * <a target="_blank" href="https://wilsonmar.github.io/pulumi">Pulumi</a> programming in Python
    * Bicep (from Microsoft)
    <br /><br />
 
@@ -83,7 +83,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 * Create a VM with a public IP address:
 
    <pre><strong>MY_RG="azuremolchapter2-$MY_LOC"
-   ./az-vm-cli.sh 
+   <a href="https://github.com/wilson-mar/azure-your-way/blob/main/az-vm-cli.sh">./az-vm-cli.sh</a>
    </strong></pre>
    
    Type yes to question<br />
