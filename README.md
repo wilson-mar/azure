@@ -131,7 +131,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 * Create a Docker container, AKS, Lastly, scale up replicas:
 
    <pre><strong>MY_RG="azuremolchapter19-$MY_LOC"
-   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-aks-cli.sh">./az-aks-cli.sh</a>
+   ./<a target="_blank" href="https://github.com/wilson-mar/azure-your-way/blob/main/az-aks-cli.sh">az-aks-cli.sh</a>
    </strong></pre>
 
 * Create Azure Functions:
