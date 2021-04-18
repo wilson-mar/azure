@@ -48,7 +48,6 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_RG="mol"
    export MY_VM_NAME="mol-westus2"
    export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
-   export MY_APPNAME="mol-thismustbeunique2"
    export MY_VAULT_NAME="secretplace"
    export MY_SVC_BUS_NAME="azuremol"
    export MY_STORAGE_ACCT="AzureSaves12345"  # globally unique in front of /file.core.windows.net
@@ -57,7 +56,8 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_KEYVAULT_NAME="specialplace2"
    export MY_KEY_NAME="databasepassword"
    export MY_KEY_SECRET="SecureP@ssw0rd"     # for saving into Key Vault
-   export MY_DOCKERHUB_ACCT="WilsonMar"      # globally unique in DockerHub
+   export MY_DOCKERHUB_ACCT="iainfoulds"     # globally unique in Docker.io (DockerHub)
+   export MY_APPNAME="azuremol"              # 
    </pre>
 
    The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
