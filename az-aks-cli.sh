@@ -11,6 +11,13 @@ set -o errexit
 # Create a resource group
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
+# aks installed by default. See https://docs.microsoft.com/en-us/azure/cloud-shell/features#tools
+#echo "<<< Install the kubectl CLI for managing the Kubernetes cluster:"
+# az aks install-cli --install-location /usr/local/bin
+   # https://github.com/MicrosoftDocs/azure-docs/issues/6609
+   # Downloading client to "/usr/local/bin/kubectl" from "https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl"
+   # Connection error while attempting to download client ([Errno 13] Permission denied: '/usr/local/bin/kubectl')
+
 echo "<<< Create a Dockerfile:"
 cat <<EOF > Dockerfile
 FROM nginx:1.17.5
@@ -56,10 +63,6 @@ az aks get-credentials \
 
    # Merged "azuremol" as current context in /home/wilson/.kube/config
 
-echo "<<< (Idempotent) Install the kubectl CLI for managing the Kubernetes cluster:"
-az aks install-cli
-   # Downloading client to "/usr/local/bin/kubectl" from "https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl"
-   # Connection error while attempting to download client ([Errno 13] Permission denied: '/usr/local/bin/kubectl')
 
 echo "<<< Start an Kubernetes deployment:"
 # This deployment uses the same base container image as the ACI instance in
