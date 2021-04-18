@@ -73,12 +73,13 @@ echo "<<< Start a Kubernetes deployment:"
 # This deployment uses the same base container image as the ACI instance in
 # a previous example. Again, port 80 is opened to allow web traffic.
 # https://stackoverflow.com/questions/52890718/kubectl-run-is-deprecated-looking-for-alternative
-kubectl run "${MY_CONTAINER}" \
+kubectl run --generator=run/v1 "${MY_CONTAINER}" \
     --image=docker.io/"${MY_DOCKERHUB_ACCT}"/"${MY_CONTAINER}":latest \
     --port=80 
     
 #    --generator=deployment/v1beta1 \
    # Error: unknown flag: --generator=run-pod/v1
+   # --generator=run/v1 from https://unofficial-kubernetes.readthedocs.io/en/latest/user-guide/kubectl-conventions/
 
 echo "<<< Create a load balancer for Kubernetes deployment:"
 # Although port 80 is open to the deployment, external traffic can't reach the
