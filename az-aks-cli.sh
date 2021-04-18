@@ -8,6 +8,9 @@
 
 set -o errexit
 
+echo "This is experiencing an error."
+exit
+
 # Create a resource group
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
@@ -63,14 +66,18 @@ az aks get-credentials \
 
    # Merged "azuremol" as current context in /home/wilson/.kube/config
 
-echo "<<< Start an Kubernetes deployment:"
+echo "<<< Kubernetes client version:"
+kubectl version -c 
+
+echo "<<< Start a Kubernetes deployment:"
 # This deployment uses the same base container image as the ACI instance in
 # a previous example. Again, port 80 is opened to allow web traffic.
+# https://stackoverflow.com/questions/52890718/kubectl-run-is-deprecated-looking-for-alternative
 kubectl run "${MY_CONTAINER}" \
-    --generator=deployment/v1beta1 \
     --image=docker.io/"${MY_DOCKERHUB_ACCT}"/"${MY_CONTAINER}":latest \
     --port=80 
     
+#    --generator=deployment/v1beta1 \
    # Error: unknown flag: --generator=run-pod/v1
 
 echo "<<< Create a load balancer for Kubernetes deployment:"
