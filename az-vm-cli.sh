@@ -37,7 +37,7 @@ ssh-keygen -t rsa -b 2048 -f "${SSH_KEY_FILE_NAME}" -N ""
 # provide this public key
 ls -al ~/.ssh/"${SSH_KEY_FILE_NAME}"*
 
-echo ">>> Create a Linux VM:"
+echo ">>> Create a Linux VM: ${MY_VM_NAME}"
 # You specify the resoure group from the previous step, then provide a name.
 # This VM uses Ubuntu LTS as the VM image, and creates a user name `azuremol`
 # The `--generate-ssh-keys` checks for keys you may have created earlier. If
