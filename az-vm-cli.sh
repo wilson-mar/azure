@@ -61,16 +61,10 @@ publicIp=$(az vm show \
 # TODO: if publicIp is blank, stop
 
 # SSH to your VM with the username and public IP address for your VM
-#ssh "${MY_ADMIN_USER_NAME}"@$publicIp
-
-# Display information to verify entry in the Linux machine:
-uname -a
-
-# Once logged in to your VM, install the LAMP web stack with apt-get
-sudo apt update && sudo apt install -y lamp-server^
-
-# out of
-exit
+#ssh "${MY_ADMIN_USER_NAME}"@$publicIp 'uname -a; sudo apt update && sudo apt install -y lamp-server^; exit'
+   # uname -a  # Display information to verify entry in the Linux machine:
+   # Once logged in to your VM, install the LAMP web stack with apt-get
+   # sudo apt update && sudo apt install -y lamp-server^
 
 # Open port 80 to your webserver (not HTTPS) while testing:
 az vm open-port --name "${MY_VM_NAME}" --port 80 --resource-group "${MY_RG}"
