@@ -54,7 +54,7 @@ az aks get-credentials \
     --name "${MY_CONTAINER}" \
     --resource-group "${MY_RG}"
     
-# Install the kubectl CLI for managing the Kubernetes cluster
+# (Idempotent) Install the kubectl CLI for managing the Kubernetes cluster
 az aks install-cli
 
 # Start an Kubernetes deployment
