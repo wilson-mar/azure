@@ -62,10 +62,13 @@ Scripts here are adapted from various experts generous with sharing their code:
    The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
    Save them to a local file such as <tt>$HOME/.secrets.sh</tt> so that you can 
    copy and paste them at the beginning of each CLI session.
+   
+   PROTIP: Use of a variable by various scripts and commands avoids typos and misconfigurations.
+   
+1. PROTIP: Use environment variables to <strong>delete resource groups</strong> created to stop charges from accumulating: 
 
-1. Using environment variables makes it easier to <strong>delete resource groups</strong> created to stop charges from accumulating: 
-
-   <pre><strong>az group delete --name "${MY_RG}" --yes  
+   <pre><strong>MY_RG="mol"
+   az group delete --name "${MY_RG}" --yes  
    sleep 10  # takes several minutes
    </strong></pre>
 
