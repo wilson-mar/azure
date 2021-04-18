@@ -57,6 +57,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_KEYVAULT_NAME="specialplace2"
    export MY_KEY_NAME="databasepassword"
    export MY_KEY_SECRET="SecureP@ssw0rd"     # for saving into Key Vault
+   export MY_DOCKERHUB_ACCT="IanFoulds"      # globally unique in DockerHub
    </pre>
 
    The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
