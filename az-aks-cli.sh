@@ -76,10 +76,15 @@ echo "<<< Start a Kubernetes deployment:"
 kubectl run --generator=run/v1 "${MY_CONTAINER}" \
     --image=docker.io/"${MY_DOCKERHUB_ACCT}"/"${MY_CONTAINER}":latest \
     --port=80 
-    
-#    --generator=deployment/v1beta1 \
+
+# FIXME: We need the new way to replace 
+# --generator=deployment/v1beta1 \  # has been deprecated since k8s v1.17 https://kubernetes.io/docs/reference/kubectl/conventions/
    # Error: unknown flag: --generator=run-pod/v1
    # --generator=run/v1 from https://unofficial-kubernetes.readthedocs.io/en/latest/user-guide/kubectl-conventions/
+# NOTE: Moving to kubectl create command, loses the ability to fully customize generated Deployment. For example, 
+   # it is no longer possible to define replicas (--replicas option), resources (--requests and --limits options) 
+   # or implicitly create an associated Service with --expose option.
+
 
 echo "<<< Create a load balancer for Kubernetes deployment:"
 # Although port 80 is open to the deployment, external traffic can't reach the
