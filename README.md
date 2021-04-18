@@ -65,10 +65,11 @@ Scripts here are adapted from various experts generous with sharing their code:
 
 1. Using environment variables makes it easier to <strong>delete resource groups</strong> created to stop charges from accumulating: 
 
-   <pre><strong>az group delete --name "${MY_RG}"   # takes several minutes
+   <pre><strong>az group delete --name "${MY_RG}" --yes  # takes several minutes
    </strong></pre>
 
-   <pre>Are you sure you want to perform this operation? (y/n): y</pre>
+   <tt>--yes</tt> before the az command feeds a "y" to automatically answer the request:
+   Are you sure you want to perform this operation? (y/n): y
 
 1. If you ran these scripts for <strong>training or testing</strong>, remove the repo (to save disk space):
 
