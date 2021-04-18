@@ -8,7 +8,7 @@
 
 set -o errexit
 
-echo "This is experiencing an error."
+echo "This is not usable at the moment."
 exit
 
 # Create a resource group
