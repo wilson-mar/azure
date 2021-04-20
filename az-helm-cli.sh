@@ -7,8 +7,12 @@
 # ???
 # Based on # https://docs.microsoft.com/en-us/azure/container-registry/container-registry-oci-artifacts
 #   00. Define environment variables before invoking this script
-#       MY_GIT_CONTAINER, MY_LOC, MY_RG, MY_ACR, --username $SP_APP_ID --password $SP_PASSWD, MY_ACR_REPO
+#       MY_GIT_CONTAINER, MY_REPO, MY_LOC, MY_RG, MY_ACR, --username $SP_APP_ID --password $SP_PASSWD, MY_ACR_REPO
 #   01. Navigate/create container folder and download this repo into it
+#       After you obtain a Terminal (console) in your environment,
+#       cd to folder, copy this line and paste in the terminal:
+#       bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilson-mar/$MY_REPO/master/az-helm-cli.sh)" -v -i
+
 #   02. Install and start the Docker client if it's not already installed and started
 #   03. Install and use CLI to log into Azure
 #   04. Log into Azure
