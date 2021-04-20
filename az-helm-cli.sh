@@ -300,7 +300,7 @@ error() {    # &#9747;
 warning() {  # &#9758; or &#9755;
    printf "\n\e[5m\e[36m\e[1m☞ %s\e[0m\n" "$(echo "$@" | sed '/./,$!d')"
 }
-fatal() {   # Skull: &#9760;  # Star: &starf; &#9733; U+02606  # Toxic: &#9762;
+fatal_msg() {   # Skull: &#9760;  # Star: &starf; &#9733; U+02606  # Toxic: &#9762;
    printf "\n\e[31m\e[1m☢  %s\e[0m\n" "$(echo "$@" | sed '/./,$!d')"
 }
 
@@ -430,20 +430,20 @@ pwd
    tar -zxf oras_0.11.1_*.tar.gz   # unzip
    rm -rf oras_0.11.1_*.tar.gz     # remove
    if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
+      echo "Already in PATH=$PATH"
+   else
       # in Cloud Shell:
          PATH="/usr/csuser/${MY_GIT_CONTAINER}/${MY_REPO}/oras:$PATH\"    
       # Local:   
          PATH="$HOME/${MY_GIT_CONTAINER}/${MY_REPO}/oras:$PATH\"    
       echo "new PATH=$PATH"
-   else
-      echo "Already in PATH=$PATH"
    fi
    chmod +x oras
    ls -al oras
 
 if ! command -v oras ; then    # not installed, so:
-   echo "oras not found after install!"
-   abort
+   fatal_msg "oras not found after install!"
+   exit
 fi
 
 h2 " 22. Create a Service Principal with push rights:"
