@@ -54,6 +54,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 
    <pre>export MY_LOC="westus2"   # aka region
    export MY_RG="mol"
+   export MY_GIT_CONTAINER="clouddrive"      # "clouddrive" in Cloud Shell
    export MY_VM_NAME="mol-westus2"
    export MY_APPNAME="azuremol"              # 
    export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
