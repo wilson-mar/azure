@@ -40,13 +40,14 @@
 #   25. List resource group:"
 #   26. List resources under resource group:"
 #   27. Clean up resource group, ACR, images:"
+        # Delete the Azure Resource Group after this so they don't accumulate charges without your supervision.
 #
 # Authenticate with your registry using the helm registry login command.
 # Use helm chart commands in the Helm CLI to push, pull, and manage Helm charts in a registry
 # Use helm install to install charts to a Kubernetes cluster from a local repository cache.
 #
-# CAUTION: Delete the Azure Resource Group after this so they don't accumulate charges without your supervision.
 # Adapted from https://docs.microsoft.com/en-us/azure/container-registry/container-registry-helm-repos
+# and https://gaunacode.com/publishing-helm-3-charts-to-azure-container-registry-using-azure-devops-part-1
 
 set -o errexit
 
@@ -54,10 +55,19 @@ echo ">>> 01. Create/recreate container folder and download this repo into it:"
 # TODO: WILSON:
 
 echo ">>> 02. Install and start the Docker client if it's not already installed and started:"
-# TODO: WILSON:
+cd ~/clouddrive
+MY_REPO="azure-your-way"
+if [   -d "${MY_REPO}" ]; then  # folder found:
+   # TODO: Assume delete previous version of GitHub:
+   rm -rf "${MY_REPO}"
+fi
+git clone https://github.com/wilson-mar/"${MY_REPO}".git --depth 1 
+cd "${MY_REPO}"
+ls
+chmod +x *.sh
 
 echo ">>> 03. Install and use CLI to log into Azure:"
-az --version
+az --version  # 2.22.0 and extensions
 # TODO: if not installed: install it
 az login  # pops-up browser
 
@@ -93,9 +103,10 @@ az acr login --name "${MY_ACR}"
 # echo "Here is an artifact" > artifact.txt
 
 echo ">>> 07. Create a Dockerfile (instead of reference one pre-created):"
-echo "FROM mcr.microsoft.com/hello-world" > hello-world.dockerfile
+echo "FROM mcr.microsoft.com/hello-world" > hello-world.dockerfile # ???
 
 echo ">>> 08. Use a Dockerfile to create a Docker container image:"
+
 
 echo ">>> 09. Tag Docker image:"
 # TODO: docker tag mcr.microsoft.com/hello-world <login-server>/hello-world:v1
@@ -109,6 +120,15 @@ echo ">>> 12. Sign in ORAS:"
 oras login "${MY_ACR}".azurecr.io --username $SP_APP_ID --password $SP_PASSWD
 
 echo ">>> 13. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool to"
+# On MacOS:
+# which oras
+   curl -LO https://github.com/deislabs/oras/releases/download/v0.11.1/oras_0.11.1_darwin_amd64.tar.gz
+   mkdir -p oras-install/
+   tar -zxf oras_0.11.1_*.tar.gz -C oras-install/
+   mv oras-install/oras /usr/local/bin/
+   rm -rf oras_0.11.1_*.tar.gz oras-install/
+
+exit
 
 echo ">>> 14. Use ORAS to push the new image into your ACR (Azure Container Registry), instead of DockerHub:">
 # docker push <login-server>/hello-world:v1
@@ -154,6 +174,7 @@ docker run <login-server>/hello-world:v1
 
 echo ">>> 20b. Reference Helm3 charts as OCI artifacts in the ACR (Azure Container Registry):"
 #          The OCI (Open Container Initiative) Image Format Specs is at https://github.com/opencontainers/distribution-spec"
+# https://docs.fluxcd.io/projects/helm-operator/en/1.0.0-rc9/references/helmrelease-custom-resource.html
 
 echo ">>> 21. Use ACR tasks to build and test container images."
 
@@ -170,6 +191,7 @@ az group list -o table
 echo ">>> 26. List resources under resource group:"
 az resource list --resource group "${MY_RG}" --location "${MY_LOC}"
    # Alternative: a. Install Python environment
+   # python --version
    # Install b. In requirements.txt azure-mgmt-resource>=1.15.0 & azure-identity>=1.5.0
    # pip install -r requirements.txt
    # Bring in code from https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-example-list-resource-groups 
