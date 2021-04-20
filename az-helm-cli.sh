@@ -146,8 +146,8 @@ pwd
    curl -LO https://github.com/deislabs/oras/releases/download/v0.11.1/oras_0.11.1_darwin_amd64.tar.gz
    tar -zxf oras_0.11.1_*.tar.gz      # unzip
    rm -rf oras_0.11.1_*.tar.gz
-   ls -al oras
    chmod +x oras
+   ls -al oras
 
 if ! command -v oras ; then    # not installed, so:
    echo "oras not found after install!"
