@@ -56,7 +56,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_RG="mol"
    export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
    export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
-   export MY_CALL_SCRIPT="az-helm-cli.sh"    # the script being called
+   export MY_SCRIPT="az-helm-cli.sh"         # the script being called
    export MY_SCRIPT_VERSION="0.1.4"          #
    export MY_VM_NAME="mol-westus2"
    export MY_APPNAME="azuremol"              # 
