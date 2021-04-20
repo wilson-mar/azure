@@ -57,6 +57,7 @@
 set -o errexit
 
 echo ">>> 01. Create/recreate container folder and download this repo into it:"
+echo "MY_SCRIPT_VERSION=$MY_SCRIPT_VERSION"
 # TODO: WILSON:
 
 echo ">>> 02. Install and start the Docker client if it's not already installed and started:"
@@ -78,7 +79,11 @@ echo ">>> 03. Install CLI to log into Azure:"
 az --version  # 2.22.0 and extensions
 
 echo ">>> 04. Use az login # to Azure:"
-az login  # pops-up browser
+RESPONSE=$( az account list )
+# TODO: state": "Enabled",
+   az login  # pops-up browser
+      # Cloud Shell is automatically authenticated under the initial account signed-in with. Run 'az login' only if you need to use a different account
+      # To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code RTGDJB9TN to authenticate.
 
 echo ">>> 05. Create Resource Group:"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
