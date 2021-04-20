@@ -57,7 +57,8 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
    export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
    export MY_SCRIPT="az-helm-cli.sh"         # the script being called
-   export MY_SCRIPT_VERSION="0.1.4"          #
+   export MY_SCRIPT_VERSION="0.1.4"    
+   export MY_ACR="jollygoodacr"    
    export MY_VM_NAME="mol-westus2"
    export MY_APPNAME="azuremol"              # 
    export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
@@ -82,8 +83,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 1. PROTIP: Use environment variables to <strong>delete resource groups</strong> created to stop charges from accumulating on Virtual Servers, etc.: 
 
    <pre><strong>MY_RG="mol"
-   az group delete --name "${MY_RG}" --yes  
-   sleep 10  # takes several minutes
+   az group delete --name "${MY_RG}" --yes   # takes several minutes
    </strong></pre>
 
    <tt>--yes</tt> before the az command feeds a "y" to automatically answer the request:<br />
