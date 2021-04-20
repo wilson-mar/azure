@@ -12,51 +12,9 @@
 # B. To invoke this script: Navigate/create container folder and download this repo into it
 #       After you obtain a Terminal (console) in your environment,
 #       cd to folder, copy this line and paste in the terminal:
+#
 #       bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilson-mar/$MY_REPO/master/$MY_SCRIPT)" 
-#
-###  01. Establish starting times of this run:
-###  02. Install and start the Docker client (if it's not already installed and started):
-###  03. Define TOGGLE variables for use as "feature flags":
-###  04. Set variables associated with each parameter flag:
-###  05. Set custom functions to echo text to screen:
-###  06. Edit and set run error control variables:
-###  07. Obtain operating system info to define package manager usage:
-###  08. Validate variables controlling run:
-
-
-#   10. Install and use CLI for logging into Azure:
-#   11. Log into Azure
-
-#   05. Create Azure Resource Group"
-#   06. Create your private ACR (Azure Container Registry)
-#   07. Login into your ACR
-
-#   08. Create a Dockerfile (instead of reference one pre-created).
-#   09. Create a Docker container image from Dockerfile and images.
-#   10. Tag Docker image:"
-#   11. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool:">
-#   12. Create a Service Principal with push rights.
-#   13. Sign in ORAS
-#   14. Use ORAS to push the new image into your ACR (Azure Container Registry), instead of DockerHub.
-#   15. Remove the image tag from your local Docker environment.
-#   16. List repos (artifacts) in ACR, to confirm:
-#   17. List tags in ACR, to confirm:"
-#   18. Get attributes of an artifact in ACR, to confirm.
-
-#   19. Have Azure Defender Security Center scan images in ACR:"
-
-#   20a. Run individual Docker image or "
-#   20b. Reference Helm3 charts as OCI artifacts in the ACR (Azure Container Registry). 
-#          The OCI (Open Container Initiative) Image Format Specs is at https://github.com/opencontainers/distribution-spec
-#   21. Use ACR tasks to build and test container images.
-#   22. Install Helm, get helm version.
-#   23. Push change into Helm to trigger run which establishes services in Azure.
-#   24. Validate automation.
-#   25. List resource group:"
-#   26. List resources under resource group:"
-#   27. Clean up resource group, ACR, images:"
-        # Delete the Azure Resource Group after this so they don't accumulate charges without your supervision.
-#
+##
 # Authenticate with your registry using the helm registry login command.
 # Use helm chart commands in the Helm CLI to push, pull, and manage Helm charts in a registry
 # Use helm install to install charts to a Kubernetes cluster from a local repository cache.
@@ -104,15 +62,15 @@ args_prompt() {
    echo "   -O \"repo1\" repo name (defaults based on -org)"
    echo "   -C    remove -Cloned files after run (to save disk space)"
    echo "   -xx       stop and not exit at end"
-   echo "WINDOWS EXAMPLE INVOCATION:"
-   echo "sh $MY_SCRIPT -n \"wilson-mar\" -e \"wilson_mar@${EMAIL_HOST}\" -os \"Windows\" -v"  
+#   echo "WINDOWS EXAMPLE INVOCATION:"
+#   echo "sh $MY_SCRIPT -n \"wilson-mar\" -e \"wilson_mar@${EMAIL_HOST}\" -os \"Windows\" -v"  
    echo "MAC EXAMPLE INVOCATION:"
    echo "./$MY_SCRIPT "
 }
 
 if [ $# -eq 0 ]; then  # display if no parameters are provided:
    args_prompt
-#   exit 1
+#   exit 1      # and stop processing.
 fi
 
 
