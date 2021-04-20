@@ -61,6 +61,7 @@ echo "MY_SCRIPT_VERSION=$MY_SCRIPT_VERSION"
 # TODO: WILSON:
 
 echo ">>> 02. Install and start the Docker client if it's not already installed and started:"
+cd
 if [ !   -d "${MY_GIT_CONTAINER}" ]; then  # folder not found, so make it:
    mkdir -p "${MY_GIT_CONTAINER}"    # in Cloud Shell ?
 fi
@@ -79,11 +80,14 @@ echo ">>> 03. Install CLI to log into Azure:"
 az --version  # 2.22.0 and extensions
 
 echo ">>> 04. Use az login # to Azure:"
-RESPONSE=$( az account list )
-# TODO: state": "Enabled",
+USER=$(az vm show -g QueryDemo -n TestVM --query 'osProfile.adminUsername' -o json)
+# az account list -o table
+RESPONSE=$( az ad signed-in-user show --query "accountEnabled" -o json )
+if [[ "$RESPONSE" == *"true"* ]]; then  # TODO: state": "Enabled", userPrincipalName
    az login  # pops-up browser
       # Cloud Shell is automatically authenticated under the initial account signed-in with. Run 'az login' only if you need to use a different account
       # To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code RTGDJB9TN to authenticate.
+fi
 
 echo ">>> 05. Create Resource Group:"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
@@ -146,7 +150,7 @@ echo ">>> 11. Install https://github.com/deislabs/oras to use the OCI Registry a
    rm -rf oras_0.11.1_*.tar.gz
    chmod +x oras
 # fi
-if ! command -v oras ; then
+if ! command -v oras >/dev/null; then  # not installed, so:
    echo "oras not found after install!"
    abort
 fi
