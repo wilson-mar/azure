@@ -137,7 +137,7 @@ echo ">>> 09. Use a Dockerfile to create a Docker container image:"
 echo ">>> 10. Tag Docker image:"
 # TODO: docker tag mcr.microsoft.com/hello-world <login-server>/hello-world:v1
 
-echo ">>> 11. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool:"
+echo ">>> 11. Install in ${MY_GIT_CONTAINER}/${MY_REPO} to use the OCI Registry as Storage (ORAS) tool:"
 # On MacOS:
 # install no matter what:  if ! command -v oras ; then.   
    cd $HOME/"${MY_GIT_CONTAINER}"/"${MY_REPO}"  # use github repo.
