@@ -11,7 +11,7 @@
 #   01. Navigate/create container folder and download this repo into it
 #       After you obtain a Terminal (console) in your environment,
 #       cd to folder, copy this line and paste in the terminal:
-#       bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilson-mar/$MY_REPO/master/az-helm-cli.sh)" -v -i
+#       bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilson-mar/$MY_REPO/master/az-helm-cli.sh)"
 
 #   02. Install and start the Docker client if it's not already installed and started
 #   03. Install and use CLI to log into Azure
@@ -149,7 +149,7 @@ pwd
    ls -al oras
    chmod +x oras
 
-if ! command -v oras; then  # not installed, so:
+if ! command -v oras ; then    # not installed, so:
    echo "oras not found after install!"
    abort
 fi
