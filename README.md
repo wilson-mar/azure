@@ -86,6 +86,12 @@ Scripts here are adapted from various experts generous with sharing their code:
 
 1. Invoke an individual Bash script with a command like this to create various resources within Azure:
 
+* Use Helm charts
+
+   <pre><strong>MY_RG="helm-$MY_LOC"
+   ./<a href="https://github.com/wilson-mar/azure-your-way/blob/main/az-helm-cli.sh">az-helm-cli.sh</a>
+   </strong></pre>
+
 * Create a VM with a public IP address:
 
    <pre><strong>MY_RG="azuremolchapter2-$MY_LOC"
