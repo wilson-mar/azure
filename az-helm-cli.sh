@@ -8,10 +8,11 @@
 # Based on # https://docs.microsoft.com/en-us/azure/container-registry/container-registry-oci-artifacts
 # A. Before invoking this script: Define environment variables 
 #       MY_GIT_CONTAINER, MY_REPO, MY_LOC, MY_RG, MY_ACR, --username $SP_APP_ID --password $SP_PASSWD, MY_ACR_REPO
+#       MY_SCRIPT
 # B. To invoke this script: Navigate/create container folder and download this repo into it
 #       After you obtain a Terminal (console) in your environment,
 #       cd to folder, copy this line and paste in the terminal:
-#       bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilson-mar/$MY_REPO/master/az-helm-cli.sh)" 
+#       bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilson-mar/$MY_REPO/master/$MY_SCRIPT)" 
 #
 ###  01. Establish starting times of this run:
 ###  02. Install and start the Docker client (if it's not already installed and started):
@@ -69,7 +70,7 @@ set -o errexit
 THIS_PROGRAM="$0"
 EPOCH_START="$( date -u +%s )"  # such as 1572634619
 LOG_DATETIME=$( date +%Y-%m-%dT%H:%M:%S%z)-$((1 + RANDOM % 1000))   # EX: 2021-04-20T10:16:02+0000-296
-echo "=========================== $LOG_DATETIME $THIS_PROGRAM $MY_SCRIPT $MY_SCRIPT_VERSION at $HOME"
+echo "=============== $LOG_DATETIME $THIS_PROGRAM $MY_SCRIPT $MY_SCRIPT_VERSION at $HOME"
 
 
 ###  02. Define a menu and display it if -h is specified in the command line:
@@ -82,10 +83,10 @@ args_prompt() {
    echo "   -vv           run -very verbose (debug)"
    echo "   -q           -quiet headings for each step"
    echo " "
-   echo "   -I           -Install vault, etc."
+   echo "   -I           -Install packages (default is not)"
    echo "   -U           -Upgrade installed packages"
    echo " "
-   echo "   -S  \"~/.secrets.sh\"  -Secrets full file path"
+   echo "   -S  \"~/.secrets.sh\"  -Secrets full file path to local user home folder"
    echo "   -vra         -vault revoke (logout) before login"
    echo "   -V  \"vault.${EMAIL_HOST}:8200\" (override default VAULT_ADDR)"
    echo "   -e  \"john_doe@${EMAIL_HOST}\" -email for github (gen'd from os user)"
@@ -93,8 +94,8 @@ args_prompt() {
    echo "   -n  \"john-doe\" GitHub.com user accou-nt"
    echo "   -fn \"John Doe\"  user full name (based on GitHub user name"
    echo " "
-#  echo "   -p   \"mck_acct\" = folder holding repos (the org name)"
-   echo "   -org \"McK-Internal\" (default, case sensitive for Vault)"
+#  echo "   -p   \"clouddrive\" = folder holding repos (the org name)"
+   echo "   -org \"Internal\" (default, case sensitive for Vault)"
    echo "   -ou           (like org-12345678)"
    echo "   -o           -open/view web page in default browser"
    echo " "
@@ -113,11 +114,6 @@ if [ $# -eq 0 ]; then  # display if no parameters are provided:
    args_prompt
    exit 1
 fi
-exit_abnormal() {            # Function: Exit with error.
-  echo "exiting abnormally"
-  #args_prompt
-  exit 1
-}
 
 
 ###  03. Define TOGGLE variables for use as "feature flags":
@@ -309,7 +305,15 @@ fatal() {   # Skull: &#9760;  # Star: &starf; &#9733; U+02606  # Toxic: &#9762;
 }
 
 
-###  06. Edit and set run error control variables:
+###  06. Edit and set run error control:
+
+exit_abnormal() {            # Function: Exit with error.
+  echo "exiting abnormally"
+  #args_prompt
+  echo "Deleting Azure Resource Group "${MY_RG}" to stop charges ..."
+  az group delete --name "${MY_RG}" --yes   # takes several minutes
+  exit 1
+}
 
 if [ "${CONTINUE_ON_ERR}" = true ]; then  # -E
    warning "Set to continue despite error ..."
