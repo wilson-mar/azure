@@ -11,7 +11,7 @@
 # B. To invoke this script: Navigate/create container folder and download this repo into it
 #       After you obtain a Terminal (console) in your environment,
 #       cd to folder, copy this line and paste in the terminal:
-#       bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilson-mar/$MY_REPO/master/az-helm-cli.sh)"
+#       bash -c "$(curl -fsSL https://raw.githubusercontent.com/wilson-mar/$MY_REPO/master/az-helm-cli.sh)" 
 #
 ###  01. Establish starting times of this run:
 ###  02. Install and start the Docker client (if it's not already installed and started):
@@ -69,12 +69,11 @@ set -o errexit
 THIS_PROGRAM="$0"
 EPOCH_START="$( date -u +%s )"  # such as 1572634619
 LOG_DATETIME=$( date +%Y-%m-%dT%H:%M:%S%z)-$((1 + RANDOM % 1000))   # EX: 2021-04-20T10:16:02+0000-296
-EMAIL_HOST="gmail.com"
-echo "=========================== $LOG_DATETIME $THIS_PROGRAM $SCRIPT_VERSION"
-echo "HOME=\"$HOME\""
+echo "=========================== $LOG_DATETIME $THIS_PROGRAM $MY_SCRIPT $MY_SCRIPT_VERSION at $HOME"
 
 
 ###  02. Define a menu and display it if -h is specified in the command line:
+EMAIL_HOST="gmail.com"
 args_prompt() {
    echo "OPTIONS:"
    echo "   -h           -help (this menu)"
