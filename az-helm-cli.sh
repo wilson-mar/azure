@@ -80,7 +80,7 @@ echo ">>> 03. Install CLI to log into Azure:"
 az --version  # 2.22.0 and extensions
 
 echo ">>> 04. Use az login # to Azure:"
-USER=$(az vm show -g QueryDemo -n TestVM --query 'osProfile.adminUsername' -o json)
+# USER=$(az vm show -g QueryDemo -n TestVM --query 'osProfile.adminUsername' -o json)
 # az account list -o table
 RESPONSE=$( az ad signed-in-user show --query "accountEnabled" -o json )
 if [[ "$RESPONSE" == *"true"* ]]; then  # TODO: state": "Enabled", userPrincipalName
