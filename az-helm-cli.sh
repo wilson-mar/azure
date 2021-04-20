@@ -142,7 +142,7 @@ echo ">>> 11. Install in ${MY_GIT_CONTAINER}/${MY_REPO} the OCI Registry as Stor
 cd
 cd "${MY_GIT_CONTAINER}"/"${MY_REPO}"  # use github repo.
 pwd
-ls -al
+# ls -al
 #   if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
       PATH="${MY_GIT_CONTAINER}"/"${MY_REPO}:$PATH\"
       echo "new PATH=$PATH"
