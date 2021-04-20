@@ -37,6 +37,9 @@
 #   22. Install Helm, get helm version.
 #   23. Push change into Helm to trigger run which establishes services in Azure.
 #   24. Validate automation.
+#   25. List resource group:"
+#   26. List resources under resource group:"
+#   27. Clean up resource group, ACR, images:"
 #
 # Authenticate with your registry using the helm registry login command.
 # Use helm chart commands in the Helm CLI to push, pull, and manage Helm charts in a registry
@@ -153,11 +156,29 @@ echo ">>> 20b. Reference Helm3 charts as OCI artifacts in the ACR (Azure Contain
 #          The OCI (Open Container Initiative) Image Format Specs is at https://github.com/opencontainers/distribution-spec"
 
 echo ">>> 21. Use ACR tasks to build and test container images."
+
 echo ">>> 22. Install Helm, get helm version."
+
 echo ">>> 23. Push change into Helm to trigger run which establishes services in Azure."
+
 echo ">>> 24. Validate automation."
 
-echo ">>> 25. Clean up resource group, ACR, images, then list Resource Groups:"
+echo ">>> 25. List resource group:"
+az group list -o table
+   # Ignore "cloud-shell-storage-westus" and "NetworkWatcherRG"
+
+echo ">>> 26. List resources under resource group:"
+az resource list --resource group "${MY_RG}" --location "${MY_LOC}"
+   # Alternative: a. Install Python environment
+   # Install b. In requirements.txt azure-mgmt-resource>=1.15.0 & azure-identity>=1.5.0
+   # pip install -r requirements.txt
+   # Bring in code from https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-example-list-resource-groups 
+      # to 3b. List resources within a specific resource group
+   # Authenticate Python apps with Azure services: https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-authenticate
+   # Run: python list_resources.py "${MY_RG}"
+   
+   # https://vincentlauzon.com/2016/01/21/listing-resources-under-resource-group-with-azure-powershell/
+   
+echo ">>> 27. Clean up resource group, ACR, images, then list Resource Groups:"
 az group delete --name "${MY_RG}"
-az group list
 
