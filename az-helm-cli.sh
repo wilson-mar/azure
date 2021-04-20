@@ -7,20 +7,21 @@
 # ???
 # Based on # https://docs.microsoft.com/en-us/azure/container-registry/container-registry-oci-artifacts
 #   00. Define environment variables before invoking this script
-#       MY_LOC, MY_RG, MY_ACR, --username $SP_APP_ID --password $SP_PASSWD, MY_ACR_REPO
+#       MY_GIT_CONTAINER, MY_LOC, MY_RG, MY_ACR, --username $SP_APP_ID --password $SP_PASSWD, MY_ACR_REPO
 #   01. Navigate/create container folder and download this repo into it
 #   02. Install and start the Docker client if it's not already installed and started
 #   03. Install and use CLI to log into Azure
-#   04. Create Azure Resource Group"
-#   05. Create your private ACR (Azure Container Registry)
-#   06. Login into your ACR
+#   04. Log into Azure
 
-#   07. Create a Dockerfile (instead of reference one pre-created).
-#   08. Create a Docker container image from Dockerfile and images.
-#   09. Tag Docker image:"
-#   10. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool:">
-#   11. Create a Service Principal with push rights.
-#   12. RESERVED
+#   05. Create Azure Resource Group"
+#   06. Create your private ACR (Azure Container Registry)
+#   07. Login into your ACR
+
+#   08. Create a Dockerfile (instead of reference one pre-created).
+#   09. Create a Docker container image from Dockerfile and images.
+#   10. Tag Docker image:"
+#   11. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool:">
+#   12. Create a Service Principal with push rights.
 #   13. Sign in ORAS
 #   14. Use ORAS to push the new image into your ACR (Azure Container Registry), instead of DockerHub.
 #   15. Remove the image tag from your local Docker environment.
@@ -55,27 +56,31 @@ echo ">>> 01. Create/recreate container folder and download this repo into it:"
 # TODO: WILSON:
 
 echo ">>> 02. Install and start the Docker client if it's not already installed and started:"
-cd ~/clouddrive
-MY_REPO="azure-your-way"
-if [   -d "${MY_REPO}" ]; then  # folder found:
+if [ !   -d "${MY_GIT_CONTAINER}" ]; then  # folder not found, so make it:
+   mkdir -p "${MY_GIT_CONTAINER}"    # in Cloud Shell ?
+fi
+         cd "${MY_GIT_CONTAINER}"
+if [   -d "${MY_REPO}" ]; then  # folder found, so remove it:
    # TODO: Assume delete previous version of GitHub:
    rm -rf "${MY_REPO}"
 fi
 git clone https://github.com/wilson-mar/"${MY_REPO}".git --depth 1 
 cd "${MY_REPO}"
 ls
-chmod +x *.sh
+chmod +x *.sh   # make shell files executable.
 
-echo ">>> 03. Install and use CLI to log into Azure:"
-az --version  # 2.22.0 and extensions
+echo ">>> 03. Install CLI to log into Azure:"
 # TODO: if not installed: install it
+az --version  # 2.22.0 and extensions
+
+echo ">>> 04. Use az login # to Azure:"
 az login  # pops-up browser
 
-echo ">>> 04. Create Resource Group:"
+echo ">>> 05. Create Resource Group:"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
    #    "provisioningState": "Succeeded"
 
-echo ">>> 05. Create your private ACR (Azure Container Registry):"
+echo ">>> 06. Create your private ACR (Azure Container Registry):"
 # https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
 # https://docs.microsoft.com/en-us/azure/container-registry/container-registry-tutorial-prepare-registry
 
@@ -101,7 +106,7 @@ RESPONSE=$( az acr check-name -n "${MY_ACR}" )
          # or --sku Standard  # for increased storage and image throughput
          # or --sku Basic     # for best cost savings
 
-echo ">>> 06. Login into your ACR:"
+echo ">>> 07. Login into your ACR:"
 # If running Docker:
    # az acr login --name "${MY_ACR}"
 # If running Cloud Shell, get an access token, which does not require Docker to be installed:
@@ -109,18 +114,18 @@ echo ">>> 06. Login into your ACR:"
    echo "$RESPONSE" | head -c 70   # first 70 characters of variable
    echo "\n"
    
-echo ">>> 07. Create a Dockerfile (instead of reference one pre-created):"
+echo ">>> 08. Create a Dockerfile (instead of reference one pre-created):"
 # echo "FROM mcr.microsoft.com/hello-world" > hello-world.dockerfile # ???
 
-echo ">>> 08. Use a Dockerfile to create a Docker container image:"
+echo ">>> 09. Use a Dockerfile to create a Docker container image:"
 
 
-echo ">>> 09. Tag Docker image:"
+echo ">>> 10. Tag Docker image:"
 # TODO: docker tag mcr.microsoft.com/hello-world <login-server>/hello-world:v1
 
-echo ">>> 10. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool:"
+echo ">>> 11. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool:"
 # On MacOS:
-if ! command -v oras ; then
+# install no matter what:  if ! command -v oras ; then.   
    cd ~/clouddrive/"${MY_REPO}"  # use github repo.
    if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
       PATH="$HOME/clouddrive/"${MY_REPO}:$PATH\"
@@ -131,12 +136,14 @@ if ! command -v oras ; then
    tar -zxf oras_0.11.1_*.tar.gz      # unzip
    rm -rf oras_0.11.1_*.tar.gz
    chmod +x oras
+# fi
+if ! command -v oras ; then
+   echo "oras not found after install!"
+   abort
 fi
 
-echo ">>> 11. Create a Service Principal with push rights:"
+echo ">>> 12. Create a Service Principal with push rights:"
 # TODO: 
-
-echo ">>> 12. RESERVED:"
 
 echo ">>> 13. Sign in ORAS:"
 oras login "${MY_ACR}".azurecr.io --username $SP_APP_ID --password $SP_PASSWD
