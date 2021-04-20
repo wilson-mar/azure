@@ -371,16 +371,18 @@ if [[ "$RESPONSE" != *"true"* ]]; then  # TODO: state": "Enabled", userPrincipal
    abort
 fi
 
-h2 " 15. Create Resource Group:"
+h2 " 15. Create Resource Group: ${MY_RG}"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
    #    "provisioningState": "Succeeded"
 
-h2 " 16. Create your private ACR (Azure Container Registry):"
+
+h2 " 16. Create your private ACR (Azure Container Registry): \"${MY_ACR}\""
 # https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
 # https://docs.microsoft.com/en-us/azure/container-registry/container-registry-tutorial-prepare-registry
 
 # See https://docs.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest
 RESPONSE=$( az acr check-name -n "${MY_ACR}" )
+# ERROR: Parameter 'RegistryNameCheckRequest.name' must have length greater than 5.
 # if RESPONSE = exists:
    # fall thru
 # "message": null,  # not created.
