@@ -178,7 +178,7 @@ while test $# -gt 0; do
       MY_FOLDER=$( echo "$1" | sed -e 's/^[^=]*=//g' )
       shift
       ;;
-  	 -h)
+     -h)
       args_prompt
       exit 0
       break
@@ -403,7 +403,7 @@ RESPONSE=$( az acr check-name -n "${MY_ACR}" )
          # or --sku Standard  # for increased storage and image throughput
          # or --sku Basic     # for best cost savings
 
-h2 " 17. Login into your ACR:"
+h2 " 17. Login into your ACR: loginServer: ${MY_ACR}.azurecr.io:"
 # If running Docker:
    # az acr login --name "${MY_ACR}"
 # If running Cloud Shell, get an access token, which does not require Docker to be installed:
@@ -427,11 +427,19 @@ cd "${MY_GIT_CONTAINER}"/"${MY_REPO}"  # use github repo.
 pwd
 
    curl -LO https://github.com/deislabs/oras/releases/download/v0.11.1/oras_0.11.1_darwin_amd64.tar.gz
-   tar -zxf oras_0.11.1_*.tar.gz      # unzip
-   rm -rf oras_0.11.1_*.tar.gz
-cd "${MY_GIT_CONTAINER}"/"${MY_REPO}"  # use github repo.
+   tar -zxf oras_0.11.1_*.tar.gz   # unzip
+   rm -rf oras_0.11.1_*.tar.gz     # remove
+   if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
+      # in Cloud Shell:
+         PATH="/usr/csuser/${MY_GIT_CONTAINER}/${MY_REPO}/oras:$PATH\"    
+      # Local:   
+         PATH="$HOME/${MY_GIT_CONTAINER}/${MY_REPO}/oras:$PATH\"    
+      echo "new PATH=$PATH"
+   else
+      echo "Already in PATH=$PATH"
+   fi
    chmod +x oras
-  ls -al oras
+   ls -al oras
 
 if ! command -v oras ; then    # not installed, so:
    echo "oras not found after install!"
