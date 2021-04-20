@@ -70,7 +70,7 @@ set -o errexit
 THIS_PROGRAM="$0"
 EPOCH_START="$( date -u +%s )"  # such as 1572634619
 LOG_DATETIME=$( date +%Y-%m-%dT%H:%M:%S%z)-$((1 + RANDOM % 1000))   # EX: 2021-04-20T10:16:02+0000-296
-echo "=============== $LOG_DATETIME $THIS_PROGRAM $MY_SCRIPT $MY_SCRIPT_VERSION at $HOME"
+echo "=============== $LOG_DATETIME $THIS_PROGRAM $MY_SCRIPT $MY_SCRIPT_VERSION at $PWD"
 
 
 ###  02. Define a menu and display it if -h is specified in the command line:
