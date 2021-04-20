@@ -137,18 +137,18 @@ echo ">>> 09. Use a Dockerfile to create a Docker container image:"
 echo ">>> 10. Tag Docker image:"
 # TODO: docker tag mcr.microsoft.com/hello-world <login-server>/hello-world:v1
 
-echo ">>> 11. Install in ${MY_GIT_CONTAINER}/${MY_REPO} to use the OCI Registry as Storage (ORAS) tool:"
+echo ">>> 11. Install in ${MY_GIT_CONTAINER}/${MY_REPO} the OCI Registry as Storage (ORAS) tool:"
 # On MacOS:
 cd
 cd $HOME/"${MY_GIT_CONTAINER}"/"${MY_REPO}"  # use github repo.
 pwd
 ls -al
-   if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
+#   if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
       PATH=$HOME/"${MY_GIT_CONTAINER}"/"${MY_REPO}:$PATH\"
       echo "new PATH=$PATH"
-   else
-      echo "Already in PATH=$PATH"
-   fi
+#   else
+#      echo "Already in PATH=$PATH"
+#   fi
 
    curl -LO https://github.com/deislabs/oras/releases/download/v0.11.1/oras_0.11.1_darwin_amd64.tar.gz
    tar -zxf oras_0.11.1_*.tar.gz      # unzip
