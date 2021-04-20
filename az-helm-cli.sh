@@ -140,11 +140,11 @@ echo ">>> 10. Tag Docker image:"
 echo ">>> 11. Install in ${MY_GIT_CONTAINER}/${MY_REPO} the OCI Registry as Storage (ORAS) tool:"
 # On MacOS:
 cd
-cd $HOME/"${MY_GIT_CONTAINER}"/"${MY_REPO}"  # use github repo.
+cd "${MY_GIT_CONTAINER}"/"${MY_REPO}"  # use github repo.
 pwd
 ls -al
 #   if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
-      PATH=$HOME/"${MY_GIT_CONTAINER}"/"${MY_REPO}:$PATH\"
+      PATH="${MY_GIT_CONTAINER}"/"${MY_REPO}:$PATH\"
       echo "new PATH=$PATH"
 #   else
 #      echo "Already in PATH=$PATH"
