@@ -81,14 +81,14 @@ az --version  # 2.22.0 and extensions
 
 echo ">>> 04. Use az login # to Azure:"
 # See https://docs.microsoft.com/en-us/cli/azure/ad/signed-in-user?view=azure-cli-latest
-RESPONSE=$( az ad signed-in-user show --query "accountEnabled" -o json )
-if [[ "$RESPONSE" == *"true"* ]]; then  # TODO: state": "Enabled", userPrincipalName
-   az login  # pops-up browser
+az login  # pops-up browser
       # Cloud Shell is automatically authenticated under the initial account signed-in with. Run 'az login' only if you need to use a different account
       # To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code RTGDJB9TN to authenticate.
+RESPONSE=$( az ad signed-in-user show --query "accountEnabled" -o json )
+if [[ "$RESPONSE" != *"true"* ]]; then  # TODO: state": "Enabled", userPrincipalName
+   echo ">>> RESPONSE after az login not Enabled"
+   abort
 fi
-# USER=$(az vm show -g QueryDemo -n TestVM --query 'osProfile.adminUsername' -o json)
-# az account list -o table
 
 echo ">>> 05. Create Resource Group:"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
