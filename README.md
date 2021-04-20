@@ -50,12 +50,13 @@ Scripts here are adapted from various experts generous with sharing their code:
    chmod +x *.sh
    </strong></pre>
 
-1. Copy enviornment variable definitions and paste in the command line for bash scripts to reference:
+1. Copy environment variable definitions and paste in the command line for bash scripts to reference:
 
    <pre>export MY_LOC="westus2"   # aka region
    export MY_RG="mol"
    export MY_GIT_CONTAINER="clouddrive"      # "clouddrive" in Cloud Shell
    export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
+   export MY_CALL_SCRIPT="az-helm-cli.sh"    # the script being called
    export MY_VM_NAME="mol-westus2"
    export MY_APPNAME="azuremol"              # 
    export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
