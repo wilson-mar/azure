@@ -142,19 +142,12 @@ echo ">>> 11. Install in ${MY_GIT_CONTAINER}/${MY_REPO} the OCI Registry as Stor
 cd
 cd "${MY_GIT_CONTAINER}"/"${MY_REPO}"  # use github repo.
 pwd
-# ls -al
-#   if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
-      PATH="${MY_GIT_CONTAINER}"/"${MY_REPO}:$PATH\"
-      echo "new PATH=$PATH"
-#   else
-#      echo "Already in PATH=$PATH"
-#   fi
 
    curl -LO https://github.com/deislabs/oras/releases/download/v0.11.1/oras_0.11.1_darwin_amd64.tar.gz
    tar -zxf oras_0.11.1_*.tar.gz      # unzip
    rm -rf oras_0.11.1_*.tar.gz
    chmod +x oras
-# fi
+
 if ! command -v oras; then  # not installed, so:
    echo "oras not found after install!"
    abort
