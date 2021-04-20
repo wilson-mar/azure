@@ -20,14 +20,14 @@
 #   09. Tag Docker image:"
 #   10. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool:">
 #   11. Create a Service Principal with push rights.
-#   12. Sign in ORAS
-
-#   13. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool to
+#   12. RESERVED
+#   13. Sign in ORAS
 #   14. Use ORAS to push the new image into your ACR (Azure Container Registry), instead of DockerHub.
 #   15. Remove the image tag from your local Docker environment.
 #   16. List repos (artifacts) in ACR, to confirm:
 #   17. List tags in ACR, to confirm:"
 #   18. Get attributes of an artifact in ACR, to confirm.
+
 #   19. Have Azure Defender Security Center scan images in ACR:"
 
 #   20a. Run individual Docker image or "
@@ -73,6 +73,7 @@ az login  # pops-up browser
 
 echo ">>> 04. Create Resource Group:"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
+   #    "provisioningState": "Succeeded"
 
 echo ">>> 05. Create your private ACR (Azure Container Registry):"
 # https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli
@@ -81,14 +82,17 @@ echo ">>> 05. Create your private ACR (Azure Container Registry):"
 # See https://docs.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest
 RESPONSE=$( az acr check-name -n "${MY_ACR}" )
 # if RESPONSE = exists:
+   # fall thru
+# "message": null,  # not created.
+# if "nameAvailable": false   # abort to pick another ACR name.
+# true,
    az acr create --sku Basic \
       --name "${MY_ACR}" \
       --resource-group "${MY_RG}"
 # For more parms, see https://docs.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest
 
-
 # TODO: In output, capture to $GEND_ACR_LOGIN_SERVER
-  # "loginServer": "mycontainerregistry007.azurecr.io",
+  # "loginServer": "litthouse.azurecr.io",
 #fi
 
 # Service Tier: see https://docs.microsoft.com/en-us/azure/container-registry/container-registry-skus#changing-tiers
@@ -98,12 +102,15 @@ RESPONSE=$( az acr check-name -n "${MY_ACR}" )
          # or --sku Basic     # for best cost savings
 
 echo ">>> 06. Login into your ACR:"
-az acr login --name "${MY_ACR}"
-
-# echo "Here is an artifact" > artifact.txt
-
+# If running Docker:
+   # az acr login --name "${MY_ACR}"
+# If running Cloud Shell, get an access token, which does not require Docker to be installed:
+   RESPONSE=$( az acr login -n "${MY_ACR}" --expose-token )
+   echo "$RESPONSE" | head -c 70   # first 70 characters of variable
+   echo "\n"
+   
 echo ">>> 07. Create a Dockerfile (instead of reference one pre-created):"
-echo "FROM mcr.microsoft.com/hello-world" > hello-world.dockerfile # ???
+# echo "FROM mcr.microsoft.com/hello-world" > hello-world.dockerfile # ???
 
 echo ">>> 08. Use a Dockerfile to create a Docker container image:"
 
@@ -112,23 +119,27 @@ echo ">>> 09. Tag Docker image:"
 # TODO: docker tag mcr.microsoft.com/hello-world <login-server>/hello-world:v1
 
 echo ">>> 10. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool:"
+# On MacOS:
+if ! command -v oras ; then
+   cd ~/clouddrive/"${MY_REPO}"  # use github repo.
+   if grep -q "${MY_REPO}" "$PATH"; then  # not in $PATH:
+      PATH="$HOME/clouddrive/"${MY_REPO}:$PATH\"
+    fi
+   echo "PATH=$PATH"   # DEBUGGING
+   pwd  
+   curl -LO https://github.com/deislabs/oras/releases/download/v0.11.1/oras_0.11.1_darwin_amd64.tar.gz
+   tar -zxf oras_0.11.1_*.tar.gz      # unzip
+   rm -rf oras_0.11.1_*.tar.gz
+   chmod +x oras
+fi
 
 echo ">>> 11. Create a Service Principal with push rights:"
 # TODO: 
 
-echo ">>> 12. Sign in ORAS:"
+echo ">>> 12. RESERVED:"
+
+echo ">>> 13. Sign in ORAS:"
 oras login "${MY_ACR}".azurecr.io --username $SP_APP_ID --password $SP_PASSWD
-
-echo ">>> 13. Install https://github.com/deislabs/oras to use the OCI Registry as Storage (ORAS) tool to"
-# On MacOS:
-# which oras
-   curl -LO https://github.com/deislabs/oras/releases/download/v0.11.1/oras_0.11.1_darwin_amd64.tar.gz
-   mkdir -p oras-install/
-   tar -zxf oras_0.11.1_*.tar.gz -C oras-install/
-   mv oras-install/oras /usr/local/bin/
-   rm -rf oras_0.11.1_*.tar.gz oras-install/
-
-exit
 
 echo ">>> 14. Use ORAS to push the new image into your ACR (Azure Container Registry), instead of DockerHub:">
 # docker push <login-server>/hello-world:v1
