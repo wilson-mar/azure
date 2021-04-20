@@ -54,7 +54,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 
    <pre>export MY_LOC="westus"               # aka region
    export MY_RG="mol"
-   export MY_GIT_CONTAINER="clouddrive"      # "clouddrive" in Cloud Shell
+   export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
    export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
    export MY_CALL_SCRIPT="az-helm-cli.sh"    # the script being called
    export MY_SCRIPT_VERSION="0.1.4"          #
