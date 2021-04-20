@@ -112,7 +112,7 @@ args_prompt() {
 
 if [ $# -eq 0 ]; then  # display if no parameters are provided:
    args_prompt
-   exit 1
+#   exit 1
 fi
 
 
@@ -330,25 +330,18 @@ fi
 
 ###  07. Obtain operating system info to define package manager usage:
 
-
 ###  08. Validate variables controlling run:
 
-###  09. Setup folders files needed:
-###  10. Setup files needed:
-
-###  10. Install and use CLI for logging into Azure:
-h2 " 11. Create/recreate container folder and download this repo into it:"
-echo "MY_SCRIPT_VERSION=$MY_SCRIPT_VERSION"
-# TODO: WILSON:
-
-h2 " 12. Install and start the Docker client if it's not already installed and started:"
+h2 " 09. Create/recreate container folder and download this repo into it:"
 cd
+# TODO: WILSON: using Azure Storage Account ???
 if [ !   -d "${MY_GIT_CONTAINER}" ]; then  # folder not found, so make it:
-   mkdir -p "${MY_GIT_CONTAINER}"    # in Cloud Shell ?
+   mkdir -p "${MY_GIT_CONTAINER}"    # default "clouddrive" in Cloud Shell
 fi
          cd "${MY_GIT_CONTAINER}"
+
+# TODO: Assume delete previous version of GitHub:
 if [   -d "${MY_REPO}" ]; then  # folder found, so remove it:
-   # TODO: Assume delete previous version of GitHub:
    rm -rf "${MY_REPO}"
 fi
 git clone https://github.com/wilson-mar/"${MY_REPO}".git --depth 1 
@@ -356,7 +349,14 @@ cd "${MY_REPO}"
 ls
 chmod +x *.sh   # make shell files executable.
 
-h2 " 13. Install CLI to log into Azure:"
+###  10. Install and use CLI for logging into Azure:
+
+###  11. :
+
+h2 " 12. Install and start the Docker client if it's not already installed and started  (if needed locally):"
+# TODO: If local
+
+h2 " 13. Install az CLI to log into Azure (if needed locally):"
 # TODO: if not installed: install it
 az --version  # 2.22.0 and extensions
 
