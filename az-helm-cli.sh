@@ -103,14 +103,10 @@ args_prompt() {
    echo "   -O \"repo1\" repo name (defaults based on -org)"
    echo "   -C    remove -Cloned files after run (to save disk space)"
    echo "   -xx       stop and not exit at end"
-   echo "WINDOWS EXAMPLES:"
-   echo "sh vault-ssh-keysign.sh -n \"wilson-mar\" -e \"wilson_mar@${EMAIL_HOST}\" -os \"Windows\" -v"  
-   echo "MAC EXAMPLES:"
-   echo "./vault-ssh-keysign.sh -n \"wilson-mar\"  # McK-Internal default "
-   echo "./vault-ssh-keysign.sh -n \"wilson-mar\" -d -c -v  # -delete and -clone"
-   echo "./vault-ssh-keysign.sh -n \"wilson-mar\" -org \"McK-Internal-Test\" -d -c -v"
-   echo "./vault-ssh-keysign.sh -n \"wilson-mar\" -org \"McK-Playground\" -d -c -v"
-   echo "./vault-ssh-keysign.sh -n \"wilson-mar\" -org \"McK-Enterprise-Automation\" -O \"onefirmgithub-automation-controller\" -c -v "
+   echo "WINDOWS EXAMPLE INVOCATION:"
+   echo "sh $MY_SCRIPT -n \"wilson-mar\" -e \"wilson_mar@${EMAIL_HOST}\" -os \"Windows\" -v"  
+   echo "MAC EXAMPLE INVOCATION:"
+   echo "./$MY_SCRIPT "
 }
 
 if [ $# -eq 0 ]; then  # display if no parameters are provided:
