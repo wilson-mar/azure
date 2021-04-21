@@ -27,6 +27,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    
    * https://github.com/Azure/azure-quickstart-templates (ARM Templates)
    * https://github.com/johnthebrit/AzureMasterClass PowerShell scripts
+   * https://github.com/terraform-providers/terraform-provider-azurerm
 
    * Skylines Academy
    * Gruntwork (Terraform)
