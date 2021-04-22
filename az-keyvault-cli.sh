@@ -38,8 +38,9 @@ az keyvault create \
 # RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
 
 
-az keyvault show
-# The HSM 'None' not found within subscription.
+az keyvault list -o table
+
+# az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
 # Create a secret in Key Vault
