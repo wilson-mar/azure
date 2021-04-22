@@ -10,6 +10,7 @@ set -o errexit
 
 echo ">>> Setup enviornment variables:"
 sh $HOME/setup.sh
+echo "MY_RG=$MY_RG in ./az-keybault-cli.sh"
 
 # Create a resource group
 az group create --name "${MY_RG}" --location "${MY_LOC}"
