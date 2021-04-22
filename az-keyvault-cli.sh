@@ -25,7 +25,6 @@ az keyvault create \
     --location "${MY_LOC}" \
     --retention-days 90 \
     --enabled-for-deployment \
-    --enable-purge-protection false \
     --default-action Deny  # Default action to apply when no rule matches.
     
   # --sku Standard \ # command not found
