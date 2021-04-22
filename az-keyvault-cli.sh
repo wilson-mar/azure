@@ -46,10 +46,10 @@ echo ">>> Create (generate) a secret in Key Vault:"
 # This secret is a basic password that is used to install a database server
 az keyvault secret set \
     --vault-name $MY_KEYVAULT_NAME \
-  # Upload options: Manual as Certificate, which is deprecated.
     --name "${MY_KEY_NAME}" \
     --value "${MY_KEY_SECRET}" \
     --description "Database password"  # = GUI Content Type (optional)
+  # Upload options: Manual as Certificate, which is deprecated.
   # Set activation date?
   # Set expiration date?
   # Enabled: Yes
