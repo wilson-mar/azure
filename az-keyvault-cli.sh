@@ -12,14 +12,14 @@ set -o errexit
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 # Define a unique name for the Key Vault
-keyVaultName="${MY_KEYVAULT_NAME}"$RANDOM
+# MY_KEYVAULT_NAME="${MY_KEYVAULT_NAME}"$RANDOM
 
 # Create a Key Vault
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
 # and is also enable for deployment. Being enabled for deployments allows VMs
 # to use the keys stored within
 az keyvault create \
-    --name $keyVaultName \
+    --name $MY_KEYVAULT_NAME \
     --enable-soft-delete \
     --enabled-for-deployment \
     --resource-group "${MY_RG}"
@@ -27,7 +27,7 @@ az keyvault create \
 # Create a secret in Key Vault
 # This secret is a basic password that is used to install a database server
 az keyvault secret set \
-    --vault-name $keyVaultName \
+    --vault-name $MY_KEYVAULT_NAME \
     --name "${MY_KEY_NAME}" \
     --description "Database password" \
     --value "${MY_KEY_SECRET}" 
@@ -35,12 +35,12 @@ az keyvault secret set \
 # Show the secret stored in Key Vault
 az keyvault secret show \
     --name "${MY_KEY_NAME}" \
-    --vault-name $keyVaultName
+    --vault-name $MY_KEYVAULT_NAME
 
 # Delete the secret
 az keyvault secret delete \
     --name "${MY_KEY_NAME}" \
-    --vault-name $keyVaultName
+    --vault-name $MY_KEYVAULT_NAME
 
 # Wait 5 seconds for the secret to be successfully deleted before recovering
 sleep 5
@@ -51,7 +51,7 @@ sleep 5
 # the vault.
 az keyvault secret recover \
     --name "${MY_KEY_NAME}" \
-    --vault-name $keyVaultName
+    --vault-name $MY_KEYVAULT_NAME
 
 # Create a VM
 az vm create \
@@ -91,7 +91,7 @@ spn=$(az ad sp list \
 # Add the VM's identity, based on the Azure Active Directory SPN. The identity
 # is granted permissions to get secrets from the vault.
 az keyvault set-policy \
-    --name $keyVaultName \
+    --name $MY_KEYVAULT_NAME \
     --secret-permissions get \
     --spn $spn
 
@@ -106,6 +106,6 @@ az vm extension set \
     --name CustomScript \
     --vm-name molvm \
     --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples-2nd-ed/master/15/install_mysql_server.sh"]}' \
-    --protected-settings '{"commandToExecute":"sh install_mysql_server.sh $keyVaultName"}' \
+    --protected-settings '{"commandToExecute":"sh install_mysql_server.sh $MY_KEYVAULT_NAME"}' \
     --resource-group "${MY_RG}"
 
