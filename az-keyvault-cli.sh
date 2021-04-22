@@ -8,9 +8,8 @@
 
 set -o errexit
 
+echo ">>> Setup enviornment variables:"
 sh $HOME/setup.sh
-
-exit
 
 # Create a resource group
 az group create --name "${MY_RG}" --location "${MY_LOC}"
