@@ -57,7 +57,7 @@ az backup protection backup-now \
 # The status of the backup should be listed as InProgress. It can 15-20 minutes
 # for the initial backup job to complete
 az backup job list \
-    --vault-name "${MY_VAULT_NAME}" \
+    --vault-name "${MY_KEYVAULT_NAME}" \
     --output table \
     --resource-group "${MY_RG}"
     
