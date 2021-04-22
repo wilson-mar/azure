@@ -76,3 +76,66 @@ echo ">>> To see your web server in action, enter the public IP address in to yo
 
 # More VM CLI commands are at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-manage
 
+
+
+echo ">>> Create a VM:"
+az vm create \
+    --name molvm \
+    --image ubuntults \
+    --admin-username "${MY_ADMIN_USER_NAME}" \
+    --generate-ssh-keys \
+    --resource-group "${MY_RG}"
+
+echo ">>> List VMs:"
+az vm list --query '[].{name:name,os:storageProfile.osDisk.osType}'
+
+echo ">>> Define the scope for upcoming Managed Service Identity tasks:"
+# The scope is set to the resource group of the VM. This scope limits what
+# access is granted to the identity
+scope=$(az group show --query id --output tsv) \
+    --resource-group "${MY_RG}"
+
+echo ">>> Create a Managed Service Identity:"
+# The VM is assigned an identity, scoped to its resource group. The ID of this
+# identity, the systemAssignedIdentity, is then stored as a variable for use
+# in remaining commands
+read systemAssignedIdentity <<< $(az vm identity assign \
+    --name molvm \
+    --role reader \
+    --scope $scope \
+    --query systemAssignedIdentity \
+    --output tsv) \
+    --resource-group "${MY_RG}"
+
+echo ">>> List the service principal name of the identity:"
+# This identity is stored in Azure Active Directory and is used to actually
+# assign permissions on the Key Vault. The VM's identity is queried within
+# Azure Active directory, then the SPN is assigned to a variable
+spn=$(az ad sp list \
+    --query "[?contains(objectId, '$systemAssignedIdentity')].servicePrincipalNames[0]" \
+    --output tsv) 
+
+echo ">>> Update permissions on Key Vault:"
+# Add the VM's identity, based on the Azure Active Directory SPN. The identity
+# is granted permissions to get secrets from the vault.
+az keyvault set-policy \
+    --name $MY_KEYVAULT_NAME \
+    --secret-permissions get \
+    --spn $spn
+
+echo ">>> Apply the Custom Script Extension:"
+# The Custom Script Extension runs on the VM to execute a command that obtains
+# the secret from Key Vault using the Instance Metadata Service, then uses the
+# key to perform an unattended install of MySQL Server that automatically
+# provides a password
+az vm extension set \
+    --publisher Microsoft.Azure.Extensions \
+    --version 2.0 \
+    --name CustomScript \
+    --vm-name molvm \
+    --settings '{"fileUris":["https://raw.githubusercontent.com/fouldsy/azure-mol-samples-2nd-ed/master/15/install_mysql_server.sh"]}' \
+    --protected-settings '{"commandToExecute":"sh install_mysql_server.sh $MY_KEYVAULT_NAME"}' \
+    --resource-group "${MY_RG}"
+
+# TODO: Replace reference to fouldsy install_mysql_server.sh with our own vm image.
+
