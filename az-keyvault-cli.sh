@@ -14,7 +14,7 @@ az group create --name "${MY_RG}" --location "${MY_LOC}"
 # Define a unique name for the Key Vault done by caller of this script:
 # MY_KEYVAULT_NAME="${MY_KEYVAULT_NAME}"$RANDOM
 
-# Create a Key Vault - 
+echo ">>> Create a Key Vault:"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
@@ -43,7 +43,7 @@ az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
-# Create a secret in Key Vault
+echo ">>> Create a secret in Key Vault:"
 # This secret is a basic password that is used to install a database server
 az keyvault secret set \
     --vault-name $MY_KEYVAULT_NAME \
@@ -51,14 +51,14 @@ az keyvault secret set \
     --description "Database password" \
     --value "${MY_KEY_SECRET}" 
 
-# Show the secret stored in Key Vault
+echo ">>> Show the secret stored in Key Vault:"
 az keyvault secret show \
     --name "${MY_KEY_NAME}" \
     --vault-name $MY_KEYVAULT_NAME
 
 exit
 
-# Delete the secret
+echo ">>> Delete the secret:"
 az keyvault secret delete \
     --name "${MY_KEY_NAME}" \
     --vault-name $MY_KEYVAULT_NAME
@@ -67,7 +67,7 @@ az keyvault secret delete \
 # Wait 5 seconds for the secret to be successfully deleted before recovering
 sleep 5
 
-# Recover the deleted secret
+echo ">>> Recover the deleted secret:"
 # As the vault was enabled for soft delete, key are secret metadata is retained
 # for a period of time. This allows keys and secrets to be recovered back to
 # the vault.
@@ -77,7 +77,7 @@ az keyvault secret recover \
 
 
 
-# Create a VM
+echo ">>> Create a VM:"
 az vm create \
     --name molvm \
     --image ubuntults \
@@ -85,13 +85,13 @@ az vm create \
     --generate-ssh-keys \
     --resource-group "${MY_RG}"
 
-# Define the scope for upcoming Managed Service Identity tasks
+echo ">>> Define the scope for upcoming Managed Service Identity tasks:"
 # The scope is set to the resource group of the VM. This scope limits what
 # access is granted to the identity
 scope=$(az group show --query id --output tsv) \
     --resource-group "${MY_RG}"
 
-# Create a Managed Service Identity
+echo ">>> Create a Managed Service Identity:"
 # The VM is assigned an identity, scoped to its resource group. The ID of this
 # identity, the systemAssignedIdentity, is then stored as a variable for use
 # in remaining commands
@@ -103,7 +103,7 @@ read systemAssignedIdentity <<< $(az vm identity assign \
     --output tsv) \
     --resource-group "${MY_RG}"
 
-# List the service principal name of the identity
+echo ">>> List the service principal name of the identity:"
 # This identity is stored in Azure Active Directory and is used to actually
 # assign permissions on the Key Vault. The VM's identity is queried within
 # Azure Active directory, then the SPN is assigned to a variable
@@ -111,7 +111,7 @@ spn=$(az ad sp list \
     --query "[?contains(objectId, '$systemAssignedIdentity')].servicePrincipalNames[0]" \
     --output tsv) 
 
-# Update permissions on Key Vault
+echo ">>> Update permissions on Key Vault:"
 # Add the VM's identity, based on the Azure Active Directory SPN. The identity
 # is granted permissions to get secrets from the vault.
 az keyvault set-policy \
@@ -119,7 +119,7 @@ az keyvault set-policy \
     --secret-permissions get \
     --spn $spn
 
-# Apply the Custom Script Extension
+echo ">>> Apply the Custom Script Extension:"
 # The Custom Script Extension runs on the VM to execute a command that obtains
 # the secret from Key Vault using the Instance Metadata Service, then uses the
 # key to perform an unattended install of MySQL Server that automatically
