@@ -13,8 +13,8 @@ set -o errexit
 #echo "MY_RG=$MY_RG in ./az-keybault-cli.sh"
 
 # Create a resource group
-$rsgExists = az group exists -n "${MY_RG}"
-if [ $rsgExists ]; then  # true:
+RESPONSE = az group exists -n "${MY_RG}"
+if [ $RESPONSE ]; then  # true:
     az group delete --resource-group "${MY_RG}" --yes
 fi
 az group create --name "${MY_RG}" --location "${MY_LOC}"
