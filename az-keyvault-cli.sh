@@ -33,8 +33,14 @@ az keyvault create \
   # --sku Standard  # or Premium (includes support for HSM backed keys) HSM: Standard_B1, Custom_B32. Default: Standard_B1.
   # Argument 'enable_soft_delete' has been deprecated and will be removed in a future release.
   # --enable-purge-protection false # during test env usage when Vault is rebuilt between sessions.
+  # See https://docs.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview
   # TODO: Add VNET rules 
 # RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
+
+
+az keyvault show
+# The HSM 'None' not found within subscription.
+
 
 # Create a secret in Key Vault
 # This secret is a basic password that is used to install a database server
