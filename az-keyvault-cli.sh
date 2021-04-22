@@ -11,18 +11,23 @@ set -o errexit
 # Create a resource group
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
-# Define a unique name for the Key Vault
+# Define a unique name for the Key Vault done by caller of this script:
 # MY_KEYVAULT_NAME="${MY_KEYVAULT_NAME}"$RANDOM
 
-# Create a Key Vault
+# Create a Key Vault - 
+# Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
+# https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
-# and is also enable for deployment. Being enabled for deployments allows VMs
-# to use the keys stored within
+# and is also enable for deployment which allows VMs to use the keys stored.
 az keyvault create \
+    --resource-group "${MY_RG}" \
     --name $MY_KEYVAULT_NAME \
+    --location "${MY_LOC}"
+    --sku Standard \
+    --retention-days 90 \
     --enable-soft-delete \
     --enabled-for-deployment \
-    --resource-group "${MY_RG}"
+    --enable-purge-protection true
 
 # Create a secret in Key Vault
 # This secret is a basic password that is used to install a database server
