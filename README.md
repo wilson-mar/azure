@@ -49,6 +49,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    cd azure-your-way
    ls
    chmod +x *.sh
+   export PS1="\n  \w\[\033[33m\]\n$ "
    </strong></pre>
 
 1. Copy environment variable definitions and paste in the command line for bash scripts to reference:
