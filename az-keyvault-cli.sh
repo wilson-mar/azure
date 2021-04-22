@@ -20,7 +20,7 @@ az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 echo ">>> Create a Key Vault:"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
-# https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
+# CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
 # and is also enable for deployment which allows VMs to use the keys stored.
 az keyvault create \
@@ -40,10 +40,32 @@ az keyvault create \
   # TODO: Add VNET rules 
 # RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
 
-
 az keyvault list -o table
-
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
+
+echo ">>> Create a Storage Account for Function App:"
+az storage account create \
+   --name "${MY_STORAGE_ACCT}" \
+   --sku standard_lrs \
+   --resource-group "${MY_RG}"
+   # RESPONSE: 
+
+echo ">>> Create a Function App:"
+# Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
+# PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
+# CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/functionapp?view=azure-cli-latest#az_functionapp_create
+# The Function App is set up to be manually connected to a sample app in GitHub
+az functionapp create \
+    --name "${FUNC_APP_NAME}" \
+    --storage-account "${MY_STORAGE_ACCT}" \
+    --consumption-plan-location "${MY_LOC}" \
+    --deployment-source-url https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js \
+    --resource-group "${MY_RG}"
+  # -p $MY_PLAN  # Region, SKU Dynamic, Operating System: Windows
+     # Consumption plan is used, which means you are only charged based on memory usage while your app is running. 
+  # Publish: Code (not Docker Container)
+  # Runtime Stack: .NET Core
+  # Version: 3.1
 
 
 echo ">>> Create (generate) a secret in Key Vault:"
@@ -58,6 +80,12 @@ az keyvault secret set \
   # Set expiration date?
   # Enabled: Yes
   # Use PowerShell to set multi-line secrets.
+
+Client address is not authorized and caller is not a trusted service.
+Client address: 13.64.246.36
+Caller: appid=b677c290-cf4b-4a8e-a60e-91ba650a4abe;oid=58a1c620-bcd5-4d6e-8001-9b86c6fb1baf;iss=https://sts.windows.net/92543348-f7f0-4cc2-addc-11021d882720/
+Vault: keyvault-mol-15032;location=westus
+
 
 echo ">>> Show the secret stored in Key Vault:"
 az keyvault secret show \
