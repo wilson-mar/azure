@@ -22,13 +22,13 @@ echo ">>> Create a Key Vault:"
 az keyvault create \
     --resource-group "${MY_RG}" \
     --name $MY_KEYVAULT_NAME \
-    --location "${MY_LOC}"
-    --sku Standard \
+    --location "${MY_LOC}" \
     --retention-days 90 \
     --enabled-for-deployment \
     --enable-purge-protection false \
     --default-action Deny  # Default action to apply when no rule matches.
     
+  # --sku Standard \ # command not found
   # --retention-days 90 \. # 90 is max allowed.
   # --sku Standard  # or Premium (includes support for HSM backed keys) HSM: Standard_B1, Custom_B32. Default: Standard_B1.
   # Argument 'enable_soft_delete' has been deprecated and will be removed in a future release.
@@ -43,13 +43,18 @@ az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
-echo ">>> Create a secret in Key Vault:"
+echo ">>> Create (generate) a secret in Key Vault:"
 # This secret is a basic password that is used to install a database server
 az keyvault secret set \
     --vault-name $MY_KEYVAULT_NAME \
+  # Upload options: Manual as Certificate, which is deprecated.
     --name "${MY_KEY_NAME}" \
-    --description "Database password" \
-    --value "${MY_KEY_SECRET}" 
+    --value "${MY_KEY_SECRET}" \
+    --description "Database password"  # = GUI Content Type (optional)
+  # Set activation date?
+  # Set expiration date?
+  # Enabled: Yes
+  # Use PowerShell to set multi-line secrets.
 
 echo ">>> Show the secret stored in Key Vault:"
 az keyvault secret show \
@@ -84,6 +89,9 @@ az vm create \
     --admin-username "${MY_ADMIN_USER_NAME}" \
     --generate-ssh-keys \
     --resource-group "${MY_RG}"
+
+echo ">>> List VMs:"
+az vm list --query '[].{name:name,os:storageProfile.osDisk.osType}'
 
 echo ">>> Define the scope for upcoming Managed Service Identity tasks:"
 # The scope is set to the resource group of the VM. This scope limits what
