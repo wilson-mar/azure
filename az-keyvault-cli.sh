@@ -25,13 +25,13 @@ az keyvault create \
     --location "${MY_LOC}"
     --sku Standard \
     --retention-days 90 \
-    --enable-soft-delete false \
     --enabled-for-deployment \
     --enable-purge-protection false \
     --default-action Deny  # Default action to apply when no rule matches.
     
   # --retention-days 90 \. # 90 is max allowed.
   # --sku Standard  # or Premium (includes support for HSM backed keys) HSM: Standard_B1, Custom_B32. Default: Standard_B1.
+  # Argument 'enable_soft_delete' has been deprecated and will be removed in a future release.
   # --enable-purge-protection false # during test env usage when Vault is rebuilt between sessions.
   # TODO: Add VNET rules 
 
