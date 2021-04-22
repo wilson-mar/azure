@@ -106,13 +106,12 @@ az identity create --name "${MY_MANAGED_IDENTITY}" \
 
 
 echo ">>> Create (generate) secret \"${MY_KEY_NAME}\" in Key Vault \"${MY_KEYVAULT_NAME}\":"
-exit
 # This secret is a basic password that is used to install a database server
 az keyvault secret set \
     --vault-name "${MY_KEYVAULT_NAME}" \
     --name "${MY_KEY_NAME}" \
     --value "${MY_KEY_SECRET}" \
-    --description "Database password"  # = GUI Content Type (optional)
+    --description "${MY_KEY_CONTENT_TYPE}"  # such as "Database password"  # = GUI Content Type (optional)
   # Upload options: Manual as Certificate, which is deprecated.
   # Set activation date?
   # Set expiration date?
@@ -125,7 +124,7 @@ echo ">>> Add Access Policy:"
    # Client address: 13.64.246.36
    # Caller: appid=b677c290-cf4b-4a8e-a60e-91ba650a4abe;oid=58a1c620-bcd5-4d6e-8001-9b86c6fb1baf;iss=https://sts.windows.net/92543348-f7f0-4cc2-addc-11021d882720/
    # Vault: keyvault-mol-15032;location=westus
-
+exit
 
 echo ">>> Show the secret stored in Key Vault:"
 az keyvault secret show \
