@@ -15,6 +15,7 @@ set -o errexit
 # Create a resource group
 RESPONSE=$( az group exists -n "${MY_RG}" )
 if [ $RESPONSE ]; then  # true:
+    echo ">>> Deleting $MY_RG ..."
     az group delete --resource-group "${MY_RG}" --yes
 fi
 az group create --name "${MY_RG}" --location "${MY_LOC}"
