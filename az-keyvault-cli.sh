@@ -25,8 +25,8 @@ fi
 
 # Define a unique name for the Key Vault done by caller of this script:
 EPOCH=$( date +%m%d )  # No room for %Y = 2021
-MY_KEYVAULT_NAME="Keyvault-${MY_RG}-$EPOCH-$RANDOM"  # LIMIT: Max 25 characters.
-   # Example: Keyvault-mol-20211230-3537
+MY_KEYVAULT_NAME="Keyvault-${MY_RG}-$EPOCH-$RANDOM"  
+   # Example: Keyvault-mol-1230-3537  # LIMIT: Max 25 characters.
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 
 
