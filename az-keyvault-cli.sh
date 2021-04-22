@@ -13,7 +13,7 @@ set -o errexit
 #echo "MY_RG=$MY_RG in ./az-keybault-cli.sh"
 
 echo ">>> Delete Resource Group \"$MY_RG\" if it already exists before recreating ..."
-az group list --output tsv | grep $rsgName -q || az group delete --resource-group "${MY_RG}" --yes
+#az group list --output tsv | grep "${MY_RG}" -q || az group delete --resource-group "${MY_RG}" --yes
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 
