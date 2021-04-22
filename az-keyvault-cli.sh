@@ -17,6 +17,7 @@ set -o errexit
 #echo "MY_RG=$MY_RG in ./az-keybault-cli.sh"
 
 echo ">>> Delete Resource Group \"$MY_RG\" if it already exists before recreating ..."
+# Deleting RG deletes KeyVault and objects in it; Storage Acct.
 if [ $(az group exists --name "${MY_RG}") = true ]; then
     az group delete --resource-group "${MY_RG}" --yes
 fi
@@ -54,7 +55,7 @@ az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
-MY_STORAGE_ACCT="Storage${MY_RG}$RANDOM"
+MY_STORAGE_ACCT="storage-${MY_RG}-$RANDOM"
 echo ">>> Create Storage Account Name \"$MY_STORAGE_ACCT\" for Function App:"
 az storage account create \
    --name "${MY_STORAGE_ACCT}" \
