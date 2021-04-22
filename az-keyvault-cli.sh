@@ -62,7 +62,9 @@ az storage account create \
    --sku standard_lrs \
    --resource-group "${MY_RG}"
 
-az storage account list -o table | grep "${MY_STORAGE_ACCT}"
+az storage account list --resource-group "${MY_RG}" --output table 
+   # --query [*].{Name:name,Location:primaryLocation,Kind:kind}  CreationTime
+   # grep to show only on created to filter out cloud-shell-storage account
 
 
 echo ">>> Create a Function App:"
