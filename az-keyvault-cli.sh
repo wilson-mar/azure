@@ -26,9 +26,8 @@ fi
 # Define a unique name for the Key Vault done by caller of this script:
 EPOCH=$( date +%m%d )  # No room for %Y = 2021
 MY_KEYVAULT_NAME="Keyvault-${MY_RG}-$EPOCH-$RANDOM"  
-   # Example: Keyvault-mol-1230-3537  # LIMIT: Max 25 characters.
+   # Example: Keyvault-mol-1230-3537  # LIMIT: Max 24 characters.
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
-
 
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
@@ -54,7 +53,9 @@ az keyvault create \
 az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
-echo ">>> Create a Storage Account for Function App:"
+
+MY_STORAGE_ACCT="Storage${MY_RG}$RANDOM"
+echo ">>> Create Storage Account Name \"$MY_STORAGE_ACCT\" for Function App:"
 az storage account create \
    --name "${MY_STORAGE_ACCT}" \
    --sku standard_lrs \
