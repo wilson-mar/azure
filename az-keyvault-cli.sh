@@ -34,8 +34,7 @@ az keyvault create \
   # Argument 'enable_soft_delete' has been deprecated and will be removed in a future release.
   # --enable-purge-protection false # during test env usage when Vault is rebuilt between sessions.
   # TODO: Add VNET rules 
-
-
+# RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
 
 # Create a secret in Key Vault
 # This secret is a basic password that is used to install a database server
@@ -56,6 +55,7 @@ exit
 az keyvault secret delete \
     --name "${MY_KEY_NAME}" \
     --vault-name $MY_KEYVAULT_NAME
+# RESPONSE: Secret databasepassword is currently being deleted.
 
 # Wait 5 seconds for the secret to be successfully deleted before recovering
 sleep 5
