@@ -8,12 +8,17 @@
 
 set -o errexit
 
-echo ">>> Setup enviornment variables:"
-sh $HOME/setup.sh
-echo "MY_RG=$MY_RG in ./az-keybault-cli.sh"
+#echo ">>> Setup enviornment variables:"
+#sh $HOME/setup.sh
+#echo "MY_RG=$MY_RG in ./az-keybault-cli.sh"
 
 # Create a resource group
+$rsgExists = az group exists -n "${MY_RG}"
+if [ $rsgExists ]; then  # true:
+    az group delete --resource-group "${MY_RG}" --yes
+fi
 az group create --name "${MY_RG}" --location "${MY_LOC}"
+
 
 # Define a unique name for the Key Vault done by caller of this script:
 # MY_KEYVAULT_NAME="${MY_KEYVAULT_NAME}"$RANDOM
