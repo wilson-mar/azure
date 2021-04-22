@@ -66,14 +66,14 @@ az storage account list --resource-group "${MY_RG}" --output table
    # --query [*].{Name:name,Location:primaryLocation,Kind:kind}  CreationTime
    # grep to show only on created to filter out cloud-shell-storage account
 
-
-echo ">>> Create a Function App:"
+MY_FUNC_APP_NAME="funcapp-${MY_RG}-$MMDD-$RANDOM" 
+echo ">>> Create a Function App \"$MY_FUNC_APP_NAME\":"
 # Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/functionapp?view=azure-cli-latest#az_functionapp_create
 # The Function App is set up to be manually connected to a sample app in GitHub
 az functionapp create \
-    --name "${FUNC_APP_NAME}" \
+    --name "${MY_FUNC_APP_NAME}" \
     --storage-account "${MY_STORAGE_ACCT}" \
     --consumption-plan-location "${MY_LOC}" \
     --deployment-source-url https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js \
