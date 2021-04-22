@@ -55,7 +55,7 @@ az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
-MY_STORAGE_ACCT="storage${MMDD}$$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
+MY_STORAGE_ACCT="storage${MMDD}$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
 echo ">>> Create Storage Account Name \"$MY_STORAGE_ACCT\" for Function App:"
 az storage account create \
    --name "${MY_STORAGE_ACCT}" \
