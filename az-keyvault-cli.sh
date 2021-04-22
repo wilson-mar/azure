@@ -82,6 +82,7 @@ az functionapp create \
     --storage-account "${MY_STORAGE_ACCT}" \
     --consumption-plan-location "${MY_LOC}" \
     --deployment-source-url https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js \
+    --functions-version "${MY_FUNC_APP_VER}" \
     --resource-group "${MY_RG}"
   # -p $MY_PLAN  # Region, SKU Dynamic, Operating System: Windows
      # Consumption plan is used, which means you are only charged based on memory usage while your app is running. 
