@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# az-keyvault-cli.sh
+# ./az-keyvault-cli.sh
 # This script was adapted from https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/15/azure_cli_sample.sh
 # released under the MIT license. See https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/LICENSE
 # and chapter 15 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
