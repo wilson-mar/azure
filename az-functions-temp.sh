@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# az-functions-temp.sh
+# ./az-functions-temp.sh
 # This script was adapted from https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/21/azure_cli_sample.sh
 # released under the MIT license. See https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/LICENSE
 # and chapter 21 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
@@ -13,21 +13,21 @@
 
 set -o errexit
 
-# Create a resource group
+echo ">>> Create a resource group:"
 az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 # Define a unique name for the Service Bus namespace
 MY_SVC_BUS_NAMESPACE=$MY_SVC_BUS_NAME$RANDOM
 echo "MY_SVC_BUS_NAMESPACE=$MY_SVC_BUS_NAMESPACE"
 
-# Create a Service Bus namespace
+echo ">>> Create a Service Bus namespace:"
 # This namespace is used to then create a queue that allows messages to be
 # transmitted between your Azure IoT Hub and applications such as Logic Apps
 # and Function Apps
 az servicebus namespace create --name "${MY_SVC_BUS_NAMESPACE}" \
     --resource-group "${MY_RG}"
 
-# Create a Service Bus queue
+echo ">>> Create a Service Bus queue:"
 # This queue is used to connect Azure IoT Hub with your serverless applications
 # to pass messages back and forth
 az servicebus queue create \
@@ -35,20 +35,20 @@ az servicebus queue create \
     --namespace-name "${MY_SVC_BUS_NAMESPACE}" \
     --resource-group "${MY_RG}"
     
-# Define a unique name for the Storage account
+echo ">>> Define a unique name for the Storage account:"
 storageAccount="$MY_STORAGE_ACCT$RANDOM"
 
-# Create an Azure Storage account
+echo ">>> Create an Azure Storage account:"
 # The Function App requires a Storage account
 az storage account create \
    --name "${MY_STORAGE_ACCT}" \
    --sku standard_lrs \
    --resource-group "${MY_RG}"
     
-# Define a unique name for the Function App
+echo ">>> Define a unique name for the Function App:"
 FUNC_APP_NAME="$MY_SVC_BUS_NAME$RANDOM"
 
-# Create a Function App
+echo ">>> Create a Function App:"
 # A consumption plan is used, which means you are only charged based on the
 # memory usage while your app is running. The Function App is set up to be
 # manually connected to a sample app in GitHub
