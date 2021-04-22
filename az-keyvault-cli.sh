@@ -21,7 +21,7 @@ fi
 
 # Define a unique name for the Key Vault done by caller of this script:
 EPOCH=$( date +%s )
-MY_KEYVAULT_NAME="${MY_KEYVAULT_NAME}-$EPOCH-$RANDOM"
+MY_KEYVAULT_NAME="Keyvault-${MY_RG}-$EPOCH-$RANDOM"
 
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
