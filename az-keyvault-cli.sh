@@ -25,9 +25,17 @@ az keyvault create \
     --location "${MY_LOC}"
     --sku Standard \
     --retention-days 90 \
-    --enable-soft-delete \
+    --enable-soft-delete false \
     --enabled-for-deployment \
-    --enable-purge-protection true
+    --enable-purge-protection false \
+    --default-action Deny  # Default action to apply when no rule matches.
+    
+  # --retention-days 90 \. # 90 is max allowed.
+  # --sku Standard  # or Premium (includes support for HSM backed keys) HSM: Standard_B1, Custom_B32. Default: Standard_B1.
+  # --enable-purge-protection false # during test env usage when Vault is rebuilt between sessions.
+  # TODO: Add VNET rules 
+
+
 
 # Create a secret in Key Vault
 # This secret is a basic password that is used to install a database server
@@ -41,6 +49,8 @@ az keyvault secret set \
 az keyvault secret show \
     --name "${MY_KEY_NAME}" \
     --vault-name $MY_KEYVAULT_NAME
+
+exit
 
 # Delete the secret
 az keyvault secret delete \
@@ -57,6 +67,8 @@ sleep 5
 az keyvault secret recover \
     --name "${MY_KEY_NAME}" \
     --vault-name $MY_KEYVAULT_NAME
+
+
 
 # Create a VM
 az vm create \
@@ -114,3 +126,4 @@ az vm extension set \
     --protected-settings '{"commandToExecute":"sh install_mysql_server.sh $MY_KEYVAULT_NAME"}' \
     --resource-group "${MY_RG}"
 
+# TODO: Replace reference to fouldsy install_mysql_server.sh with our own vm image.
