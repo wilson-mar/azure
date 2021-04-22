@@ -5,6 +5,9 @@
 # released under the MIT license. See https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/LICENSE
 # and chapter 15 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
+# Also referenced: 
+# https://app.pluralsight.com/library/courses/microsoft-azure-security-engineer-configure-manage-key-vault Sep 08, 2020
+# https://app.pluralsight.com/library/courses/microsoft-azure-key-vault-configuring-managing Nov 18, 2020
 
 set -o errexit
 
@@ -80,6 +83,8 @@ echo ">>> Create a Service Principal:"
 
 
 echo ">>> Add a Managed Identity:"
+# https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm
+
 
 
 echo ">>> Create (generate) a secret in Key Vault:"
