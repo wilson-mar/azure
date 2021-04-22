@@ -26,7 +26,7 @@ fi
 
 # Define a unique name for the Key Vault done by caller of this script:
 MMDD=$( date +%m%d )  # No room for %Y = 2021
-MY_KEYVAULT_NAME="Keyvault-${MY_RG}-$MMDD-$RANDOM"  
+MY_KEYVAULT_NAME="keyvault-${MY_RG}-$MMDD-$RANDOM"  
    # Example: Keyvault-mol-1230-3537  # LIMIT: Max 24 characters.
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 
@@ -55,13 +55,14 @@ az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
-MY_STORAGE_ACCT="storage${MMDD}$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
-echo ">>> Create Storage Account Name \"$MY_STORAGE_ACCT\" for Function App:"
+MY_STORAGE_ACCT="storage-${MMDD}-$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
+echo ">>> Create new Storage Account \"$MY_STORAGE_ACCT\" for Function App:"
 az storage account create \
    --name "${MY_STORAGE_ACCT}" \
    --sku standard_lrs \
    --resource-group "${MY_RG}"
    # RESPONSE: 
+az storage list -o table
 
 
 echo ">>> Create a Function App:"
