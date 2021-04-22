@@ -20,10 +20,11 @@ fi
 
 
 # Define a unique name for the Key Vault done by caller of this script:
-EPOCH=$( date +%s )
-MY_KEYVAULT_NAME="Keyvault-${MY_RG}-$EPOCH-$RANDOM"
-
+EPOCH=$( date +%Y%m%d )
+MY_KEYVAULT_NAME="Keyvault-${MY_RG}-$EPOCH-$RANDOM"  # LIMIT: Max 25 characters.
+   # Example: Keyvault-mol-20211230-3537
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
+exit
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
@@ -55,6 +56,7 @@ az storage account create \
    --resource-group "${MY_RG}"
    # RESPONSE: 
 
+
 echo ">>> Create a Function App:"
 # Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
@@ -71,6 +73,10 @@ az functionapp create \
   # Publish: Code (not Docker Container)
   # Runtime Stack: .NET Core
   # Version: 3.1
+
+
+echo ">>> Create a Service Principal:"
+
 
 
 echo ">>> Create (generate) a secret in Key Vault:"
