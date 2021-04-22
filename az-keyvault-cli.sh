@@ -23,7 +23,7 @@ fi
 EPOCH=$( date +%s )
 MY_KEYVAULT_NAME="${MY_KEYVAULT_NAME}-#EPOCH-$RANDOM"
 
-echo ">>> Create a Key Vault:"
+echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
