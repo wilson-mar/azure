@@ -61,8 +61,8 @@ az storage account create \
    --name "${MY_STORAGE_ACCT}" \
    --sku standard_lrs \
    --resource-group "${MY_RG}"
-   # RESPONSE: 
-az storage list -o table
+
+az storage account list -o table | grep "${MY_STORAGE_ACCT}"
 
 
 echo ">>> Create a Function App:"
