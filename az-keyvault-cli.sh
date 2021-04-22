@@ -26,7 +26,7 @@ fi
 
 # Define a unique name for the Key Vault done by caller of this script:
 MMDD=$( date +%m%d )  # No room for %Y = 2021
-MY_KEYVAULT_NAME="keyvault-${MY_RG}-$MMDD-$RANDOM"  
+MY_KEYVAULT_NAME="keyvault${MMDD}${MY_RG}$RANDOM"   
    # Example: Keyvault-mol-1230-3537  # LIMIT: Max 24 characters.
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 
@@ -55,7 +55,7 @@ az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
-MY_STORAGE_ACCT="storage${MMDD}x$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
+MY_STORAGE_ACCT="storage${MMDD}${MY_RG}$RANDOM"    # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
 echo ">>> Create new Storage Account \"$MY_STORAGE_ACCT\" for Function App:"
 az storage account create \
    --name "${MY_STORAGE_ACCT}" \
@@ -71,7 +71,7 @@ echo ">>> Add tag \"${MY_STORAGE_TAG}\" to Storage account \"$MY_STORAGE_ACCT\":
 az storage account update --name "${MY_STORAGE_ACCT}" --resource-group "${MY_RG}" --tags “${MY_STORAGE_TAGS}”
 
 
-MY_FUNC_APP_NAME="funcapp-${MY_RG}-$MMDD-$RANDOM" 
+MY_FUNC_APP_NAME="funcapp${MMDD}${MY_RG}$RANDOM" 
 echo ">>> Create a Function App \"$MY_FUNC_APP_NAME\":"
 # Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
@@ -95,7 +95,7 @@ az functionapp create \
 # See https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_create_for_rbac
 
 
-MY_MANAGED_IDENTITY="identity${MMDD}x$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
+MY_MANAGED_IDENTITY="identity${MMDD}${MY_RG}$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
 echo ">>> Add Managed Identity \"${MY_MANAGED_IDENTITY}\":"  # using tokens from Azure Active Directory, instead of Service Principal (service acct)  credentials
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm
