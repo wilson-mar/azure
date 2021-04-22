@@ -68,7 +68,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_STORAGE_ACCT="AzureSaves12345"  # globally unique in front of /file.core.windows.net
    export FUNC_APP_NAME="Bulwinkle12345"     # globally unique in front of .azurewebsites.net
    export SSH_KEY_FILE_NAME="id_rsa".        # default is id_rsa.
-   export MY_KEYVAULT_NAME="specialplace2+$RANDOM"   # globally unique
+   export MY_KEYVAULT_NAME="specialplace$RANDOM"   # globally unique
    export MY_KEY_NAME="databasepassword"
    export MY_KEY_SECRET="SecureP@ssw0rd"     # for saving into Key Vault
    export MY_DOCKERHUB_ACCT="iainfoulds"     # globally unique in Docker.io (DockerHub)
