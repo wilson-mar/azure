@@ -8,6 +8,7 @@
 # Also referenced: 
 # https://app.pluralsight.com/library/courses/microsoft-azure-security-engineer-configure-manage-key-vault Sep 08, 2020
 # https://app.pluralsight.com/library/courses/microsoft-azure-key-vault-configuring-managing Nov 18, 2020
+   # https://github.com/ned1313/Configure-and-Manage-Key-Vault
 
 set -o errexit
 
@@ -23,7 +24,7 @@ fi
 
 
 # Define a unique name for the Key Vault done by caller of this script:
-EPOCH=$( date +%Y%m%d )
+EPOCH=$( date +%m%d )  # No room for %Y = 2021
 MY_KEYVAULT_NAME="Keyvault-${MY_RG}-$EPOCH-$RANDOM"  # LIMIT: Max 25 characters.
    # Example: Keyvault-mol-20211230-3537
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
