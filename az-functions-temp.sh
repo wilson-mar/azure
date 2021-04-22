@@ -49,6 +49,7 @@ echo ">>> Define a unique name for the Function App:"
 FUNC_APP_NAME="$MY_SVC_BUS_NAME$RANDOM"
 
 echo ">>> Create a Function App:"
+# Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # A consumption plan is used, which means you are only charged based on the
 # memory usage while your app is running. The Function App is set up to be
 # manually connected to a sample app in GitHub
@@ -56,6 +57,6 @@ az functionapp create \
     --name "${FUNC_APP_NAME}" \
     --storage-account "${MY_STORAGE_ACCT}" \
     --consumption-plan-location "${MY_LOC}" \
-    --deployment-source-url https://raw.githubusercontent.com/fouldsy/azure-mol-samples/master/21/analyzeTemperature.js \
+    --deployment-source-url https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js \
     --resource-group "${MY_RG}"
     
