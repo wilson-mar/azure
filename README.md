@@ -17,7 +17,6 @@ are Bash scripts which have been <strong>generalized</strong> for productive use
 Scripts here are adapted from various experts generous with sharing their code:
    * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds, explained in https://aka.ms/monthoflunches published 4/30/2020.
 
-   Microsoft Learning:
    * https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies
    * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
    * https://github.com/Azure/azure-cli by Microsoft
