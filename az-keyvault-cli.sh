@@ -21,7 +21,7 @@ fi
 
 # Define a unique name for the Key Vault done by caller of this script:
 EPOCH=$( date +%s )
-MY_KEYVAULT_NAME="${MY_KEYVAULT_NAME}-#EPOCH-$RANDOM"
+MY_KEYVAULT_NAME="${MY_KEYVAULT_NAME}-$EPOCH-$RANDOM"
 
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
@@ -86,10 +86,12 @@ az keyvault secret set \
   # Enabled: Yes
   # Use PowerShell to set multi-line secrets.
 
-Client address is not authorized and caller is not a trusted service.
-Client address: 13.64.246.36
-Caller: appid=b677c290-cf4b-4a8e-a60e-91ba650a4abe;oid=58a1c620-bcd5-4d6e-8001-9b86c6fb1baf;iss=https://sts.windows.net/92543348-f7f0-4cc2-addc-11021d882720/
-Vault: keyvault-mol-15032;location=westus
+echo ">>> Add Access Policy:"
+# To avoid these error messages:
+   # Client address is not authorized and caller is not a trusted service.
+   # Client address: 13.64.246.36
+   # Caller: appid=b677c290-cf4b-4a8e-a60e-91ba650a4abe;oid=58a1c620-bcd5-4d6e-8001-9b86c6fb1baf;iss=https://sts.windows.net/92543348-f7f0-4cc2-addc-11021d882720/
+   # Vault: keyvault-mol-15032;location=westus
 
 
 echo ">>> Show the secret stored in Key Vault:"
