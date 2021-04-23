@@ -14,7 +14,6 @@
 
 set -o errexit
 
-
 # Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
 echo ">>> Register provider \"Microsoft.KeyVault\" for subscription:"
 # To avoid error "The subscription is not registered to use namespace 'Microsoft.KeyVault'"
@@ -24,10 +23,17 @@ RESPONSE=$( az provider show --namespace Microsoft.KeyVault --query registration
 if [ $RESPONSE == "Registered" ]; then
    echo ">>> Registered"
 else
-   echo "NOT"
-   # az provider register -n Microsoft.KeyVault
+   az provider register -n Microsoft.KeyVault
 fi
-exit
+
+if [ $(az group exists --name "${MY_RG}") = true ]; then
+   echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
+   az group delete --resource-group "${MY_RG}" --yes
+fi
+echo ">>> Create Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc."
+    az group create --name "${MY_RG}" --location "${MY_LOC}"
+
+
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
