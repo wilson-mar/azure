@@ -54,7 +54,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 1. Copy environment variable definitions and paste in the command line for bash scripts to reference:
 
    <pre>export MY_LOC="westus"               # aka region
-   export MY_RG="mol"
+   export MY_RG=$( date +%y%m%d )            # example: 210131 yymmdd
    export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
    export MY_CLIENT_IP="13.81.60.25"
    export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
