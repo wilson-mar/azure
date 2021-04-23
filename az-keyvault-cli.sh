@@ -13,10 +13,10 @@
 
 set -o errexit
 
-echo ">>> Delete Resource Group \"$MY_RG\" if it already exists before recreating ..."
-# Deleting RG deletes KeyVault and objects in it; Storage Acct.
+echo ">>> Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc."
 if [ $(az group exists --name "${MY_RG}") = true ]; then
-    az group delete --resource-group "${MY_RG}" --yes
+   echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
+   az group delete --resource-group "${MY_RG}" --yes
 fi
     az group create --name "${MY_RG}" --location "${MY_LOC}"
 
@@ -84,11 +84,12 @@ echo ">>> Create Function App \"$MY_FUNC_APP_NAME\":"
 az functionapp create \
     --name "${MY_FUNC_APP_NAME}" \
     --storage-account "${MY_STORAGE_ACCT}" \
-    --consumption-plan-location "${MY_LOC}" \
     --plan "${MY_PLAN}" \
-    --deployment-source-url "${MY_FUNC_APP_URL}" \ 
-    --functions-version "${MY_FUNC_APP_VER}" \
+    --deployment-source-url "${MY_FUNC_APP_URL}" \
     --resource-group "${MY_RG}"
+    
+  # --consumption-plan-location "${MY_LOC}" \
+  # --functions-version "${MY_FUNC_APP_VER}" \
   # -p $MY_PLAN  # Region, SKU Dynamic, Operating System: Windows
      # Consumption plan is used, which means you are only charged based on memory usage while your app is running. 
   # Publish: Code (not Docker Container)
