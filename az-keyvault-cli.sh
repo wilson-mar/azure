@@ -41,7 +41,7 @@ az keyvault create \
   # See https://docs.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview
 # RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
 
-echo ">>> Add network rule to Function App:"
+echo ">>> Add network rule to Key Vault \"$MY_KEYVAULT_NAME\":"
   # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault/network-rule?view=azure-cli-latest
   # --network-acls # Network ACLs. It accepts a JSON filename or a JSON string. JSON format: {"ip":[<ip1>, <ip2>...],"vnet":[<vnet_name_1>/<subnet_name_1>,<subnet_id2>...]}.
   # --network-acls-ips  # Network ACLs IP rules. Space-separated list of IP addresses.
