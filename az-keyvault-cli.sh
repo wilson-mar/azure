@@ -67,12 +67,14 @@ echo ">>> Add tag \"${MY_STORAGE_TAG}\" to Storage account \"$MY_STORAGE_ACCT\":
 az storage account update --name "${MY_STORAGE_ACCT}" --resource-group "${MY_RG}" --tags “${MY_STORAGE_TAGS}”
 
 
-echo ">>> Create Plan \"$MY_PLAN\":"
+echo ">>> Create App Service Plan \"$MY_PLAN\":"
 # CLI DOC: https://docs.microsoft.com/en-us/cli/azure/appservice/plan?view=azure-cli-latest
 az appservice plan create --name "${MY_PLAN}" \
    --resource-group "${MY_RG}"
+#   --is-linux --number-of-workers 1 --sku S1
+#   --hyper-v --sku P1V3
 
-echo ">>> Create a Function App \"$MY_FUNC_APP_NAME\":"
+echo ">>> Create Function App \"$MY_FUNC_APP_NAME\":"
 # Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/functionapp?view=azure-cli-latest#az_functionapp_create
