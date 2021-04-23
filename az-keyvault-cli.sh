@@ -16,7 +16,7 @@ set -o errexit
 
 
 # Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
-echo ">>> Register Key Vault provider:"
+echo ">>> Register provider \"Microsoft.KeyVault\" for KeyVault:"
 # To avoid error "The subscription is not registered to use namespace 'Microsoft.KeyVault'"
 # when you try to create a new key vault. This is a one-time operation for each subscription.
 # CLI DOC: https://docs.microsoft.com/en-US/cli/azure/provider#az_provider_register
