@@ -57,9 +57,6 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_RG="x$( date +%y%m%d )"            # example: 210131 yymmdd
    export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
    export MY_CLIENT_IP="13.81.60.25"
-   export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
-   export MY_SCRIPT="az-helm-cli.sh"         # the script being called
-   export MY_SCRIPT_VERSION="0.1.4"    
    export MY_ACR="jollygoodacr"    
    export MY_VM_NAME="mol-westus2"
    export MY_APPNAME="azuremol"              # 
@@ -79,6 +76,9 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_KEY_CONTENT_TYPE="Database password"
    export MY_DOCKERHUB_ACCT="iainfoulds"     # globally unique in Docker.io (DockerHub)
    export MY_CONTAINER="azuremol"            # within DockerHub
+   export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
+   export MY_SCRIPT="az-helm-cli.sh"         # the script being called
+   export MY_SCRIPT_VERSION="0.1.4"          # the version of script being called, to be sure that you're getting the right one.
    </pre>
 
    The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
