@@ -14,12 +14,6 @@
 
 set -o errexit
 
-echo ">>> Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc."
-if [ $(az group exists --name "${MY_RG}") = true ]; then
-   echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
-   az group delete --resource-group "${MY_RG}" --yes
-fi
-    az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 # Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
 echo ">>> Register Key Vault provider:"
