@@ -54,7 +54,7 @@ Scripts here are adapted from various experts generous with sharing their code:
 1. Copy environment variable definitions and paste in the command line for bash scripts to reference:
 
    <pre>export MY_LOC="westus"               # aka region
-   export MY_RG=$( date +%y%m%d )            # example: 210131 yymmdd
+   export MY_RG="x$( date +%y%m%d )"            # example: 210131 yymmdd
    export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
    export MY_CLIENT_IP="13.81.60.25"
    export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
@@ -65,12 +65,14 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_APPNAME="azuremol"              # 
    export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
    export MY_SVC_BUS_NAME="azuremol"
-   export MY_STORAGE_ACCT="Storage-$MY_RG-$RANDOM"   # globally unique in front of /file.core.windows.net
-   export MY_FUNC_APP_NAME="FuncApp-$MY_RG-$RANDOM"     # globally unique in front of .azurewebsites.net
+   export MY_STORAGE_ACCT="${MY_RG}storage$RANDOM"   # LIMIT: Max. 24 lower-case char & numbers, no dashes. globally unique in front of /file.core.windows.net
+   export MY_STORAGE_TAGS="env=dev"
+   export MY_FUNC_APP_NAME="${MY_RG}funcapp$RANDOM"  # globally unique in front of .azurewebsites.net
    export MY_FUNC_APP_VER="2"               # New!
    export MY_FUNC_APP_URL="https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js"
    export MY_SSH_KEY_FILE_NAME="id_rsa".        # default is id_rsa.
-   export MY_KEYVAULT_NAME="keyvault-$MY_RG-$RANDOM"   # globally unique
+   export MY_MANAGED_IDENTITY="${MY_RG}identity$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
+   export MY_KEYVAULT_NAME="${MY_RG}keyvault$RANDOM"   # LIMIT: Max 24 characters. globally unique.
    export MY_KEY_NAME="databasepassword"
    export MY_KEY_SECRET="SecureP@ssw0rd"     # for saving into Key Vault
    export MY_KEY_CONTENT_TYPE="Database password"
