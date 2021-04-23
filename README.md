@@ -65,11 +65,13 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
    export MY_SVC_BUS_NAME="azuremol"
    export MY_STORAGE_ACCT="Storage-$MY_RG-$RANDOM"   # globally unique in front of /file.core.windows.net
-   export FUNC_APP_NAME="FuncApp-$MY_RG-$RANDOM"     # globally unique in front of .azurewebsites.net
-   export SSH_KEY_FILE_NAME="id_rsa".        # default is id_rsa.
+   export MY_FUNC_APP_NAME="FuncApp-$MY_RG-$RANDOM"     # globally unique in front of .azurewebsites.net
+   export MY_FUNC_APP_NAME="2"               # New!
+   export MY_SSH_KEY_FILE_NAME="id_rsa".        # default is id_rsa.
    export MY_KEYVAULT_NAME="keyvault-$MY_RG-$RANDOM"   # globally unique
    export MY_KEY_NAME="databasepassword"
    export MY_KEY_SECRET="SecureP@ssw0rd"     # for saving into Key Vault
+   export MY_KEY_CONTENT_TYPE="Database password"
    export MY_DOCKERHUB_ACCT="iainfoulds"     # globally unique in Docker.io (DockerHub)
    export MY_CONTAINER="azuremol"            # within DockerHub
    </pre>
