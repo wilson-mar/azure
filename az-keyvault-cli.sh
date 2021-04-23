@@ -101,10 +101,14 @@ echo ">>> Add Managed Identity \"${MY_MANAGED_IDENTITY}\":"  # using tokens from
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm
 # System-assigned identidfy to specific resource means when that resource is deleted, Azure automatically deletes the identity.
-# See https://docs.microsoft.com/en-us/cli/azure/identity?view=azure-cli-latest
+# CLI DOC: https://docs.microsoft.com/en-us/cli/azure/identity?view=azure-cli-latest
 az identity create --name "${MY_MANAGED_IDENTITY}" \
                    --resource-group "${MY_RG}"
 
+
+#echo ">>> Add Access Policy:"
+# To avoid these error messages:
+   # Client address is not authorized and caller is not a trusted service.
 
 echo ">>> Create (generate) secret \"${MY_KEY_NAME}\" in Key Vault \"${MY_KEYVAULT_NAME}\":"
 # This secret is a basic password that is used to install a database server
@@ -119,19 +123,12 @@ az keyvault secret set \
   # Enabled: Yes
   # Use PowerShell to set multi-line secrets.
 
-echo ">>> Add Access Policy:"
-# To avoid these error messages:
-   # Client address is not authorized and caller is not a trusted service.
-   # Client address: 13.64.246.36
-   # Caller: appid=b677c290-cf4b-4a8e-a60e-91ba650a4abe;oid=58a1c620-bcd5-4d6e-8001-9b86c6fb1baf;iss=https://sts.windows.net/92543348-f7f0-4cc2-addc-11021d882720/
-   # Vault: keyvault-mol-15032;location=westus
-exit
-
 echo ">>> Show the secret stored in Key Vault:"
 az keyvault secret show \
     --name "${MY_KEY_NAME}" \
-    --vault-name $MY_KEYVAULT_NAME
+    --vault-name "${MY_KEYVAULT_NAME}"
 
+exit
 echo ">>> Delete the secret:"
 az keyvault secret delete \
     --name "${MY_KEY_NAME}" \
