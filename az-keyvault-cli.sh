@@ -16,16 +16,16 @@ set -o errexit
 
 
 # Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
-echo ">>> Register provider \"Microsoft.KeyVault\" for KeyVault:"
+echo ">>> Register provider \"Microsoft.KeyVault\" for subscription:"
 # To avoid error "The subscription is not registered to use namespace 'Microsoft.KeyVault'"
 # when you try to create a new key vault. This is a one-time operation for each subscription.
 # CLI DOC: https://docs.microsoft.com/en-US/cli/azure/provider#az_provider_register
-RESPONSE=$( az provider show --namespace Microsoft.KeyVault --query "[].{registrationState:state}[?registrationState==Registered]" )
-echo "RESPONSE=$RESPONSE"
-exit
-
-if [ RESPONSE == true ]; then
-   az provider register -n Microsoft.KeyVault
+RESPONSE=$( az provider show --namespace Microsoft.KeyVault --query registrationState )
+if [ $RESPONSE == "Registered" ]; then
+   echo ">>> Registered"
+else
+   echo "NOT"
+   # az provider register -n Microsoft.KeyVault
 fi
 exit
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
