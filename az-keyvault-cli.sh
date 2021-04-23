@@ -5,7 +5,8 @@
 # released under the MIT license. See https://github.com/fouldsy/azure-mol-samples-2nd-ed/blob/master/LICENSE
 # and chapter 15 of the ebook "Learn Azure in a Month of Lunches - 2nd edition" (Manning Publications) by Iain Foulds,
 # Purchase at https://www.manning.com/books/learn-azure-in-a-month-of-lunches-second-edition
-# Also referenced: 
+# References:
+# https://github.com/Azure-Samples/app-service-msi-keyvault-dotnet
 # https://app.pluralsight.com/library/courses/microsoft-azure-security-engineer-configure-manage-key-vault Sep 08, 2020
 # https://app.pluralsight.com/library/courses/microsoft-azure-key-vault-configuring-managing Nov 18, 2020
    # https://github.com/ned1313/Configure-and-Manage-Key-Vault
@@ -20,12 +21,18 @@ if [ $(az group exists --name "${MY_RG}") = true ]; then
 fi
     az group create --name "${MY_RG}" --location "${MY_LOC}"
 
+# Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
+echo ">>> Register Key Vault provider:"
+# To avoid error "The subscription is not registered to use namespace 'Microsoft.KeyVault'"
+# when you try to create a new key vault. This is a one-time operation for each subscription.
+az provider register -n Microsoft.KeyVault
 
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
-# The vault is enabled for soft delete, which allows deleted keys to recovered,
+# The vault is enabled for soft delete by default, which allows deleted keys to recovered, but a new keyvault name needs to be created every run.
 # and is also enable for deployment which allows VMs to use the keys stored.
+# TODO: Identify if keyvault already exists:
 az keyvault create \
     --name "${MY_KEYVAULT_NAME}" \
     --location "${MY_LOC}" \
@@ -43,7 +50,9 @@ az keyvault create \
   # See https://docs.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview
 # RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
 
-echo ">>> Add network rule to Key Vault \"$MY_KEYVAULT_NAME\":"
+echo ">>> Limit Admin's IP address by Add network rule to Key Vault \"$MY_KEYVAULT_NAME\":"
+# Define your MY_CLIENT_IP using "curl -s ifconfig.me"
+# If you're on a VPN, it rotates among various IPs, so it is not a good option to limit access to your IP address.
   # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault/network-rule?view=azure-cli-latest
   # --network-acls # Network ACLs. It accepts a JSON filename or a JSON string. JSON format: {"ip":[<ip1>, <ip2>...],"vnet":[<vnet_name_1>/<subnet_name_1>,<subnet_id2>...]}.
   # --network-acls-ips  # Network ACLs IP rules. Space-separated list of IP addresses.
@@ -103,6 +112,7 @@ az functionapp create \
 
 
 echo ">>> Add Managed Identity \"${MY_MANAGED_IDENTITY}\":"  # using tokens from Azure Active Directory, instead of Service Principal (service acct)  credentials
+# Tutorial: https://docs.microsoft.com/en-us/azure/key-vault/general/tutorial-net-create-vault-azure-web-app
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm
 # System-assigned identidfy to specific resource means when that resource is deleted, Azure automatically deletes the identity.
@@ -116,7 +126,8 @@ az identity create --name "${MY_MANAGED_IDENTITY}" \
 # To avoid these error messages:
    # Client address is not authorized and caller is not a trusted service.
 
-echo ">>> Create (generate) secret named \"${MY_KEY_NAME}\" in Key Vault \"${MY_KEYVAULT_NAME}\":"
+echo ">>> Set (Create, generate) secret named \"${MY_KEY_NAME}\" in Key Vault \"${MY_KEYVAULT_NAME}\":"
+# Overview: https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-cli
 # This secret is a basic password that is used to install a database server
 az keyvault secret set \
     --vault-name "${MY_KEYVAULT_NAME}" \
@@ -158,3 +169,7 @@ echo ">>> Use Managed Identity to read secret:"
 # VIDEO DEMO https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
 
 # https://www.youtube.com/watch?v=PgujSug1ZbI use KeyVault in Logic App, ADF 
+
+# TODO: Issue certificate use Key Vault:
+# CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault/certificate/issuer?view=azure-cli-latest
+# https://github.com/Azure-Samples/key-vault-java-certificate-authentication/blob/master/README.md
