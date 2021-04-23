@@ -9,6 +9,7 @@
 # https://app.pluralsight.com/library/courses/microsoft-azure-security-engineer-configure-manage-key-vault Sep 08, 2020
 # https://app.pluralsight.com/library/courses/microsoft-azure-key-vault-configuring-managing Nov 18, 2020
    # https://github.com/ned1313/Configure-and-Manage-Key-Vault
+# https://newsignature.com/articles/azure-devops-with-a-firewall-enabled-key-vault/
 
 set -o errexit
 
@@ -26,13 +27,14 @@ echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
 # and is also enable for deployment which allows VMs to use the keys stored.
 az keyvault create \
-    --resource-group "${MY_RG}" \
     --name "${MY_KEYVAULT_NAME}" \
     --location "${MY_LOC}" \
     --retention-days 90 \
     --enabled-for-deployment \
-    --default-action Deny  # Default action to apply when no rule matches.
-    
+    --default-action Deny \
+    --resource-group "${MY_RG}" 
+
+  # --default-action Deny # Default action to apply when no rule matches.
   # --sku Standard \ # command not found
   # --retention-days 90 \. # 90 is max allowed.
   # --sku Standard  # or Premium (includes support for HSM backed keys) HSM: Standard_B1, Custom_B32. Default: Standard_B1.
