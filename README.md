@@ -160,6 +160,8 @@ Scripts here are adapted from various experts generous with sharing their code:
 Bash scripts here are written with coding conventions defined at <a target="_blank" href="https://wilsonmar.github.io/bash-codng">https://wilsonmar.github.io/bash-coding</a> which include:
 
    * <tt>set -o errexit</tt> so that the script stops on the first error (instead of running on).
+   * A backslash \ character at the end of a line is used for continuation of a command.
+   * <tt>--resource-group</tt> is a required argument. It's last so that missing slash line a line above it would cause the command to fail.
    <br /><br />
    
    
