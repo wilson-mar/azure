@@ -81,7 +81,7 @@ az functionapp create \
     --name "${MY_FUNC_APP_NAME}" \
     --storage-account "${MY_STORAGE_ACCT}" \
     --consumption-plan-location "${MY_LOC}" \
-    --plan "${MY_PLAN}"
+    --plan "${MY_PLAN}" \
     --deployment-source-url "${MY_FUNC_APP_URL}" \ 
     --functions-version "${MY_FUNC_APP_VER}" \
     --resource-group "${MY_RG}"
@@ -91,8 +91,6 @@ az functionapp create \
   # Runtime Stack: .NET Core
   # Version: 3.1
 
-az functionapp create --resource-group MyResourceGroup --plan MyPlan --name MyUniqueAppName --storage-account MyStorageAccount
-Create a basic function app.
 
 # echo ">>> Create a Service Principal (service acct):"
 # Instead # See https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli
