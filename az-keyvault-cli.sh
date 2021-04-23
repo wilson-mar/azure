@@ -21,6 +21,9 @@ echo ">>> Register provider \"Microsoft.KeyVault\" for KeyVault:"
 # when you try to create a new key vault. This is a one-time operation for each subscription.
 # CLI DOC: https://docs.microsoft.com/en-US/cli/azure/provider#az_provider_register
 RESPONSE=$( az provider show --namespace Microsoft.KeyVault --query "[].{registrationState:state}[?registrationState==Registered]" )
+echo "RESPONSE=$RESPONSE"
+exit
+
 if [ RESPONSE == true ]; then
    az provider register -n Microsoft.KeyVault
 fi
