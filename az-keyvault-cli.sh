@@ -20,18 +20,14 @@ fi
     az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 
-# Define a unique name for the Key Vault done by caller of this script:
-MY_KEYVAULT_NAME="${MY_RG}keyvault$RANDOM"   
-   # Example: Keyvault-mol-1230-3537  # LIMIT: Max 24 characters.
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
-
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
 # The vault is enabled for soft delete, which allows deleted keys to recovered,
 # and is also enable for deployment which allows VMs to use the keys stored.
 az keyvault create \
     --resource-group "${MY_RG}" \
-    --name $MY_KEYVAULT_NAME \
+    --name "${MY_KEYVAULT_NAME}" \
     --location "${MY_LOC}" \
     --retention-days 90 \
     --enabled-for-deployment \
@@ -50,14 +46,13 @@ echo ">>> Add network rule to Function App:"
   # --network-acls # Network ACLs. It accepts a JSON filename or a JSON string. JSON format: {"ip":[<ip1>, <ip2>...],"vnet":[<vnet_name_1>/<subnet_name_1>,<subnet_id2>...]}.
   # --network-acls-ips  # Network ACLs IP rules. Space-separated list of IP addresses.
   # --network-acls-vnets  # Network ACLS VNet rules. Space-separated list of Vnet/subnet pairs or subnet resource ids.
-az keyvault network-rule add --name "${MY_RG}keyvault$RANDOM"  \
+az keyvault network-rule add --name "${MY_KEYVAULT_NAME}"  \
                              --ip-address "${MY_CLIENT_IP}"
 
 az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
-MY_STORAGE_ACCT="${MY_RG}storage$RANDOM"    # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
 echo ">>> Create new Storage Account \"$MY_STORAGE_ACCT\" for Function App:"
 az storage account create \
    --name "${MY_STORAGE_ACCT}" \
@@ -68,12 +63,10 @@ az storage account list --resource-group "${MY_RG}" --output table
    # --query [*].{Name:name,Location:primaryLocation,Kind:kind}  CreationTime
    # grep to show only on created to filter out cloud-shell-storage account
 
-MY_STORAGE_TAGS="env=dev"
 echo ">>> Add tag \"${MY_STORAGE_TAG}\" to Storage account \"$MY_STORAGE_ACCT\":"
 az storage account update --name "${MY_STORAGE_ACCT}" --resource-group "${MY_RG}" --tags “${MY_STORAGE_TAGS}”
 
 
-MY_FUNC_APP_NAME="${MY_RG}funcapp$RANDOM" 
 echo ">>> Create a Function App \"$MY_FUNC_APP_NAME\":"
 # Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
@@ -98,7 +91,6 @@ az functionapp create \
 # See https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_create_for_rbac
 
 
-MY_MANAGED_IDENTITY="${MY_RG}identity$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
 echo ">>> Add Managed Identity \"${MY_MANAGED_IDENTITY}\":"  # using tokens from Azure Active Directory, instead of Service Principal (service acct)  credentials
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm
