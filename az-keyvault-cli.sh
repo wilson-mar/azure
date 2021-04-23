@@ -50,7 +50,7 @@ echo ">>> Add network rule to Function App:"
   # --network-acls # Network ACLs. It accepts a JSON filename or a JSON string. JSON format: {"ip":[<ip1>, <ip2>...],"vnet":[<vnet_name_1>/<subnet_name_1>,<subnet_id2>...]}.
   # --network-acls-ips  # Network ACLs IP rules. Space-separated list of IP addresses.
   # --network-acls-vnets  # Network ACLS VNet rules. Space-separated list of Vnet/subnet pairs or subnet resource ids.
-az keyvault network-rule add --name "${MY_RG}keyvault$RANDOM$RANDOM"  \
+az keyvault network-rule add --name "${MY_RG}keyvault$RANDOM"  \
                              --ip-address "${MY_CLIENT_IP}"
 
 az keyvault list -o table
