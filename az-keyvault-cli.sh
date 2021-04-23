@@ -14,6 +14,15 @@
 
 set -o errexit
 
+
+if [ $(az group exists --name "${MY_RG}") = true ]; then
+   echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
+   az group delete --resource-group "${MY_RG}" --yes
+fi
+echo ">>> Create Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc."
+    az group create --name "${MY_RG}" --location "${MY_LOC}"
+
+
 # Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
 echo ">>> Register provider \"Microsoft.KeyVault\" for subscription:"
 # To avoid error "The subscription is not registered to use namespace 'Microsoft.KeyVault'"
@@ -25,13 +34,6 @@ if [ $RESPONSE == "Registered" ]; then
 else
    az provider register -n Microsoft.KeyVault
 fi
-
-if [ $(az group exists --name "${MY_RG}") = true ]; then
-   echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
-   az group delete --resource-group "${MY_RG}" --yes
-fi
-echo ">>> Create Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc."
-    az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
