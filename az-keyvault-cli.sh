@@ -12,10 +12,6 @@
 
 set -o errexit
 
-#echo ">>> Setup enviornment variables:"
-#sh $HOME/setup.sh
-#echo "MY_RG=$MY_RG in ./az-keybault-cli.sh"
-
 echo ">>> Delete Resource Group \"$MY_RG\" if it already exists before recreating ..."
 # Deleting RG deletes KeyVault and objects in it; Storage Acct.
 if [ $(az group exists --name "${MY_RG}") = true ]; then
@@ -25,8 +21,7 @@ fi
 
 
 # Define a unique name for the Key Vault done by caller of this script:
-MMDD=$( date +%m%d )  # No room for %Y = 2021
-MY_KEYVAULT_NAME="keyvault${MMDD}${MY_RG}$RANDOM"   
+MY_KEYVAULT_NAME="${MY_RG}keyvault$RANDOM"   
    # Example: Keyvault-mol-1230-3537  # LIMIT: Max 24 characters.
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 
@@ -48,14 +43,21 @@ az keyvault create \
   # Argument 'enable_soft_delete' has been deprecated and will be removed in a future release.
   # --enable-purge-protection false # during test env usage when Vault is rebuilt between sessions.
   # See https://docs.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview
-  # TODO: Add VNET rules 
 # RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
+
+echo ">>> Add network rule to Function App:"
+  # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault/network-rule?view=azure-cli-latest
+  # --network-acls # Network ACLs. It accepts a JSON filename or a JSON string. JSON format: {"ip":[<ip1>, <ip2>...],"vnet":[<vnet_name_1>/<subnet_name_1>,<subnet_id2>...]}.
+  # --network-acls-ips  # Network ACLs IP rules. Space-separated list of IP addresses.
+  # --network-acls-vnets  # Network ACLS VNet rules. Space-separated list of Vnet/subnet pairs or subnet resource ids.
+az keyvault network-rule add --name "${MY_RG}keyvault$RANDOM$RANDOM"  \
+                             --ip-address "${MY_CLIENT_IP}"
 
 az keyvault list -o table
 # az keyvault show # RESPONSE: The HSM 'None' not found within subscription.
 
 
-MY_STORAGE_ACCT="storage${MMDD}${MY_RG}$RANDOM"    # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
+MY_STORAGE_ACCT="${MY_RG}storage$RANDOM"    # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
 echo ">>> Create new Storage Account \"$MY_STORAGE_ACCT\" for Function App:"
 az storage account create \
    --name "${MY_STORAGE_ACCT}" \
@@ -71,7 +73,7 @@ echo ">>> Add tag \"${MY_STORAGE_TAG}\" to Storage account \"$MY_STORAGE_ACCT\":
 az storage account update --name "${MY_STORAGE_ACCT}" --resource-group "${MY_RG}" --tags “${MY_STORAGE_TAGS}”
 
 
-MY_FUNC_APP_NAME="funcapp${MMDD}${MY_RG}$RANDOM" 
+MY_FUNC_APP_NAME="${MY_RG}funcapp$RANDOM" 
 echo ">>> Create a Function App \"$MY_FUNC_APP_NAME\":"
 # Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
@@ -81,7 +83,7 @@ az functionapp create \
     --name "${MY_FUNC_APP_NAME}" \
     --storage-account "${MY_STORAGE_ACCT}" \
     --consumption-plan-location "${MY_LOC}" \
-    --deployment-source-url https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js \
+    --deployment-source-url "${MY_FUNC_APP_URL}" \ 
     --functions-version "${MY_FUNC_APP_VER}" \
     --resource-group "${MY_RG}"
   # -p $MY_PLAN  # Region, SKU Dynamic, Operating System: Windows
@@ -96,7 +98,7 @@ az functionapp create \
 # See https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_create_for_rbac
 
 
-MY_MANAGED_IDENTITY="identity${MMDD}${MY_RG}$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
+MY_MANAGED_IDENTITY="${MY_RG}identity$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
 echo ">>> Add Managed Identity \"${MY_MANAGED_IDENTITY}\":"  # using tokens from Azure Active Directory, instead of Service Principal (service acct)  credentials
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
 # See https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm
@@ -107,10 +109,11 @@ az identity create --name "${MY_MANAGED_IDENTITY}" \
 
 
 #echo ">>> Add Access Policy:"
+# See https://docs.microsoft.com/en-us/azure/key-vault/general/network-security
 # To avoid these error messages:
    # Client address is not authorized and caller is not a trusted service.
 
-echo ">>> Create (generate) secret \"${MY_KEY_NAME}\" in Key Vault \"${MY_KEYVAULT_NAME}\":"
+echo ">>> Create (generate) secret named \"${MY_KEY_NAME}\" in Key Vault \"${MY_KEYVAULT_NAME}\":"
 # This secret is a basic password that is used to install a database server
 az keyvault secret set \
     --vault-name "${MY_KEYVAULT_NAME}" \
@@ -122,6 +125,7 @@ az keyvault secret set \
   # Set expiration date?
   # Enabled: Yes
   # Use PowerShell to set multi-line secrets.
+   # ERROR RESPONSE: Client address is not authorized and caller is not a trusted service.
 
 echo ">>> Show the secret stored in Key Vault:"
 az keyvault secret show \
@@ -150,4 +154,4 @@ az keyvault secret recover \
 echo ">>> Use Managed Identity to read secret:"
 # VIDEO DEMO https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
 
-
+# https://www.youtube.com/watch?v=PgujSug1ZbI use KeyVault in Logic App, ADF 
