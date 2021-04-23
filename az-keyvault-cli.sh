@@ -25,8 +25,12 @@ fi
 echo ">>> Register Key Vault provider:"
 # To avoid error "The subscription is not registered to use namespace 'Microsoft.KeyVault'"
 # when you try to create a new key vault. This is a one-time operation for each subscription.
-az provider register -n Microsoft.KeyVault
-
+# CLI DOC: https://docs.microsoft.com/en-US/cli/azure/provider#az_provider_register
+RESPONSE=$( az provider show --namespace Microsoft.KeyVault --query "[].{registrationState:state}[?registrationState==Registered]" )
+if [ RESPONSE == true ]; then
+   az provider register -n Microsoft.KeyVault
+fi
+exit
 echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
