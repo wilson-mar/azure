@@ -56,6 +56,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    <pre>export MY_LOC="westus"               # aka region
    export MY_RG="mol"
    export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
+   export MY_CLIENT_IP="13.81.60.25"
    export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
    export MY_SCRIPT="az-helm-cli.sh"         # the script being called
    export MY_SCRIPT_VERSION="0.1.4"    
@@ -66,7 +67,8 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_SVC_BUS_NAME="azuremol"
    export MY_STORAGE_ACCT="Storage-$MY_RG-$RANDOM"   # globally unique in front of /file.core.windows.net
    export MY_FUNC_APP_NAME="FuncApp-$MY_RG-$RANDOM"     # globally unique in front of .azurewebsites.net
-   export MY_FUNC_APP_NAME="2"               # New!
+   export MY_FUNC_APP_VER="2"               # New!
+   export MY_FUNC_APP_URL="https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js"
    export MY_SSH_KEY_FILE_NAME="id_rsa".        # default is id_rsa.
    export MY_KEYVAULT_NAME="keyvault-$MY_RG-$RANDOM"   # globally unique
    export MY_KEY_NAME="databasepassword"
