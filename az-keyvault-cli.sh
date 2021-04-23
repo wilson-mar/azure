@@ -67,6 +67,11 @@ echo ">>> Add tag \"${MY_STORAGE_TAG}\" to Storage account \"$MY_STORAGE_ACCT\":
 az storage account update --name "${MY_STORAGE_ACCT}" --resource-group "${MY_RG}" --tags “${MY_STORAGE_TAGS}”
 
 
+echo ">>> Create Plan \"$MY_PLAN\":"
+# CLI DOC: https://docs.microsoft.com/en-us/cli/azure/appservice/plan?view=azure-cli-latest
+az appservice plan create --name "${MY_PLAN}" \
+   --resource-group "${MY_RG}"
+
 echo ">>> Create a Function App \"$MY_FUNC_APP_NAME\":"
 # Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
@@ -76,6 +81,7 @@ az functionapp create \
     --name "${MY_FUNC_APP_NAME}" \
     --storage-account "${MY_STORAGE_ACCT}" \
     --consumption-plan-location "${MY_LOC}" \
+    --plan "${MY_PLAN}"
     --deployment-source-url "${MY_FUNC_APP_URL}" \ 
     --functions-version "${MY_FUNC_APP_VER}" \
     --resource-group "${MY_RG}"
@@ -85,6 +91,8 @@ az functionapp create \
   # Runtime Stack: .NET Core
   # Version: 3.1
 
+az functionapp create --resource-group MyResourceGroup --plan MyPlan --name MyUniqueAppName --storage-account MyStorageAccount
+Create a basic function app.
 
 # echo ">>> Create a Service Principal (service acct):"
 # Instead # See https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli
