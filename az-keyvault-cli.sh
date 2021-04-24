@@ -64,11 +64,12 @@ fi
 
 vaultId=$(az keyvault show -g "${MY_RG}" -n "${MY_KEYVAULT_NAME}" | jq -r .id)
 
+
 echo ">>> role definition list:"
-az role definition list --name "Key Vault Contributor"
+az role definition list --name "${MY_ROLE_NAME}"
 
 echo ">>> role definition create:"
-az role assignment create --role "Key Vault Contributor" \
+az role assignment create --role "${MY_ROLE_NAME}" \
   --assignee "USER_PRINCIPAL_NAME" --scope $vaultId
 
 echo ">>> Get the subscription ID:"
