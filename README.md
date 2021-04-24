@@ -85,6 +85,9 @@ Scripts here are adapted from various experts generous with sharing their code:
    export ARM_CLIENT_SECRET="..."
    export ARM_SUBSCRIPTION_ID="..."
    export ARM_TENANT_ID="..."
+   export ARM_USE_MSI=true
+   export ARM_SUBSCRIPTION_ID="..."
+   export ARM_TENANT_ID="..."
    </pre>
 
    The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
