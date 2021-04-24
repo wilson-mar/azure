@@ -64,18 +64,22 @@ fi
 
 vaultId=$(az keyvault show -g "${MY_RG}" -n "${MY_KEYVAULT_NAME}" | jq -r .id)
 
-echo ">>> role definition list & create:"
+echo ">>> role definition list:"
 az role definition list --name "Key Vault Contributor"
+
+echo ">>> role definition create:"
 az role assignment create --role "Key Vault Contributor" \
   --assignee "USER_PRINCIPAL_NAME" --scope $vaultId
 
-echo ">>> Get the current subscription ID and create the custom role json:"
+echo ">>> Get the subscription ID:"
 subId=$( az account show | jq -r .id )
+
+echo ">>> Replace the subscription ID in the custom role json:"
 sed s/SUBSCRIPTION_ID/$subId/g custom_role.json > updated_role.json
 
 echo ">>> Get the role ID, vault ID, and user ID:"
 role=$( az role definition create --role-definition updated_role.json )
-user=$(az ad user show  --id "CaJoyce@contosohq.xyz" | jq -r .objectId)
+user=$( az ad user show  --id "CaJoyce@contosohq.xyz" | jq -r .objectId )
 
 echo ">>> Assign the role to the user with the vault as the scope:"
 az role assignment create --role "Secret Reader" \
