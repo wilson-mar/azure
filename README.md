@@ -90,11 +90,12 @@ Scripts here are adapted from various experts generous with sharing their code:
    export ARM_TENANT_ID="..."
    </pre>
 
+   In Terraform, the above would be in a terraform.tfvars file.
    The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
    Save them to a local file such as <tt>$HOME/.secrets.sh</tt> so that you can 
    copy and paste them at the beginning of each CLI session.
    
-   PROTIP: Use of a variable by various scripts and commands avoids typos and misconfigurations.
+   PROTIP: Using variable instead of hard-coding avoids typos and misconfigurations.
    
 1. PROTIP: Use environment variables to <strong>delete resource groups</strong> created to stop charges from accumulating on Virtual Servers, etc.: 
 
