@@ -40,10 +40,7 @@ fi
 
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
-# The vault is enabled for soft delete by default, which allows deleted keys to recovered, but a new keyvault name needs to be created every run.
-# and is also enable for deployment which allows VMs to use the keys stored.
-# TODO: Identify if keyvault already exists:
-RESPONSE=$( az keyvault list )
+RESPONSE=$( az keyvault list )   # Identify if keyvault already exists
 if [ $RESPONSE == "[]" ]; then
    echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
    az keyvault create \
@@ -54,11 +51,14 @@ if [ $RESPONSE == "[]" ]; then
     --default-action Deny \
     --resource-group "${MY_RG}" 
 fi
+#    --enabled-for-deployment \. in GUI Portal is checkbox "Enable Access to: Azure Resource Manager for template deployment"
+  # Argument 'enable_soft_delete' has been deprecated and will be removed in a future release.
+  # --enable-purge-protection false # during test env usage when Vault is rebuilt between sessions.
+# QUESTION: The vault is enabled for soft delete by default, which allows deleted keys to recovered, but a new keyvault name needs to be created every run.
+# and is also enable for deployment which allows VMs to use the keys stored.
   # --default-action Deny # Default action to apply when no rule matches.
   # --retention-days 90 \  # 90 is max allowed.
   # --sku Standard  # or Premium (includes support for HSM backed keys) HSM: Standard_B1, Custom_B32. Default: Standard_B1.
-  # Argument 'enable_soft_delete' has been deprecated and will be removed in a future release.
-  # --enable-purge-protection false # during test env usage when Vault is rebuilt between sessions.
   # See https://docs.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview
 # RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
 
