@@ -62,6 +62,27 @@ fi
   # See https://docs.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview
 # RESPONSE: Resource provider 'Microsoft.KeyVault' used by this operation is not registered. We are registering for you.
 
+vaultId=$(az keyvault show -g "${MY_RG}" -n "${MY_KEYVAULT_NAME}" | jq -r .id)
+
+echo ">>> role definition list & create:"
+az role definition list --name "Key Vault Contributor"
+az role assignment create --role "Key Vault Contributor" \
+  --assignee "USER_PRINCIPAL_NAME" --scope $vaultId
+
+echo ">>> Get the current subscription ID and create the custom role json:"
+subId=$( az account show | jq -r .id )
+sed s/SUBSCRIPTION_ID/$subId/g custom_role.json > updated_role.json
+
+echo ">>> Get the role ID, vault ID, and user ID:"
+role=$( az role definition create --role-definition updated_role.json )
+user=$(az ad user show  --id "CaJoyce@contosohq.xyz" | jq -r .objectId)
+
+echo ">>> Assign the role to the user with the vault as the scope:"
+az role assignment create --role "Secret Reader" \
+  --assignee $user --scope $vaultId
+  
+exit
+  
 echo ">>> Limit Admin's IP address by Add network rule to Key Vault \"$MY_KEYVAULT_NAME\":"
 # Define your MY_CLIENT_IP using "curl -s ifconfig.me"
 # If you're on a VPN, it rotates among various IPs, so it is not a good option to limit access to your IP address.
