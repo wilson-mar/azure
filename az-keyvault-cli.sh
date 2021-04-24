@@ -95,6 +95,7 @@ az appservice plan create --name "${MY_PLAN}" \
 #   --hyper-v --sku P1V3
 
 echo ">>> Create Function App \"$MY_FUNC_APP_NAME\":"
+# TODO: Instead use https://github.com/timothywarner/function-image-upload-resize
 # Instead of Port GUI https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 # PORTAL VIDEO DEMO: https://app.pluralsight.com/course-player?clipId=2308c37d-0804-4834-86f3-2f38937170c2
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/functionapp?view=azure-cli-latest#az_functionapp_create
