@@ -68,7 +68,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_STORAGE_TAGS="env=dev"
    export MY_PLAN="${MY_RG}plan$RANDOM"    # used by Function App
    export MY_FUNC_APP_NAME="${MY_RG}funcapp$RANDOM"  # globally unique in front of .azurewebsites.net
-   export MY_FUNC_APP_VER="2"               # New!
+   export MY_FUNC_APP_VER=2                # New!
    export MY_FUNC_APP_URL="https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js"
    export MY_SSH_KEY_FILE_NAME="id_rsa".        # default is id_rsa.
    export MY_MANAGED_IDENTITY="${MY_RG}identity$RANDOM"   # LIMIT: Max. 24 lower-case characters/numbers, no dashes.
