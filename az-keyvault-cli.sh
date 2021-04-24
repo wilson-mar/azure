@@ -11,6 +11,8 @@
 # https://app.pluralsight.com/library/courses/microsoft-azure-key-vault-configuring-managing Nov 18, 2020
    # https://github.com/ned1313/Configure-and-Manage-Key-Vault
 # https://newsignature.com/articles/azure-devops-with-a-firewall-enabled-key-vault/
+# TODO: https://portal.cloudskills.io/products/build-a-ci-cd-pipeline-with-azure-devops
+# https://portal.cloudskills.io/products/build-a-ci-cd-pipeline-with-azure-devops/categories/4475187/posts/15021741 [18:27] by Michael Levan
 
 set -o errexit
 
@@ -24,35 +26,36 @@ echo ">>> Create Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc.
 
 
 # Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
-echo ">>> Register provider \"Microsoft.KeyVault\" for subscription:"
 # To avoid error "The subscription is not registered to use namespace 'Microsoft.KeyVault'"
 # when you try to create a new key vault. This is a one-time operation for each subscription.
 # CLI DOC: https://docs.microsoft.com/en-US/cli/azure/provider#az_provider_register
 RESPONSE=$( az provider show --namespace Microsoft.KeyVault --query registrationState )
 if [ $RESPONSE == "Registered" ]; then
-   echo ">>> Registered"
+   echo ">>> Microsoft.KeyVault Registered."
 else
+   echo ">>> Register provider \"Microsoft.KeyVault\" for subscription:"
    az provider register -n Microsoft.KeyVault
 fi
 
 
-echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
 # The vault is enabled for soft delete by default, which allows deleted keys to recovered, but a new keyvault name needs to be created every run.
 # and is also enable for deployment which allows VMs to use the keys stored.
 # TODO: Identify if keyvault already exists:
-az keyvault create \
+RESPONSE=$( az keyvault list )
+if [ $RESPONSE == "[]" ]; then
+   echo ">>> Create Key Vault \"$MY_KEYVAULT_NAME\":"
+   az keyvault create \
     --name "${MY_KEYVAULT_NAME}" \
     --location "${MY_LOC}" \
     --retention-days 90 \
     --enabled-for-deployment \
     --default-action Deny \
     --resource-group "${MY_RG}" 
-
+fi
   # --default-action Deny # Default action to apply when no rule matches.
-  # --sku Standard \ # command not found
-  # --retention-days 90 \. # 90 is max allowed.
+  # --retention-days 90 \  # 90 is max allowed.
   # --sku Standard  # or Premium (includes support for HSM backed keys) HSM: Standard_B1, Custom_B32. Default: Standard_B1.
   # Argument 'enable_soft_delete' has been deprecated and will be removed in a future release.
   # --enable-purge-protection false # during test env usage when Vault is rebuilt between sessions.
