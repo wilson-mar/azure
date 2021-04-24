@@ -33,7 +33,9 @@ Scripts here are adapted from various experts generous with sharing their code:
    * CloudPosse (Terraform for AWS)
    <br /><br />
 
-1. Be in https://shell.azure.com
+1. TODO: Setup a CI/CD pipeline to run these scripts whenever a git push into github occurs.
+
+3. Be in https://shell.azure.com
 
 1. If you ran these scripts for <strong>training or testing</strong>, (to save disk space) remove the repo before and after the next step (download):
 
@@ -79,6 +81,10 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_REPO="azure-your-way"           # repo name in my GitHub.com/wilson-mar
    export MY_SCRIPT="az-helm-cli.sh"         # the script being called
    export MY_SCRIPT_VERSION="0.1.4"          # the version of script being called, to be sure that you're getting the right one.
+   export ARM_CLIENT_ID="..."
+   export ARM_CLIENT_SECRET="..."
+   export ARM_SUBSCRIPTION_ID="..."
+   export ARM_TENANT_ID="..."
    </pre>
 
    The above are example values. CAUTION: Do not save your secrets unencrypted in GitHub (even if it has Private visibility).
