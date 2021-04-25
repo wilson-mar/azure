@@ -65,12 +65,23 @@ fi
 vaultId=$(az keyvault show -g "${MY_RG}" -n "${MY_KEYVAULT_NAME}" | jq -r .id)
 
 
+echo ">>> create service principal :"
+az ad sp create-for-rbac [--cert]
+                         [--create-cert]
+                         [--keyvault]
+                         [--name "${MY_USER_PRINCIPAL_NAME}"
+                         [--role]
+                         [--scopes]
+                         [--sdk-auth {false, true}]
+                         [--skip-assignment {false, true}]
+                         [--years]
+                         
 echo ">>> role definition list:"
 az role definition list --name "${MY_ROLE_NAME}"
 
 echo ">>> role definition create:"
 az role assignment create --role "${MY_ROLE_NAME}" \
-  --assignee "USER_PRINCIPAL_NAME" --scope $vaultId
+  --assignee "${MY_USER_PRINCIPAL_NAME}" --scope $vaultId
 
 echo ">>> Get the subscription ID:"
 subId=$( az account show | jq -r .id )
@@ -80,9 +91,11 @@ sed s/SUBSCRIPTION_ID/$subId/g custom_role.json > updated_role.json
 
 echo ">>> Get the role ID, vault ID, and user ID:"
 role=$( az role definition create --role-definition updated_role.json )
-user=$( az ad user show  --id "CaJoyce@contosohq.xyz" | jq -r .objectId )
 
-echo ">>> Assign the role to the user with the vault as the scope:"
+echo ">>> Add AD user show:"
+user=$( az ad user show  --id "${MY_USER_PRINCIPAL_NAME}" | jq -r .objectId )
+
+echo ">>> Assign \"$user\" role \"$role\" with vault \"$vaultId\" as the scope:"
 az role assignment create --role "Secret Reader" \
   --assignee $user --scope $vaultId
   
@@ -113,15 +126,17 @@ az storage account list --resource-group "${MY_RG}" --output table
    # grep to show only on created to filter out cloud-shell-storage account
 
 echo ">>> Add tag \"${MY_STORAGE_TAG}\" to Storage account \"$MY_STORAGE_ACCT\":"
-az storage account update --name "${MY_STORAGE_ACCT}" --resource-group "${MY_RG}" --tags “${MY_STORAGE_TAGS}”
+az storage account update --name "${MY_STORAGE_ACCT}" \
+   --tags “${MY_STORAGE_TAGS}” \
+   --resource-group "${MY_RG}"
 
 
 echo ">>> Create App Service Plan \"$MY_PLAN\":"
 # CLI DOC: https://docs.microsoft.com/en-us/cli/azure/appservice/plan?view=azure-cli-latest
 az appservice plan create --name "${MY_PLAN}" \
    --resource-group "${MY_RG}"
-#   --is-linux --number-of-workers 1 --sku S1
-#   --hyper-v --sku P1V3
+#   --is-linux --number-of-workers 1 --sku FREE
+#   --hyper-v --sku P1V3  # Windows
 
 echo ">>> Create Function App \"$MY_FUNC_APP_NAME\":"
 # TODO: Instead use https://github.com/timothywarner/function-image-upload-resize
@@ -186,7 +201,8 @@ az keyvault secret show \
     --vault-name "${MY_KEYVAULT_NAME}"
 
 exit
-echo ">>> Delete the secret:"
+
+echo ">>> As Admin, Delete the secret:"
 az keyvault secret delete \
     --name "${MY_KEY_NAME}" \
     --vault-name $MY_KEYVAULT_NAME
@@ -195,7 +211,7 @@ az keyvault secret delete \
 # Wait 5 seconds for the secret to be successfully deleted before recovering
 sleep 5
 
-echo ">>> Recover the deleted secret:"
+echo ">>> As Admin, Recover the deleted secret:"
 # As the vault was enabled for soft delete, key are secret metadata is retained
 # for a period of time. This allows keys and secrets to be recovered back to
 # the vault.
