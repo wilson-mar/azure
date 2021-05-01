@@ -32,8 +32,12 @@ az cognitiveservices account create \
     --yes \
     --resource-group "${MY_RG}" 
     
+echo "<<< Get keys:"
+az cognitiveservices account keys list \
+    --name anomaly-detector-resource \
+    --resource-group "${MY_RG}" 
 
-
+exit
 
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
 # CLI DOCS: https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az_keyvault_create
