@@ -39,6 +39,7 @@ For now, here are manual steps to invoke these scripts:
    export MY_APPNAME="azuremol"              # 
    export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
    export MY_SVC_BUS_NAME="azuremol"
+   export MY_COG_ACCT="cogme"
    export MY_STORAGE_ACCT="${MY_RG}storage$RANDOM"   # LIMIT: Max. 24 lower-case char & numbers, no dashes. globally unique in front of /file.core.windows.net
    export MY_STORAGE_TAGS="env=dev"
    export MY_PLAN="${MY_RG}plan$RANDOM"    # used by Function App
