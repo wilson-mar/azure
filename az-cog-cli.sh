@@ -4,9 +4,6 @@
 
 set -o errexit
 
-echo ">>> Set subscription \"$MY_SUBSCRIPTION_ID\" "
-az account set --subscription "${MY_SUBSCRIPTION_ID}"
-
 
 if [ $(az group exists --name "${MY_RG}") = true ]; then
    echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
@@ -46,6 +43,9 @@ COGNITIVE_SERVICE_KEY=$( az cognitiveservices account keys list \
 #  "key1": "27900c313d0e494b9d53993cab31f92f",
 #  "key2": "3c0c2c36bc704f28b79f4e6cd81dadd2"
 # trace echo "COGNITIVE_SERVICE_KEY=$COGNITIVE_SERVICE_KEY  # used by Azure"
+
+echo ">>> Set subscription \"$MY_SUBSCRIPTION_ID\" "
+az account set --subscription "${MY_SUBSCRIPTION_ID}"
 
 echo ">>> Get current quota usage for resource:"
 az cognitiveservices account list-usage \
