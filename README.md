@@ -1,12 +1,17 @@
-This repo contains scripts to invoke instead of manually operating the Azure Portal, so that you can save money by deleting Resource Groups because you can get resources back with just a few commands. Most scripts in the rep are shell scripts that run natively on MacOS and thus familiar to most developers. PowerShell scripts are used in cases where they are the only solution. Utility scripts enable the scripts to run on Linux and Windows Git Shell. The scripts are also useful for learning Azure. 
+This repo contains automation scripts to invoke instead of manually operating the Azure Portal, so that you can save money by deleting Resource Groups because you can get resources back with just a few commands. Most scripts in the rep are Bash shell scripts that run natively on MacOS and thus familiar to most developers. PowerShell scripts are used in cases where they are the only solution. Utility scripts enable the scripts to run on Linux and Windows Git Shell. The scripts are also useful for learning Azure. 
 
 TODO: Setup a CI/CD pipeline to run these scripts whenever a git push into github occurs.
 
 For now, here are manual steps to invoke these scripts:
 
 1. Be in https://shell.azure.com
-
-1. If you ran these scripts for <strong>training or testing</strong>, (to save disk space) remove the repo before and after the next step (download):
+1. If you need to, create a Storage account to hold files in a clouddrive.
+1. Edit the <tt>.bashrc</tt> file to customize the prompt:
+   
+   <pre>export PS1="\n  \w\[\033[33m\]\n$ "
+   #</pre>
+   
+3. To save disk space, remove the repo before and after the next step (download):
 
    <pre><strong>cd ~/clouddrive
    rm -rf azure-your-way
@@ -19,14 +24,13 @@ For now, here are manual steps to invoke these scripts:
    cd azure-your-way
    ls
    chmod +x *.sh
-   export PS1="\n  \w\[\033[33m\]\n$ "
    </strong></pre>
 
 1. These scripts have been <strong>generalized</strong> for productive use.
-
    Copy environment variable definitions and paste in the command line for bash scripts to reference:
 
-   <pre>export MY_LOC="westus"               # aka region
+   <pre>export MY_SUBSCRIPTION_NAME="Azure Pass - Sponsorship"
+   export MY_LOC="westus"               # aka region
    export MY_RG="x$( date +%y%m%d )"            # example: 210131 yymmdd
    export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
    export MY_CLIENT_IP="13.81.60.25"
