@@ -36,13 +36,12 @@ time az cognitiveservices account create \
 echo "<<< Get COGNITIVE_SERVICE_KEY:"
 COGNITIVE_SERVICE_KEY=$( az cognitiveservices account keys list \
     --name "${MY_COG_ACCT}" \
-    --resource-group "${MY_RG}" --query key1
+    --resource-group "${MY_RG}" --query key1 -o tsv
     )
 # RESPONSE:
 #  "key1": "27900c313d0e494b9d53993cab31f92f",
 #  "key2": "3c0c2c36bc704f28b79f4e6cd81dadd2"
-
-echo "COGNITIVE_SERVICE_KEY=$COGNITIVE_SERVICE_KEY  # used by Azure"
+# trace echo "COGNITIVE_SERVICE_KEY=$COGNITIVE_SERVICE_KEY  # used by Azure"
 
 echo ">>> Get current quota usage for resource:"
 az cognitiveservices account list-usage \
