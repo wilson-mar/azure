@@ -24,6 +24,7 @@ else
    az provider register -n Microsoft.KeyVault
 fi
 
+echo "<<< Create cognitiveservices account:"
 az cognitiveservices account create \
     --name"${MY_COG_ACCT}"  \
     --kind AnomalyDetector \
