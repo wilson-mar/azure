@@ -28,7 +28,7 @@ else
    time az provider register -n Microsoft.KeyVault
 fi
 
-echo "<<< Create cognitiveservices account \"$MY_COG_ACCT\" :"
+echo ">>> Create cognitiveservices account \"$MY_COG_ACCT\" :"
 time az cognitiveservices account create \
     --name "${MY_COG_ACCT}"  \
     --kind AnomalyDetector \
@@ -37,7 +37,7 @@ time az cognitiveservices account create \
     --yes \
     --resource-group "${MY_RG}" 
     
-echo "<<< Get COGNITIVE_SERVICE_KEY:"
+echo ">>> Get COGNITIVE_SERVICE_KEY:"
 COGNITIVE_SERVICE_KEY=$( az cognitiveservices account keys list \
     --name "${MY_COG_ACCT}" \
     --resource-group "${MY_RG}" --query key1 -o tsv
