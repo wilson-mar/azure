@@ -1,4 +1,4 @@
-This repo provides scripts to use instead of using Azure Portal, so that you can save money by deleting Resource Groups because you can get resources back with just a few commands. Most scripts in the rep are shell scripts that run natively on MacOS and thus familiar to most developers. Utility scripts enable the scripts to run on Linux and Windows Git Shell. The scripts are also useful for learning Azure. PowerShell scripts are used in cases where they are the only solution.
+This repo contains scripts to invoke instead of manually operating the Azure Portal, so that you can save money by deleting Resource Groups because you can get resources back with just a few commands. Most scripts in the rep are shell scripts that run natively on MacOS and thus familiar to most developers. Utility scripts enable the scripts to run on Linux and Windows Git Shell. The scripts are also useful for learning Azure. PowerShell scripts are used in cases where they are the only solution.
 
 TODO: Setup a CI/CD pipeline to run these scripts whenever a git push into github occurs.
 
