@@ -67,6 +67,7 @@ Scripts here are adapted from various experts generous with sharing their code:
    export MY_STORAGE_ACCT="${MY_RG}storage$RANDOM"   # LIMIT: Max. 24 lower-case char & numbers, no dashes. globally unique in front of /file.core.windows.net
    export MY_STORAGE_TAGS="env=dev"
    export MY_PLAN="${MY_RG}plan$RANDOM"    # used by Function App
+   export MY_COG_ACCT="anomaly-detector-resource"
    export MY_FUNC_APP_NAME="${MY_RG}funcapp$RANDOM"  # globally unique in front of .azurewebsites.net
    export MY_FUNC_APP_VER=2                # New!
    export MY_FUNC_APP_URL="https://raw.githubusercontent.com/wilson-mar/azure-your-way/main/analyzeTemperature.js"
