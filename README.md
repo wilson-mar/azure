@@ -1,30 +1,9 @@
 This repo provides scripts to use instead of using Azure Portal, so that you can save money by deleting Resource Groups because you can get resources back with just a few commands. Most scripts in the rep are shell scripts that run natively on MacOS and thus familiar to most developers. Utility scripts enable the scripts to run on Linux and Windows Git Shell. The scripts are also useful for learning Azure. PowerShell scripts are used in cases where they are the only solution.
 
 
-The contribution of <a target="_blank" href="https://github.com/wilson-mar/azure-your-way/">this repo (at https://github.com/wilson-mar/azure-your-way)</a>
-are Bash scripts which have been <strong>generalized</strong> for productive use.
-Scripts here are adapted from various experts generous with sharing their code:
-   * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds, explained in https://aka.ms/monthoflunches published 4/30/2020.
-
-   * https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies
-   * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
-   * https://github.com/Azure/azure-cli by Microsoft
-
-   * https://github.com/timothywarner/az400 & az303 by Tim Warner
-   * https://github.com/zaalion/oreilly-azure-app-security by Reza Salehi 
-   
-   * https://github.com/Azure/azure-quickstart-templates (ARM Templates)
-   * https://github.com/johnthebrit/AzureMasterClass PowerShell scripts
-   * https://github.com/terraform-providers/terraform-provider-azurerm
-
-   * Skylines Academy
-   * Gruntwork (Terraform)
-   * CloudPosse (Terraform for AWS)
-   <br /><br />
-
 1. TODO: Setup a CI/CD pipeline to run these scripts whenever a git push into github occurs.
 
-3. Be in https://shell.azure.com
+1. Be in https://shell.azure.com
 
 1. If you ran these scripts for <strong>training or testing</strong>, (to save disk space) remove the repo before and after the next step (download):
 
@@ -42,7 +21,9 @@ Scripts here are adapted from various experts generous with sharing their code:
    export PS1="\n  \w\[\033[33m\]\n$ "
    </strong></pre>
 
-1. Copy environment variable definitions and paste in the command line for bash scripts to reference:
+1. These scripts have been <strong>generalized</strong> for productive use.
+
+   Copy environment variable definitions and paste in the command line for bash scripts to reference:
 
    <pre>export MY_LOC="westus"               # aka region
    export MY_RG="x$( date +%y%m%d )"            # example: 210131 yymmdd
@@ -165,3 +146,21 @@ Bash scripts here are written with coding conventions defined at <a target="_bla
    <br /><br />
    
    
+Scripts here are adapted from various experts generous with sharing their code:
+   * https://github.com/fouldsy/azure-mol-samples-2nd-ed by Iain Foulds, explained in https://aka.ms/monthoflunches published 4/30/2020.
+
+   * https://github.com/MicrosoftLearning/AZ-303-Microsoft-Azure-Architect-Technologies
+   * https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies
+   * https://github.com/Azure/azure-cli by Microsoft
+
+   * https://github.com/timothywarner/az400 & az303 by Tim Warner
+   * https://github.com/zaalion/oreilly-azure-app-security by Reza Salehi 
+   
+   * https://github.com/Azure/azure-quickstart-templates (ARM Templates)
+   * https://github.com/johnthebrit/AzureMasterClass PowerShell scripts
+   * https://github.com/terraform-providers/terraform-provider-azurerm
+
+   * Skylines Academy
+   * Gruntwork (Terraform)
+   * CloudPosse (Terraform for AWS)
+   <br /><br />
