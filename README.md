@@ -34,6 +34,7 @@ For now, here are manual steps to invoke these scripts:
 
    <pre>
    export MY_SUBSCRIPTION_NAME="Azure Pass - Sponsorship"
+   export MY_SUBSCRIPTION_ID="33cb040d-4e32-4524-bc8e-0bee213dddae"
    export MY_LOC="westus"               # aka region
    export MY_RG="x$( date +%y%m%d )"            # example: 210131 yymmdd
    export MY_GIT_CONTAINER="$HOME/clouddrive"      # "clouddrive" in Cloud Shell
@@ -44,6 +45,7 @@ For now, here are manual steps to invoke these scripts:
    export MY_ADMIN_USER_NAME="johndoe" # admin user name cannot contain upper case character A-Z, special characters \/"[]:|<>+=;,?*@#()! or start with $ or -
    export MY_SVC_BUS_NAME="azuremol"
    export MY_COG_ACCT="cogme"
+   export MY_COG_PRICING_TIER="F0"  # or S0
    export MY_STORAGE_ACCT="${MY_RG}storage$RANDOM"   # LIMIT: Max. 24 lower-case char & numbers, no dashes. globally unique in front of /file.core.windows.net
    export MY_STORAGE_TAGS="env=dev"
    export MY_PLAN="${MY_RG}plan$RANDOM"    # used by Function App
