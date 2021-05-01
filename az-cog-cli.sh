@@ -24,7 +24,7 @@ else
    time az provider register -n Microsoft.KeyVault
 fi
 
-echo "<<< Create cognitiveservices account:"
+echo "<<< Create cognitiveservices account \"$MY_COG_ACCT\" :"
 time az cognitiveservices account create \
     --name"${MY_COG_ACCT}"  \
     --kind AnomalyDetector \
