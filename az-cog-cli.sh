@@ -17,23 +17,13 @@ echo ">>> Create Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc.
     time az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 
-# Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
-# To avoid error "The subscription is not registered to use namespace 'Microsoft.KeyVault'"
-# when you try to create a new key vault. This is a one-time operation for each subscription.
-# CLI DOC: https://docs.microsoft.com/en-US/cli/azure/provider#az_provider_register
-RESPONSE=$( az provider show --namespace Microsoft.KeyVault --query registrationState )
-if [ $RESPONSE == "Registered" ]; then
-   echo ">>> Microsoft.KeyVault Registered."
-else
-   echo ">>> Register provider \"Microsoft.KeyVault\" for subscription:"
-   time az provider register -n Microsoft.KeyVault
-fi
+# https://docs.microsoft.com/en-us/cli/azure/cognitiveservices/account?view=azure-cli-latest
 
 echo ">>> Create cognitiveservices account \"$MY_COG_ACCT\" :"
 time az cognitiveservices account create \
     --name "${MY_COG_ACCT}"  \
     --kind AnomalyDetector \
-    --sku F0 \
+    --sku "${MY_COG_PRICING_TIER}" \
     --location "${MY_LOC}" \
     --yes \
     --resource-group "${MY_RG}" 
@@ -48,8 +38,10 @@ COGNITIVE_SERVICE_KEY=$( az cognitiveservices account keys list \
 #  "key2": "3c0c2c36bc704f28b79f4e6cd81dadd2"
 # trace echo "COGNITIVE_SERVICE_KEY=$COGNITIVE_SERVICE_KEY  # used by Azure"
 
+echo ">>> DEBUG"
+az group list
+
 echo ">>> Get current quota usage for resource:"
-# https://docs.microsoft.com/en-us/cli/azure/cognitiveservices/account?view=azure-cli-latest
 az cognitiveservices account list-usage \
     --name "${MY_COG_ACCT}" \
     --subscription "${MY_SUBSCRIPTION_NAME}" \
