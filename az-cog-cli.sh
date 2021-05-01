@@ -6,10 +6,10 @@ set -o errexit
 
 if [ $(az group exists --name "${MY_RG}") = true ]; then
    echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
-   az group delete --resource-group "${MY_RG}" --yes
+   time az group delete --resource-group "${MY_RG}" --yes
 fi
 echo ">>> Create Resource Group \"$MY_RG\" used for KeyVault, Storage Acct, etc."
-    az group create --name "${MY_RG}" --location "${MY_LOC}"
+    time az group create --name "${MY_RG}" --location "${MY_LOC}"
 
 
 # Among resource providers listed at https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
@@ -21,11 +21,11 @@ if [ $RESPONSE == "Registered" ]; then
    echo ">>> Microsoft.KeyVault Registered."
 else
    echo ">>> Register provider \"Microsoft.KeyVault\" for subscription:"
-   az provider register -n Microsoft.KeyVault
+   time az provider register -n Microsoft.KeyVault
 fi
 
 echo "<<< Create cognitiveservices account:"
-az cognitiveservices account create \
+time az cognitiveservices account create \
     --name"${MY_COG_ACCT}"  \
     --kind AnomalyDetector \
     --sku F0 \
