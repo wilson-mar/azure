@@ -26,7 +26,7 @@ fi
 
 echo "<<< Create cognitiveservices account \"$MY_COG_ACCT\" :"
 time az cognitiveservices account create \
-    --name"${MY_COG_ACCT}"  \
+    --name "${MY_COG_ACCT}"  \
     --kind AnomalyDetector \
     --sku F0 \
     --location "${MY_LOC}" \
