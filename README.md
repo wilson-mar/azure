@@ -2,6 +2,8 @@ This repo provides scripts to use instead of using Azure Portal, so that you can
 
 TODO: Setup a CI/CD pipeline to run these scripts whenever a git push into github occurs.
 
+For now, here are manual steps to invoke these scripts:
+
 1. Be in https://shell.azure.com
 
 1. If you ran these scripts for <strong>training or testing</strong>, (to save disk space) remove the repo before and after the next step (download):
