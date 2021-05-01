@@ -4,6 +4,10 @@
 
 set -o errexit
 
+echo ">>> Set subscription \"$MY_SUBSCRIPTION_ID\" "
+az account set --subscription "${MY_SUBSCRIPTION_ID}"
+
+
 if [ $(az group exists --name "${MY_RG}") = true ]; then
    echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
    time az group delete --resource-group "${MY_RG}" --yes
