@@ -75,14 +75,18 @@ For now, here are manual steps to invoke these scripts:
    
 1. PROTIP: Use environment variables to <strong>delete resource groups</strong> created to stop charges from accumulating on Virtual Servers, etc.: 
 
-   <pre><strong>MY_RG="mol"
-   az group delete --name "${MY_RG}" --yes   # takes several minutes
+   <pre><strong>az group delete --name "${MY_RG}" --yes   # takes several minutes
    </strong></pre>
 
    <tt>--yes</tt> before the az command feeds a "y" to automatically answer the request:<br />
    Are you sure you want to perform this operation? (y/n): y
 
 1. Invoke an individual Bash script with a command like this to create various resources within Azure:
+
+* Use Azure Cognitive Services:
+
+   <pre><strong>./<a href="https://github.com/wilson-mar/azure-your-way/blob/main/az-cog-cli.sh">az-cog-cli.sh</a>
+   </strong></pre>
 
 * Use Helm charts
 
