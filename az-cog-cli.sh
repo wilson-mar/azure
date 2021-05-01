@@ -5,6 +5,10 @@
 set -o errexit
 
 
+echo ">>> Set subscription \"$MY_SUBSCRIPTION_ID\" "
+az account set --subscription "${MY_SUBSCRIPTION_ID}"
+
+
 if [ $(az group exists --name "${MY_RG}") = true ]; then
    echo ">>> Delete Resource Group \"$MY_RG\" exists before recreating ..."
    time az group delete --resource-group "${MY_RG}" --yes
@@ -44,15 +48,14 @@ COGNITIVE_SERVICE_KEY=$( az cognitiveservices account keys list \
 #  "key2": "3c0c2c36bc704f28b79f4e6cd81dadd2"
 # trace echo "COGNITIVE_SERVICE_KEY=$COGNITIVE_SERVICE_KEY  # used by Azure"
 
-echo ">>> Set subscription \"$MY_SUBSCRIPTION_ID\" "
-az account set --subscription "${MY_SUBSCRIPTION_ID}"
-
 echo ">>> Get current quota usage for resource:"
+# https://docs.microsoft.com/en-us/cli/azure/cognitiveservices/account?view=azure-cli-latest
 az cognitiveservices account list-usage \
     --name "${MY_COG_ACCT}" \
     --subscription "${MY_SUBSCRIPTION_NAME}" \
     --resource-group "${MY_RG}" 
-    
+# CURRENTLY STUCK:
+# ResourceGroupNotFound: Resource group 'x210501' could not be found.
     
 exit
 
