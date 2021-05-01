@@ -25,18 +25,31 @@ else
 fi
 
 az cognitiveservices account create \
-    --name anomaly-detector-resource \
+    --name"${MY_COG_ACCT}"  \
     --kind AnomalyDetector \
     --sku F0 \
     --location "${MY_LOC}" \
     --yes \
     --resource-group "${MY_RG}" 
     
-echo "<<< Get keys:"
-az cognitiveservices account keys list \
-    --name anomaly-detector-resource \
-    --resource-group "${MY_RG}" 
+echo "<<< Get COGNITIVE_SERVICE_KEY:"
+COGNITIVE_SERVICE_KEY=$( az cognitiveservices account keys list \
+    --name "${MY_COG_ACCT}" \
+    --resource-group "${MY_RG}" --query key1
+    )
+# RESPONSE:
+#  "key1": "27900c313d0e494b9d53993cab31f92f",
+#  "key2": "3c0c2c36bc704f28b79f4e6cd81dadd2"
 
+echo "COGNITIVE_SERVICE_KEY=$COGNITIVE_SERVICE_KEY  # used by Azure"
+
+echo ">>> Get current quota usage for resource:"
+az cognitiveservices account list-usage \
+    --name "${MY_COG_ACCT}" \
+    --subscription "${MY_SUBSCRIPTION_NAME}" \
+    --resource-group "${MY_RG}" 
+    
+    
 exit
 
 # Parameters are in order shown on the Portal GUI screen https://portal.azure.com/#create/Microsoft.KeyVault
